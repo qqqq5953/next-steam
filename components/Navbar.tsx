@@ -1,34 +1,123 @@
+'use client'
+
 import { Input } from '@/components/base-ui/Input'
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from '@/components/base-ui/DropdownMenu'
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger
+} from '@/components/base-ui/sheet'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faMagnifyingGlass,
+  faRightToBracket,
+  faUserPlus
+} from '@fortawesome/free-solid-svg-icons'
+
+import { useState } from 'react'
+import Link from 'next/link'
+
+const menuItems = [
+  {
+    path: '/reviews',
+    name: 'Reviews'
+  },
+  {
+    path: '',
+    name: 'Collections'
+  },
+  {
+    path: 'platforms',
+    name: 'Platforms'
+  },
+  {
+    path: 'stores',
+    name: 'Stores'
+  },
+  {
+    path: 'genres',
+    name: 'Genres'
+  },
+  {
+    path: 'creators',
+    name: 'Creators'
+  },
+  {
+    path: 'tags',
+    name: 'Tags'
+  },
+  {
+    path: 'developers',
+    name: 'Developers'
+  }
+]
 
 export default function Navbar() {
+  const [search, setSearch] = useState('')
+
   return (
     <header>
-      <nav className="flex items-center gap-x-4">
-        <h1>STEAM</h1>
-        <Input
-          className="border-none rounded-full bg-zinc-600/90"
-          type="search"
-          placeholder="Search"
-        />
-        <DropdownMenu>
-          <DropdownMenuTrigger>Menu</DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem>Billing</DropdownMenuItem>
-            <DropdownMenuItem>Team</DropdownMenuItem>
-            <DropdownMenuItem>Subscription</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+      <nav className="flex justify-between items-center gap-x-6">
+        <h1 className="font-black tracking-[0.2em] text-lg">STEAM</h1>
+        <div className="relative">
+          <Input
+            className="border-none rounded-full bg-zinc-600/90 pl-10 h-8 text-black placeholder:text-slate-300 placeholder:font-light focus:bg-white focus:placeholder:text-slate-400 focus:outline-none focus:border-none peer transition-all duration-200 text-xs"
+            type="search"
+            placeholder="Search for games"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <FontAwesomeIcon
+            icon={faMagnifyingGlass}
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 peer-focus:text-black peer:transition-all peer:duration-200"
+          />
+        </div>
+
+        <Sheet>
+          <SheetTrigger>Menu</SheetTrigger>
+          <SheetContent className="bg-white rounded-2xl text-black">
+            <SheetHeader className="relative">
+              <SheetTitle className="text-2xl text-left">Home</SheetTitle>
+              <SheetTitle className="text-2xl text-left">Browse</SheetTitle>
+              <div className="absolute right-0 top-9 space-y-3">
+                <button className="grid place-items-center space-y-1">
+                  <div className="grid place-items-center w-12 h-12 bg-black rounded-full">
+                    <FontAwesomeIcon
+                      icon={faRightToBracket}
+                      className="text-white fa-xl"
+                    />
+                  </div>
+                  <div className="text-sm text-gray-500 font-light">Log in</div>
+                </button>
+                <button className="grid place-items-center space-y-1">
+                  <div className="grid place-items-center w-12 h-12 bg-black rounded-full">
+                    <FontAwesomeIcon
+                      icon={faUserPlus}
+                      className="text-white fa-x"
+                    />
+                  </div>
+                  <div className="text-sm text-gray-500 font-light">
+                    Sign up
+                  </div>
+                </button>
+              </div>
+              <div>
+                <ul className="text-left text-lg font-light">
+                  {menuItems.map((item) => {
+                    return (
+                      <li key={item.name} className="py-1">
+                        <Link href={item.path}>{item.name}</Link>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </div>
+            </SheetHeader>
+          </SheetContent>
+        </Sheet>
       </nav>
     </header>
   )
