@@ -1,0 +1,37 @@
+{
+  "count": 5,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 290375,
+      "game_id": 3498,
+      "store_id": 3,
+      "url": "https://store.playstation.com/en-us/product/UP1004-CUSA00419_00-GTAVDIGITALDOWNL"
+    },
+    {
+      "id": 438095,
+      "game_id": 3498,
+      "store_id": 11,
+      "url": "https://www.epicgames.com/store/en-US/product/grand-theft-auto-v/home"
+    },
+    {
+      "id": 290376,
+      "game_id": 3498,
+      "store_id": 1,
+      "url": "http://store.steampowered.com/app/271590/"
+    },
+    {
+      "id": 290377,
+      "game_id": 3498,
+      "store_id": 7,
+      "url": "https://marketplace.xbox.com/en-US/Product/GTA-V/66acd000-77fe-1000-9115-d802545408a7"
+    },
+    {
+      "id": 290378,
+      "game_id": 3498,
+      "store_id": 2,
+      "url": "https://www.microsoft.com/en-us/store/p/grand-theft-auto-v/bpj686w6s0nh?cid=msft_web_chart"
+    }
+  ]
+}

@@ -58,6 +58,16 @@ const menuItems = [
 export default function Navbar() {
   const [search, setSearch] = useState('')
 
+  fetch(
+    `https://api.rawg.io/api/games/3498/stores?key=04fd56d2bfc34a73964433ff1117f1d1`
+  )
+    .then((res) => {
+      return res.json()
+    })
+    .then((res) => {
+      console.log('stores', res)
+    })
+
   return (
     <header>
       <nav className="flex justify-between items-center gap-x-6">

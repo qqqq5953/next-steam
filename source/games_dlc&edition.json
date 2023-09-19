@@ -1,0 +1,533 @@
+{
+  "count": 3,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 347853,
+      "slug": "grand-theft-auto-v-grand-theft-auto-san-andreas",
+      "name": "Grand Theft Auto V & Grand Theft Auto: San Andreas",
+      "released": "2017-04-04",
+      "tba": false,
+      "background_image": null,
+      "rating": 0,
+      "rating_top": 0,
+      "ratings": [
+        {
+          "id": 4,
+          "title": "recommended",
+          "count": 2,
+          "percent": 50
+        },
+        {
+          "id": 5,
+          "title": "exceptional",
+          "count": 1,
+          "percent": 25
+        },
+        {
+          "id": 1,
+          "title": "skip",
+          "count": 1,
+          "percent": 25
+        }
+      ],
+      "ratings_count": 4,
+      "reviews_text_count": 0,
+      "added": 7,
+      "added_by_status": {
+        "yet": 1,
+        "owned": 1,
+        "beaten": 4,
+        "dropped": 1
+      },
+      "metacritic": null,
+      "playtime": 0,
+      "suggestions_count": 0,
+      "updated": "2023-04-14T07:47:03",
+      "user_game": null,
+      "reviews_count": 4,
+      "community_rating": 0,
+      "saturated_color": "0f0f0f",
+      "dominant_color": "0f0f0f",
+      "platforms": [
+        {
+          "platform": {
+            "id": 18,
+            "name": "PlayStation 4",
+            "slug": "playstation4",
+            "image": null,
+            "year_end": null,
+            "year_start": null,
+            "games_count": 6705,
+            "image_background": "https://media.rawg.io/media/games/b45/b45575f34285f2c4479c9a5f719d972e.jpg"
+          },
+          "released_at": "2017-04-04",
+          "requirements_en": null,
+          "requirements_ru": null
+        }
+      ],
+      "parent_platforms": [
+        {
+          "platform": {
+            "id": 2,
+            "name": "PlayStation",
+            "slug": "playstation"
+          }
+        }
+      ],
+      "genres": [
+        {
+          "id": 4,
+          "name": "Action",
+          "slug": "action",
+          "games_count": 174382,
+          "image_background": "https://media.rawg.io/media/games/960/960b601d9541cec776c5fa42a00bf6c4.jpg"
+        }
+      ],
+      "stores": [
+        {
+          "id": 339337,
+          "store": {
+            "id": 3,
+            "name": "PlayStation Store",
+            "slug": "playstation-store",
+            "domain": "store.playstation.com",
+            "games_count": 7839,
+            "image_background": "https://media.rawg.io/media/games/157/15742f2f67eacff546738e1ab5c19d20.jpg"
+          }
+        }
+      ],
+      "clip": null,
+      "tags": [
+        {
+          "id": 413,
+          "name": "online",
+          "slug": "online",
+          "language": "eng",
+          "games_count": 6536,
+          "image_background": "https://media.rawg.io/media/games/1fa/1fa75f0895240b12fc65cc98ae9649fd.jpg"
+        },
+        {
+          "id": 2030,
+          "name": "city",
+          "slug": "city",
+          "language": "eng",
+          "games_count": 9184,
+          "image_background": "https://media.rawg.io/media/games/415/41563ce6cb061a210160687a4e5d39f6.jpg"
+        },
+        {
+          "id": 999,
+          "name": "shark",
+          "slug": "shark",
+          "language": "eng",
+          "games_count": 555,
+          "image_background": "https://media.rawg.io/media/screenshots/b23/b23b2eb505ef5a49c9bf2bda7baa0433_Zr4zxsi.jpg"
+        },
+        {
+          "id": 1876,
+          "name": "drugs",
+          "slug": "drugs",
+          "language": "eng",
+          "games_count": 208,
+          "image_background": "https://media.rawg.io/media/screenshots/62e/62eece9980fb6ca8e2f3c686b2a2cee3.jpg"
+        }
+      ],
+      "esrb_rating": {
+        "id": 4,
+        "name": "Mature",
+        "slug": "mature"
+      },
+      "short_screenshots": []
+    },
+    {
+      "id": 274853,
+      "slug": "grand-theft-auto-v-great-white-shark-cash-card",
+      "name": "Grand Theft Auto V & Great White Shark Cash Card",
+      "released": "2015-06-09",
+      "tba": false,
+      "background_image": "https://media.rawg.io/media/screenshots/7d0/7d0d0ddf032ec75f02a3050943c339e1.jpg",
+      "rating": 0,
+      "rating_top": 0,
+      "ratings": [
+        {
+          "id": 4,
+          "title": "recommended",
+          "count": 2,
+          "percent": 66.67
+        },
+        {
+          "id": 1,
+          "title": "skip",
+          "count": 1,
+          "percent": 33.33
+        }
+      ],
+      "ratings_count": 3,
+      "reviews_text_count": 0,
+      "added": 5,
+      "added_by_status": {
+        "yet": 1,
+        "owned": 1,
+        "beaten": 3
+      },
+      "metacritic": null,
+      "playtime": 0,
+      "suggestions_count": 468,
+      "updated": "2019-01-09T12:41:06",
+      "user_game": null,
+      "reviews_count": 3,
+      "community_rating": 0,
+      "saturated_color": "0f0f0f",
+      "dominant_color": "0f0f0f",
+      "platforms": [
+        {
+          "platform": {
+            "id": 1,
+            "name": "Xbox One",
+            "slug": "xbox-one",
+            "image": null,
+            "year_end": null,
+            "year_start": null,
+            "games_count": 5541,
+            "image_background": "https://media.rawg.io/media/games/4cf/4cfc6b7f1850590a4634b08bfab308ab.jpg"
+          },
+          "released_at": "2015-06-09",
+          "requirements_en": null,
+          "requirements_ru": null
+        }
+      ],
+      "parent_platforms": [
+        {
+          "platform": {
+            "id": 3,
+            "name": "Xbox",
+            "slug": "xbox"
+          }
+        }
+      ],
+      "genres": [],
+      "stores": [
+        {
+          "id": 273443,
+          "store": {
+            "id": 2,
+            "name": "Xbox Store",
+            "slug": "xbox-store",
+            "domain": "microsoft.com",
+            "games_count": 4770,
+            "image_background": "https://media.rawg.io/media/games/8d6/8d69eb6c32ed6acfd75f82d532144993.jpg"
+          }
+        }
+      ],
+      "clip": null,
+      "tags": [
+        {
+          "id": 5641,
+          "name": "bundle",
+          "slug": "bundle",
+          "language": "eng",
+          "games_count": 439,
+          "image_background": "https://media.rawg.io/media/screenshots/dca/dca322b06cf8f8927737b24e10658dd2.jpg"
+        }
+      ],
+      "esrb_rating": null,
+      "short_screenshots": [
+        {
+          "id": -1,
+          "image": "https://media.rawg.io/media/screenshots/7d0/7d0d0ddf032ec75f02a3050943c339e1.jpg"
+        },
+        {
+          "id": 1768739,
+          "image": "https://media.rawg.io/media/screenshots/d7a/d7a4301f604378566eba018d7c1cb596_xBZ6u1V.jpg"
+        },
+        {
+          "id": 1768740,
+          "image": "https://media.rawg.io/media/screenshots/d91/d91ef27077b6c6d786762850afefaa57.jpg"
+        },
+        {
+          "id": 1768741,
+          "image": "https://media.rawg.io/media/screenshots/288/288ab39416ec1e377006249d061cee2f_iSd377F.jpg"
+        },
+        {
+          "id": 1768742,
+          "image": "https://media.rawg.io/media/screenshots/dcb/dcb17a4699aa3c509bcde3b87b14919b.jpg"
+        },
+        {
+          "id": 1768743,
+          "image": "https://media.rawg.io/media/screenshots/6de/6de93afed04899461844c7f2a98c0ce2.jpg"
+        },
+        {
+          "id": 1768744,
+          "image": "https://media.rawg.io/media/screenshots/90f/90fa4665e7ae47f049467ca2a26faac4_SDcpoxw.jpg"
+        }
+      ]
+    },
+    {
+      "id": 42336,
+      "slug": "grand-theft-auto-online",
+      "name": "Grand Theft Auto Online",
+      "released": "2013-10-01",
+      "tba": false,
+      "background_image": "https://media.rawg.io/media/games/bbd/bbd7af2d6dab31e0b3bbfb5f63575ab8.jpg",
+      "rating": 3.67,
+      "rating_top": 4,
+      "ratings": [
+        {
+          "id": 4,
+          "title": "recommended",
+          "count": 63,
+          "percent": 46.67
+        },
+        {
+          "id": 3,
+          "title": "meh",
+          "count": 34,
+          "percent": 25.19
+        },
+        {
+          "id": 5,
+          "title": "exceptional",
+          "count": 26,
+          "percent": 19.26
+        },
+        {
+          "id": 1,
+          "title": "skip",
+          "count": 12,
+          "percent": 8.89
+        }
+      ],
+      "ratings_count": 132,
+      "reviews_text_count": 3,
+      "added": 243,
+      "added_by_status": {
+        "yet": 11,
+        "owned": 28,
+        "beaten": 68,
+        "toplay": 12,
+        "dropped": 89,
+        "playing": 35
+      },
+      "metacritic": 82,
+      "playtime": 0,
+      "suggestions_count": 534,
+      "updated": "2023-08-31T12:57:42",
+      "user_game": null,
+      "reviews_count": 135,
+      "saturated_color": "0f0f0f",
+      "dominant_color": "0f0f0f",
+      "platforms": [
+        {
+          "platform": {
+            "id": 1,
+            "name": "Xbox One",
+            "slug": "xbox-one",
+            "image": null,
+            "year_end": null,
+            "year_start": null,
+            "games_count": 5540,
+            "image_background": "https://media.rawg.io/media/games/8a0/8a02f84a5916ede2f923b88d5f8217ba.jpg"
+          },
+          "released_at": "2013-10-01",
+          "requirements_en": null,
+          "requirements_ru": null
+        },
+        {
+          "platform": {
+            "id": 4,
+            "name": "PC",
+            "slug": "pc",
+            "image": null,
+            "year_end": null,
+            "year_start": null,
+            "games_count": 516362,
+            "image_background": "https://media.rawg.io/media/games/f46/f466571d536f2e3ea9e815ad17177501.jpg"
+          },
+          "released_at": "2013-10-01",
+          "requirements_en": null,
+          "requirements_ru": null
+        },
+        {
+          "platform": {
+            "id": 16,
+            "name": "PlayStation 3",
+            "slug": "playstation3",
+            "image": null,
+            "year_end": null,
+            "year_start": null,
+            "games_count": 3168,
+            "image_background": "https://media.rawg.io/media/games/c6b/c6bfece1daf8d06bc0a60632ac78e5bf.jpg"
+          },
+          "released_at": "2013-10-01",
+          "requirements_en": null,
+          "requirements_ru": null
+        },
+        {
+          "platform": {
+            "id": 18,
+            "name": "PlayStation 4",
+            "slug": "playstation4",
+            "image": null,
+            "year_end": null,
+            "year_start": null,
+            "games_count": 6703,
+            "image_background": "https://media.rawg.io/media/games/942/9424d6bb763dc38d9378b488603c87fa.jpg"
+          },
+          "released_at": "2013-10-01",
+          "requirements_en": null,
+          "requirements_ru": null
+        },
+        {
+          "platform": {
+            "id": 187,
+            "name": "PlayStation 5",
+            "slug": "playstation5",
+            "image": null,
+            "year_end": null,
+            "year_start": 2020,
+            "games_count": 933,
+            "image_background": "https://media.rawg.io/media/games/d89/d89bd0cf4fcdc10820892980cbba0f49.jpg"
+          },
+          "released_at": "2013-10-01",
+          "requirements_en": null,
+          "requirements_ru": null
+        }
+      ],
+      "parent_platforms": [
+        {
+          "platform": {
+            "id": 1,
+            "name": "PC",
+            "slug": "pc"
+          }
+        },
+        {
+          "platform": {
+            "id": 2,
+            "name": "PlayStation",
+            "slug": "playstation"
+          }
+        },
+        {
+          "platform": {
+            "id": 3,
+            "name": "Xbox",
+            "slug": "xbox"
+          }
+        }
+      ],
+      "genres": [
+        {
+          "id": 4,
+          "name": "Action",
+          "slug": "action",
+          "games_count": 174268,
+          "image_background": "https://media.rawg.io/media/games/f46/f466571d536f2e3ea9e815ad17177501.jpg"
+        },
+        {
+          "id": 2,
+          "name": "Shooter",
+          "slug": "shooter",
+          "games_count": 59355,
+          "image_background": "https://media.rawg.io/media/games/15c/15c95a4915f88a3e89c821526afe05fc.jpg"
+        }
+      ],
+      "stores": [],
+      "clip": null,
+      "tags": [
+        {
+          "id": 11669,
+          "name": "stats",
+          "slug": "stats",
+          "language": "eng",
+          "games_count": 4559,
+          "image_background": "https://media.rawg.io/media/games/736/73619bd336c894d6941d926bfd563946.jpg"
+        },
+        {
+          "id": 413,
+          "name": "online",
+          "slug": "online",
+          "language": "eng",
+          "games_count": 6533,
+          "image_background": "https://media.rawg.io/media/games/819/819cbc1d24837166b24299f5c8b68e07.jpg"
+        },
+        {
+          "id": 808,
+          "name": "character",
+          "slug": "character",
+          "language": "eng",
+          "games_count": 8796,
+          "image_background": "https://media.rawg.io/media/games/cce/ccee39dd9977482f655f22ad35de61ce.jpg"
+        },
+        {
+          "id": 744,
+          "name": "friends",
+          "slug": "friends",
+          "language": "eng",
+          "games_count": 15098,
+          "image_background": "https://media.rawg.io/media/games/2ee/2eeed8524931b4fae1e4a40d0e5443b5.jpg"
+        },
+        {
+          "id": 2326,
+          "name": "explore",
+          "slug": "explore",
+          "language": "eng",
+          "games_count": 3274,
+          "image_background": "https://media.rawg.io/media/games/cd2/cd2a1a360839002bceadc5a8b3c7dbf7.jpg"
+        },
+        {
+          "id": 1709,
+          "name": "work",
+          "slug": "work",
+          "language": "eng",
+          "games_count": 9179,
+          "image_background": "https://media.rawg.io/media/screenshots/5db/5dbf8a9f7e1c166e010b7685b27ce13b.jpg"
+        },
+        {
+          "id": 1234,
+          "name": "ambient",
+          "slug": "ambient",
+          "language": "eng",
+          "games_count": 490,
+          "image_background": "https://media.rawg.io/media/screenshots/74c/74c29c13b80be644fed4ffc504e2e007.jpg"
+        }
+      ],
+      "esrb_rating": {
+        "id": 4,
+        "name": "Mature",
+        "slug": "mature"
+      },
+      "short_screenshots": [
+        {
+          "id": -1,
+          "image": "https://media.rawg.io/media/games/bbd/bbd7af2d6dab31e0b3bbfb5f63575ab8.jpg"
+        },
+        {
+          "id": 613481,
+          "image": "https://media.rawg.io/media/screenshots/28c/28c64b3a4fe99ba36a565ec7d72472bf.jpg"
+        },
+        {
+          "id": 613482,
+          "image": "https://media.rawg.io/media/screenshots/e4c/e4cc9e5ee9fe6e025c69e0473e766030.jpg"
+        },
+        {
+          "id": 613483,
+          "image": "https://media.rawg.io/media/screenshots/eea/eea60f7e7e1283d044a3f1db3a76ac80.jpg"
+        },
+        {
+          "id": 613484,
+          "image": "https://media.rawg.io/media/screenshots/4c8/4c872e618e9ffe20ec30c76c4ea934ff.jpg"
+        },
+        {
+          "id": 613485,
+          "image": "https://media.rawg.io/media/screenshots/676/676b62378865c84beaef8755db8e99b3.jpg"
+        },
+        {
+          "id": 613486,
+          "image": "https://media.rawg.io/media/screenshots/c0e/c0e74ff2c777b6e169d7340c030120b4.jpg"
+        }
+      ]
+    }
+  ]
+}
