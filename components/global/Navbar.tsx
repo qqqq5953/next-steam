@@ -4,11 +4,10 @@ import { Input } from '@/components/base-ui/Input'
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger
-} from '@/components/base-ui/sheet'
+} from '@/components/base-ui/Sheet'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -58,15 +57,21 @@ const menuItems = [
 export default function Navbar() {
   const [search, setSearch] = useState('')
 
-  fetch(
-    `https://api.rawg.io/api/games/3498/stores?key=04fd56d2bfc34a73964433ff1117f1d1`
-  )
-    .then((res) => {
-      return res.json()
-    })
-    .then((res) => {
-      console.log('stores', res)
-    })
+  // fetch(
+  //   `https://api.rawg.io/api/games?page=1&search=grand&key=04fd56d2bfc34a73964433ff1117f1d1`
+  // )
+  //   .then((res) => res.json())
+  //   .then((res) => {
+  //     console.log('res', res)
+  //   })
+
+  // fetch(
+  //   `https://rawg.io/api/games/lists/main?discover=true&ordering=-relevance&page_size=40&page=1&key=c542e67aec3a4340908f9de9e86038af`
+  // )
+  //   .then((res) => res.json())
+  //   .then((res) => {
+  //     console.log('res', res)
+  //   })
 
   return (
     <header>

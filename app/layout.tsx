@@ -1,3 +1,5 @@
+import Navbar from '@/components/global/Navbar'
+
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -21,8 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`container mx-auto py-4 bg-black text-slate-50 ${inter.className}`}
+        className={`container mx-auto py-4 lg:py-10 bg-black text-slate-50 ${inter.className}`}
       >
+        <Navbar></Navbar>
         {children}
       </body>
     </html>
