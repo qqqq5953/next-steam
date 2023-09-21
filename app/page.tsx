@@ -212,9 +212,91 @@ export default async function Home() {
     }
   ]
 
+  const orderOptions = [
+    {
+      name: 'Relevance',
+      value: '-relevance'
+    },
+    {
+      name: 'Date added',
+      value: '-created'
+    },
+    {
+      name: 'Name',
+      value: 'name'
+    },
+    {
+      name: 'Release date',
+      value: '-released'
+    },
+    {
+      name: 'Popularity',
+      value: '-added'
+    },
+    {
+      name: 'Average rating',
+      value: '-rating'
+    }
+  ]
+
+  const platformOptions = [
+    {
+      name: 'PC',
+      value: '1'
+    },
+    {
+      name: 'PlayStation',
+      value: '2',
+      children: [
+        {
+          name: 'PlayStation 4',
+          value: '18'
+        },
+        {
+          name: 'PlayStation 5',
+          value: '187'
+        }
+      ]
+    },
+    {
+      name: 'Xbox',
+      value: '3',
+      children: [
+        {
+          name: 'Xbox One',
+          value: '1'
+        },
+        {
+          name: 'Xbox Series S/X',
+          value: '186'
+        }
+      ]
+    },
+    {
+      name: 'iOS',
+      value: '4'
+    },
+    {
+      name: 'Android',
+      value: '8'
+    },
+    {
+      name: 'Macintosh',
+      value: '5'
+    },
+    {
+      name: 'Linux',
+      value: '6'
+    },
+    {
+      name: 'Nintendo',
+      value: '7'
+    }
+  ]
+
   return (
     <>
-      <main>
+      <main className="space-y-4">
         <div className="text-center py-6">
           <h2 className="text-3xl font-bold">New and trending</h2>
           <h3 className="text-sm font-light pt-2">
@@ -222,9 +304,24 @@ export default async function Home() {
           </h3>
         </div>
 
-        <div className="flex gap-3 border-b-4 border-neutral-500 pb-4 mb-4">
-          <Select selectedValuePrefix={'Order by:'} options={options} />
-          <Select options={options} />
+        <div className="flex gap-2 items-center pb-4">
+          <div className="flex gap-2 grow sm:grow-0">
+            <div className="grow">
+              <Select
+                selectedValuePrefix={'Order by:'}
+                options={orderOptions}
+                type="order"
+              />
+            </div>
+            <div className="grow lg:min-w-[100px]">
+              <Select options={platformOptions} type="platform" />
+            </div>
+          </div>
+          <div className="hidden lg:block">
+            <span>Display options</span>
+            <button className="border">List</button>
+            <button className="border">Screen</button>
+          </div>
         </div>
 
         <section className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-4">
