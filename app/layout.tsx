@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`container mx-auto py-4 lg:py-10 bg-black text-slate-50 ${inter.className}`}
+        className={`p-4 mx-auto lg:p-10 bg-black text-slate-50 ${inter.className}`}
       >
         <Navbar></Navbar>
         {children}
