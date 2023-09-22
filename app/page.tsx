@@ -4,11 +4,13 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle
 } from '@/components/base-ui/card'
+
 import useFetch from '@/hooks/useFetch'
+import Dropdown from '@/components/global/Dropdown'
+import Display from '@/components/home/Display'
 
 type Platform = {
   platform: {
@@ -39,18 +41,11 @@ type Game = {
   genres: Genre[]
 }
 
-export default async function Home() {
-  const options = [
-    {
-      name: '123',
-      value: '123'
-    },
-    {
-      name: '456',
-      value: '456'
-    }
-  ]
+type Props = {
+  searchParams: { [key: string]: string | string[] | undefined }
+}
 
+export default async function Home({ searchParams }: Props) {
   // const { data, error } = await useFetch(
   //   'https://jsonplaceholder.typicode.com/posts/1'
   // )
@@ -62,7 +57,7 @@ export default async function Home() {
   // https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}
 
   // const { data, error } = await useFetch(
-  //   `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}`
+  //   `https://api.rawg.io/api/games?ordering={}key=${process.env.RAWG_API_KEY}`
   // )
 
   // const games = data.result
@@ -294,6 +289,15 @@ export default async function Home() {
     }
   ]
 
+  const { order, platform } = searchParams
+  const orderValue = orderOptions.find((option) => option.name === order)?.value
+  const platformValue = platformOptions.find(
+    (option) => option.name === platform
+  )?.value
+
+  console.log('orderValue', orderValue)
+  console.log('platformValue', platformValue)
+
   return (
     <>
       <main className="space-y-4">
@@ -307,20 +311,24 @@ export default async function Home() {
         <div className="flex gap-2 items-center pb-4">
           <div className="flex gap-2 grow sm:grow-0">
             <div className="grow">
-              <Select
+              {/* <Select
+                selectedValuePrefix={'Order by:'}
+                options={orderOptions}
+                type="order"
+              /> */}
+              <Dropdown
                 selectedValuePrefix={'Order by:'}
                 options={orderOptions}
                 type="order"
               />
             </div>
             <div className="grow lg:min-w-[100px]">
-              <Select options={platformOptions} type="platform" />
+              {/* <Select options={platformOptions} type="platform" /> */}
+              <Dropdown options={platformOptions} type="platform" />
             </div>
           </div>
-          <div className="hidden lg:block">
-            <span>Display options</span>
-            <button className="border">List</button>
-            <button className="border">Screen</button>
+          <div className="hidden lg:flex lg:gap-3 lg:items-center ml-auto">
+            <Display />
           </div>
         </div>
 

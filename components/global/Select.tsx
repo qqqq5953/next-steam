@@ -7,8 +7,7 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/base-ui/select'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 type Option = {
   name: string
@@ -27,9 +26,9 @@ export default function CustomSelect({
   options,
   type
 }: Props) {
-  const initialValue = options[0].name
   const router = useRouter()
   const searchParams = useSearchParams()
+  const initialValue = searchParams.get(type) || options[0].name
 
   function setFilter(newValue: string) {
     let queryString = searchParams.toString()
@@ -69,9 +68,9 @@ export default function CustomSelect({
       <SelectContent className="bg-white text-black">
         {options.map((option) => {
           return (
-            <SelectItem value={option.value} key={option.value}>
-              {option.name}
-            </SelectItem>
+            <div key={option.value}>
+              <SelectItem value={option.name}>{option.name}</SelectItem>
+            </div>
           )
         })}
       </SelectContent>

@@ -9,6 +9,9 @@ const nextConfig = {
         pathname: '/media/games/**'
       }
     ]
+  },
+  experimental: {
+    serverActions: true
   }
 }
 
