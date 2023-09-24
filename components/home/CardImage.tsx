@@ -6,122 +6,146 @@ import Video from '@/components/global/Video'
 import useFetch from '@/hooks/useFetch'
 
 type Props = {
-    game: Game
+  game: Game
 }
 
 type Trailer = {
-    data: string | undefined,
-    error: string | undefined
+  data: string | undefined
+  error: string | undefined
 }
 
 let hasLoad = false
 export default function CardImage({ game }: Props) {
-    const [isLoading, setIsLoading] = useState(false)
-    const [trailer, setTrailer] = useState<Trailer>({ data: undefined, error: undefined })
+  // const { data, error } = useFetch({
 
-    // const { data, error } = useFetch({
+  // let promise = new Promise((resolve, reject) => {
+  //     resolve({ data: 123, error: null })
+  // })
 
-    // let promise = new Promise((resolve, reject) => {
-    //     resolve({ data: 123, error: null })
-    // })
-    const videoRef = useRef<HTMLDivElement>(null)
-
-    function fetchTailer() {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve({ data: 'https://steamcdn-a.akamaihd.net/steam/apps/256693661/movie480.mp4', error: null })
-            }, 2000)
+  function fetchTailer() {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({
+          data: 'https://steamcdn-a.akamaihd.net/steam/apps/256693661/movie480.mp4',
+          error: null
         })
+      }, 2000)
+    })
+  }
+
+  const [videoSrc, setVideoSrc] = useState(null)
+  const videoRef = useRef<HTMLDivElement>(null)
+  let abortController = new AbortController()
+
+  async function handleMouseEnter() {
+    console.log('handleMouseEnter')
+    if (videoSrc) {
+      playVideo()
+    } else {
+      loadVideo()
     }
+  }
 
-    async function loadTrailer() {
-        console.log('loadTrailer');
-
-        if (!hasLoad) {
-            console.log('has not load yet');
-            const data = await fetchTailer()
-            // const data = await useFetch('https://jsonplaceholder.typicode.com/posts/1')
-            console.log('data', data);
-
-
-            setTrailer(data)
-
-            setTimeout(() => {
-                console.log('videoRef', videoRef.current?.firstChild);
-                videoRef.current?.firstChild.pause().then(() => {
-                    console.log('play');
-                }).catch((err) => {
-                    console.log('err', err);
-
-                })
-            }, 100);
-
-            hasLoad = true // 用物件紀錄哪個影片已經load 過了
-        } else {
-            console.log('has load');
-        }
+  async function handleMouseLeve() {
+    console.log('handleMouseLeve')
+    if (videoSrc) {
+      stopVideo()
+    } else {
+      abortFetching()
     }
+  }
 
-    function abortLoading() {
-        console.log('abortLoading');
-        console.log('videoRef', videoRef.current?.firstChild);
-        // videoRef.current?.firstChild?.pause().then(() => {
-        //     console.log('pause');
-        // }).catch((err) => {
-        //     console.log('err', err);
+  async function loadVideo() {
+    console.log('loadVideo')
 
-        // })
+    try {
+      abortController = new AbortController()
+      const signal = abortController.signal
+
+      //   const response = await fetchTailer()
+      //   const videoUrl = response.data
+      //   setVideoSrc(videoUrl)
+
+      const response = await fetch(
+        `https://api.rawg.io/api/games/${game.id}/movies?key=04fd56d2bfc34a73964433ff1117f1d1`,
+        { signal: signal }
+      )
+      const data = await response.json()
+      console.log('videoUrl', data)
+
+      if (data.results.length === 0) {
+        // show swiper image
+      } else {
+        setVideoSrc(data.results[0].data['480'])
+      }
+
+      //   setVideoSrc(videoUrl)
+      //   const response = await fetch(
+      //     'https://jsonplaceholder.typicode.com/posts',
+      //     { signal: signal }
+      //   )
+      //   const videoUrl = await response.json()
+      //   console.log('videoUrl', videoUrl)
+
+      //   setVideoSrc(videoUrl[0].title)
+    } catch (error) {
+      console.error('Error loading video:', error)
     }
+  }
 
-    // if (isLoading) {
-    //     loadTrailer()
-    // } else {
-    //     abortLoading()
-    // }
+  function stopVideo() {
+    if (!videoRef.current?.firstChild || !videoSrc) return
 
-    useEffect(() => {
-        if (isLoading) {
-            loadTrailer()
-        } else {
-            abortLoading()
-        }
+    console.log('stopVideo')
+    videoRef.current?.firstChild?.pause()
+  }
 
-    }, [isLoading])
+  function playVideo() {
+    console.log('playVideo')
+    videoRef.current?.firstChild
+      ?.play()
+      .then(() => console.log('Video is playing'))
+  }
 
+  function abortFetching() {
+    console.log('中離')
+    abortController.abort()
+    abortController = new AbortController()
+  }
 
-    return (
-        <div ref={videoRef} className="relative aspect-video group" onMouseLeave={() => setIsLoading(false)} onMouseEnter={() => setIsLoading(true)}
+  return (
+    <div
+      ref={videoRef}
+      className="relative aspect-video group"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeve}
+    >
+      {/* {videoSrc} */}
+
+      {videoSrc && (
+        <video
+          controls
+          muted
+          width="100%"
+          height="100%"
+          className="absolute inset-x-0 z-50 opacity-0 group-hover:opacity-100 transition-all duration-300"
+          onCanPlay={playVideo}
         >
-            {/* poster={game.background_image} */}
-            {trailer?.data && <video controls muted width="100%" height="100%" poster={game.background_image} className="absolute inset-x-0">
-                <source src={trailer?.data}
-                    type="video/mp4" />
-                <p>
-                    Your browser doesn't support HTML5 video. Here is a
-                    <a href={trailer?.data}>link to the video</a> instead.
-                </p>
-            </video>}
-            {/* {trailer?.data && <video autoPlay controls muted width="100%" height="100%" className="absolute inset-x-0 z-50 opacity-0 group-hover:opacity-100 transition-all duration-300 ">
-                <source src={trailer?.data} type="video/mp4" />
-                <p>
-                    Your browser doesn't support HTML5 video. Here is a
-                    <a href={trailer?.data}>link to the video</a> instead.
-                </p>
-            </video>} */}
+          <source src={videoSrc} type="video/mp4" />
+          <p>
+            Your browser doesn't support HTML5 video. Here is a
+            <a href={videoSrc}>link to the video</a> instead.
+          </p>
+        </video>
+      )}
 
-            {/* <Image
-                src={game.background_image}
-                fill
-                sizes="(min-width: 1480px) 1368px, calc(94.83vw - 16px)"
-                alt={game.name}
-                className="object-cover object-top"
-            ></Image> */}
-
-            {/* <div className='absolute inset-x-0 bottom-0 bg-red-300'>{isLoading ? 'loading' : 'not loading'}
-
-            </div> */}
-
-
-        </div>
-    )
+      <Image
+        src={game.background_image}
+        fill
+        sizes="(min-width: 1480px) 1368px, calc(94.83vw - 16px)"
+        alt={game.name}
+        className="object-cover object-top"
+      ></Image>
+    </div>
+  )
 }

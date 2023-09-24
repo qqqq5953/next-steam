@@ -30,15 +30,16 @@ export default async function Home({ searchParams }: Props) {
 
   // console.log(data);
 
-
   // 如果不行再打測試的
-  // https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}
+  //api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}
 
   // const { data, error } = await useFetch(
-  //   `https://api.rawg.io/api/games?ordering={}key=${process.env.RAWG_API_KEY}`
+  //   `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}`
   // )
 
-  // const games = data.result
+  // console.log(data.results[0])
+
+  // const games = data.results
 
   const games: Game[] = [
     {
@@ -320,7 +321,7 @@ export default async function Home({ searchParams }: Props) {
                 <CardImage game={game} />
 
                 <CardHeader>
-                  <CardTitle >{game.name}</CardTitle>
+                  <CardTitle>{game.name}</CardTitle>
                   <CardDescription></CardDescription>
                 </CardHeader>
 
