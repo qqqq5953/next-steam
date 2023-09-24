@@ -1,4 +1,4 @@
-export default async function useFetch(url: string) {
+export default async function useFetch(url: string, option?: object) {
   let data
   let error
 

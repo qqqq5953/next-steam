@@ -11,7 +11,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuPortal
 } from '@/components/base-ui/DropdownMenu'
-import { Button } from '@/components/base-ui/button'
+import { Button } from '@/components/base-ui/Button'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
@@ -85,14 +85,14 @@ export default function Dropdown({
     >
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button className="flex items-center border-none bg-neutral-800/90 w-full text-xs sm:text-sm">
-            <span className="shrink-0 text-slate-300 font-light">
+          <Button className="flex items-center border-none bg-neutral-800/90 w-full text-xs sm:text-sm hover:text-neutral-400 transition-colors duration-300">
+            <span className="shrink-0 font-light">
               {selectedValuePrefix}
             </span>
             <span className={`${selectedValuePrefix ? 'ml-1' : 'mx-0'} mr-2`}>
               {selectedValue || initialValue}
             </span>
-            <FontAwesomeIcon icon={faAngleDown} />
+            <FontAwesomeIcon icon={faAngleDown} className='text-neutral-500' />
           </Button>
         </DropdownMenuTrigger>
 

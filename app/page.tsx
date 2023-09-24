@@ -1,4 +1,3 @@
-import Select from '@/components/global/Select'
 import Image from 'next/image'
 import {
   Card,
@@ -6,40 +5,12 @@ import {
   CardDescription,
   CardHeader,
   CardTitle
-} from '@/components/base-ui/card'
+} from '@/components/base-ui/Card'
 
 import useFetch from '@/hooks/useFetch'
 import Dropdown from '@/components/global/Dropdown'
 import Display from '@/components/home/Display'
-
-type Platform = {
-  platform: {
-    id: number
-    name: string
-    // image_background: string | null
-    // year_start: number | null
-    // year_end: number | null
-  }
-  // requirements_en: {
-  //   minimum: string
-  //   recommended: string
-  // }
-}
-type Genre = {
-  id: number
-  name: string
-  // image_background: string
-}
-
-type Game = {
-  id: number
-  name: string
-  released: string
-  background_image: string
-  rating: number
-  platforms: Platform[]
-  genres: Genre[]
-}
+import CardImage from '@/components/home/CardImage'
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined }
@@ -52,6 +23,13 @@ export default async function Home({ searchParams }: Props) {
 
   // 先打官網的
   // https://rawg.io/api/games/lists/main?discover=true&ordering=-relevance&page_size=40&page=1&key=c542e67aec3a4340908f9de9e86038af
+
+  // const { data, error } = await useFetch(
+  //   `https://rawg.io/api/games/lists/main?discover=true&ordering=-relevance&page_size=4&page=1&key=c542e67aec3a4340908f9de9e86038af`
+  // )
+
+  // console.log(data);
+
 
   // 如果不行再打測試的
   // https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}
@@ -337,20 +315,12 @@ export default async function Home({ searchParams }: Props) {
             return (
               <Card
                 key={game.id}
-                className="overflow-auto bg-neutral-800/90 border-none"
+                className="overflow-hidden bg-neutral-800/90 border-transparent  hover:border-neutral-700 transition-all duration-300"
               >
-                <div className="relative h-60">
-                  <Image
-                    src={game.background_image}
-                    fill
-                    sizes="(min-width: 1480px) 1368px, calc(94.83vw - 16px)"
-                    alt={game.name}
-                    className="object-cover object-top"
-                  ></Image>
-                </div>
+                <CardImage game={game} />
 
                 <CardHeader>
-                  <CardTitle>{game.name}</CardTitle>
+                  <CardTitle >{game.name}</CardTitle>
                   <CardDescription></CardDescription>
                 </CardHeader>
 
