@@ -47,7 +47,7 @@ export default function Swiper({ screenShots, showSlide }: Props) {
                         fill
                         sizes="(min-width: 1480px) 1368px, calc(94.83vw - 16px)"
                         alt={`Slide ${index}`}
-                        className={` transition-all duration-500 ease-in-out object-cover object-top ${index === currentIndex ? 'opacity-100 ' : 'opacity-0'
+                        className={`transition-opacity duration-300 ease-in-out object-cover object-top ${index === currentIndex ? 'opacity-100' : 'opacity-0'
                             }`}
                     ></Image>
                 ))}
