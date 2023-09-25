@@ -1,13 +1,15 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import Image from 'next/image'
+import { spawn } from 'child_process'
 
 type Props = {
-    game: Game,
+    screenShots: ShortScreenshot[],
     showSlide: boolean
 }
 
-export default function Swiper({ game, showSlide }: Props) {
+export default function Swiper({ screenShots, showSlide }: Props) {
     const divRef = useRef<HTMLDivElement>(null);
     const [barWidth, setBarWidth] = useState(0);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -23,38 +25,41 @@ export default function Swiper({ game, showSlide }: Props) {
     // Function to go to the next slide
     const nextSlide = () => {
         setCurrentIndex((prevIndex) =>
-            prevIndex === game.short_screenshots.length - 1 ? 0 : prevIndex + 1
+            prevIndex === screenShots.length - 1 ? 0 : prevIndex + 1
         );
     };
 
     // Function to go to the previous slide
     const prevSlide = () => {
         setCurrentIndex((prevIndex) =>
-            prevIndex === 0 ? game.short_screenshots.length - 1 : prevIndex - 1
+            prevIndex === 0 ? screenShots.length - 1 : prevIndex - 1
         );
     };
 
 
     return (
         <div className={`relative overflow-hidden h-full ${showSlide ? 'z-10' : '-z-10'}`} ref={divRef}>
-            <div className="flex">
-                {game.short_screenshots.map((item, index) => (
-                    <img
+            <div className="relative h-full">
+                {screenShots.map((item, index) => (
+                    <Image
                         key={index}
-                        className={`absolute w-full flex-shrink-0 transition-all duration-500 ease-in-out ${index === currentIndex ? 'opacity-100 ' : 'opacity-0'
-                            }`}
+                        priority={index === 0}
                         src={item.image}
+                        fill
+                        sizes="(min-width: 1480px) 1368px, calc(94.83vw - 16px)"
                         alt={`Slide ${index}`}
-                    />
+                        className={` transition-all duration-500 ease-in-out object-cover object-top ${index === currentIndex ? 'opacity-100 ' : 'opacity-0'
+                            }`}
+                    ></Image>
                 ))}
             </div>
-            <div className='absolute h-full w-full flex items-center justify-center gap-2 px-2 z-10'>
-                {game.short_screenshots.map((_, index) => {
+            <div className='absolute top-0 h-full w-full flex items-center justify-center gap-2 px-2 z-50'>
+                {screenShots.map((_, index) => {
                     return (
                         <div
                             key={index}
                             className='flex flex-col-reverse group/slide h-full pb-4'
-                            style={{ width: `${barWidth / game.short_screenshots.length}px` }}
+                            style={{ width: `${barWidth / screenShots.length}px` }}
                             onMouseEnter={() => toSlide(index)}
                         >
                             <span className={`w-full h-2 rounded-full bg-zinc-400/80 group-hover/slide:bg-white/80`} ></span>

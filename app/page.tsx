@@ -403,13 +403,13 @@ export default async function Home({ searchParams }: Props) {
         </div>
 
         <section className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-4">
-          {games.map((game) => {
+          {games.map((game, index) => {
             return (
               <Card
                 key={game.id}
                 className="overflow-hidden bg-neutral-800/90 border-transparent  hover:border-neutral-700 transition-all duration-300"
               >
-                <CardImage game={game} />
+                <CardImage game={game} index={index} />
 
                 <CardHeader>
                   <CardTitle>{game.name}</CardTitle>

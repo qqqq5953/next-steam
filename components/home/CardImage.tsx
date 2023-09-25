@@ -7,12 +7,13 @@ import Swiper from '@/components/global/Swiper'
 import useFetch from '@/hooks/useFetch'
 
 type Props = {
-    game: Game
+    game: Game,
+    index: number
 }
 
 const hasLoadMap = new Map()
 
-export default function CardImage({ game }: Props) {
+export default function CardImage({ game, index }: Props) {
     function fetchTailer() {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -33,6 +34,8 @@ export default function CardImage({ game }: Props) {
         console.log('handleMouseEnter')
         if (videoSrc) {
             playVideo()
+        } else if (hasLoadMap.has(game.id)) {
+            setShowSlide(true)
         } else {
             loadVideo()
         }
@@ -118,34 +121,17 @@ export default function CardImage({ game }: Props) {
             {videoSrc && (
                 <Video playVideo={playVideo} videoSrc={videoSrc} videoRef={videoRef} />
             )}
-            {/* {videoSrc && (
-                <video
-                    controls
-                    muted
-                    width="100%"
-                    height="100%"
-                    className="absolute inset-x-0 z-50 opacity-0 group-hover/video:opacity-100 transition-all duration-300"
-                    onCanPlay={playVideo}
-                    ref={videoRef}
-                >
-                    <source src={videoSrc} type="video/mp4" />
-                    <p>
-                        Your browser doesn't support HTML5 video. Here is a
-                        <a href={videoSrc}>link to the video</a> instead.
-                    </p>
-                </video>
-            )} */}
-
 
             <Image
                 src={game.background_image}
+                priority={index === 0}
                 fill
                 sizes="(min-width: 1480px) 1368px, calc(94.83vw - 16px)"
                 alt={game.name}
-                className="object-cover object-top"
+                className={`object-cover object-top ${showSlide ? 'invisible' : 'visible'}`}
             ></Image>
 
-            <Swiper game={game} showSlide={showSlide} />
+            <Swiper screenShots={game.short_screenshots.slice(1)} showSlide={showSlide} />
         </div>
     )
 }
