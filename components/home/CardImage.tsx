@@ -37,7 +37,14 @@ export default function CardImage({ game, index }: Props) {
         } else if (hasLoadMap.has(game.id)) {
             setShowSlide(true)
         } else {
-            loadVideo()
+            const data = await loadVideo()
+            hasLoadMap.set(game.id, true)
+
+            if (data.results.length === 0) {
+                setShowSlide(true)
+            } else {
+                setVideoSrc(data.results[0].data['480'])
+            }
         }
     }
 
@@ -55,30 +62,21 @@ export default function CardImage({ game, index }: Props) {
     async function loadVideo() {
         console.log('loadVideo')
 
-        if (hasLoadMap.has(game.id)) return setShowSlide(true)
-
         try {
             abortController = new AbortController()
-            const signal = abortController.signal
-
-            //   const response = await fetchTailer()
-            //   const videoUrl = response.data
-            //   setVideoSrc(videoUrl)
 
             const response = await fetch(
                 `https://api.rawg.io/api/games/${game.id}/movies?key=04fd56d2bfc34a73964433ff1117f1d1`,
-                { signal: signal }
+                { signal: abortController.signal }
             )
             const data = await response.json()
             console.log('videoUrl', data)
 
-            hasLoadMap.set(game.id, true)
+            return data
 
-            if (data.results.length === 0) {
-                setShowSlide(true)
-            } else {
-                setVideoSrc(data.results[0].data['480'])
-            }
+            //   const response = await fetchTailer()
+            //   const videoUrl = response.data
+            //   setVideoSrc(videoUrl)
 
             //   setVideoSrc(videoUrl)
             //   const response = await fetch(
@@ -132,6 +130,8 @@ export default function CardImage({ game, index }: Props) {
             ></Image>
 
             <Swiper screenShots={game.short_screenshots.slice(1)} showSlide={showSlide} />
+
+
         </div>
     )
 }

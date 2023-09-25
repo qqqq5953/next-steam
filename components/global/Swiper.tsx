@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
-import { spawn } from 'child_process'
 
 type Props = {
     screenShots: ShortScreenshot[],
