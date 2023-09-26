@@ -31,4 +31,5 @@ type Game = {
   platforms: Platform[]
   genres: Genre[]
   short_screenshots: ShortScreenshot[]
+  blurDataURL?: string | undefined
 }

@@ -25,31 +25,31 @@ const menuItems = [
     name: 'Reviews'
   },
   {
-    path: '',
+    path: '/collections',
     name: 'Collections'
   },
   {
-    path: 'platforms',
+    path: '/platforms',
     name: 'Platforms'
   },
   {
-    path: 'stores',
+    path: '/stores',
     name: 'Stores'
   },
   {
-    path: 'genres',
+    path: '/genres',
     name: 'Genres'
   },
   {
-    path: 'creators',
+    path: '/creators',
     name: 'Creators'
   },
   {
-    path: 'tags',
+    path: '/tags',
     name: 'Tags'
   },
   {
-    path: 'developers',
+    path: '/developers',
     name: 'Developers'
   }
 ]
