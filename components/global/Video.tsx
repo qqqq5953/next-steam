@@ -54,10 +54,7 @@ export default function Video({
         } else if (hasLoadMap.has(id)) {
             setShowSlide(true)
         } else {
-            setIsLoading(true)
             const videos = await loadVideo()
-            setIsLoading(false)
-
             if (!videos) return
             handleHoverResult(videos)
             hasLoadMap.set(id, true)
@@ -98,6 +95,8 @@ export default function Video({
             // enable re-fetching
             abortController = new AbortController()
 
+            setIsLoading(true)
+
             const response = await fetch(
                 `https://api.rawg.io/api/games/${id}/movies?key=04fd56d2bfc34a73964433ff1117f1d1`,
                 { signal: abortController.signal }
@@ -108,6 +107,8 @@ export default function Video({
             return data.results
         } catch (error) {
             console.error('Error loading video:', error)
+        } finally {
+            setIsLoading(false)
         }
     }
 
@@ -136,7 +137,7 @@ export default function Video({
                             muted
                             width="100%"
                             height="100%"
-                            className="absolute inset-x-0 z-50 opacity-0 group-hover/video:opacity-100 transition-all duration-300"
+                            className="absolute inset-x-0 z-50 opacity-0 group-hover/video:opacity-100 transition-all duration-500 ease-in-out"
                             onCanPlay={playVideo}
                             ref={videoRef}
                         >
