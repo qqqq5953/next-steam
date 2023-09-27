@@ -10,7 +10,6 @@ import {
   CardTitle
 } from '@/components/base-ui/Card'
 
-import Image from 'next/image'
 import Video from '@/components/global/Video'
 import Swiper from '@/components/global/Swiper'
 import ImageContainer from '@/components/global/ImageContainer'
@@ -23,6 +22,7 @@ type Props = {
 export default function GameCard({ game, index }: Props) {
   const [videoSrc, setVideoSrc] = useState<string | null>(null)
   const [isHover, setIsHover] = useState<boolean | null>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [showSlide, setShowSlide] = useState(false)
 
   return (
@@ -36,9 +36,11 @@ export default function GameCard({ game, index }: Props) {
           id={game.id}
           videoSrc={videoSrc}
           isHover={isHover}
+          isLoading={isLoading}
           showSlide={showSlide}
           setShowSlide={setShowSlide}
           setVideoSrc={setVideoSrc}
+          setIsLoading={setIsLoading}
         />
 
         <ImageContainer
