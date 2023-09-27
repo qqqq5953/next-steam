@@ -132,21 +132,23 @@ export default function Video({
                 </div> :
                 <>
                     {videoSrc && (
-                        <video
-                            controls
-                            muted
-                            width="100%"
-                            height="100%"
-                            className="absolute inset-x-0 z-50 opacity-0 group-hover/video:opacity-100 transition-all duration-500 ease-in-out"
-                            onCanPlay={playVideo}
-                            ref={videoRef}
-                        >
-                            <source src={videoSrc} type="video/mp4" />
-                            <p>
-                                Your browser doesn't support HTML5 video. Here is a
-                                <a href={videoSrc}>link to the video</a> instead.
-                            </p>
-                        </video>
+                        <div className='absolute inset-0 z-50'>
+                            <video
+                                muted
+                                width="100%"
+                                height="100%"
+                                className="absolute inset-x-0 z-50 opacity-0 group-hover/video:opacity-100 transition-all duration-500 ease-in-out"
+                                onCanPlay={playVideo}
+                                ref={videoRef}
+                            >
+                                <source src={videoSrc} type="video/mp4" />
+                                <p>
+                                    Your browser doesn't support HTML5 video. Here is a
+                                    <a href={videoSrc}>link to the video</a> instead.
+                                </p>
+                            </video>
+                            {isHover && <button className='absolute bottom-0 right-0 text-white bg-black/50 z-50 px-1.5 py-1 m-2 rounded text-xs hover:border hover:border-neutral-400/60'>Play full video</button>}
+                        </div>
                     )}
                 </>
             }
