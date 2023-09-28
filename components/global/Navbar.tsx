@@ -77,9 +77,9 @@ export default function Navbar() {
     <header>
       <nav className="flex justify-between items-center gap-x-6">
         <h1 className="font-black tracking-[0.2em] text-lg">STEAM</h1>
-        <div className="relative">
+        <div className="relative grow">
           <Input
-            className="border-none rounded-full bg-zinc-600/90 pl-10 h-8 text-black placeholder:text-slate-300 placeholder:font-light focus:bg-white focus:placeholder:text-slate-400 focus:outline-none focus:border-none peer transition-all duration-200 text-xs"
+            className="border-none rounded-full bg-white/25 pl-10 h-7 lg:h-9 text-black placeholder:text-neutral-300 placeholder:font-light focus:bg-white focus:placeholder:text-neutral-400 focus:outline-none focus:border-none peer transition-all duration-200 text-xs"
             type="search"
             placeholder="Search for games"
             value={search}
@@ -87,7 +87,7 @@ export default function Navbar() {
           />
           <FontAwesomeIcon
             icon={faMagnifyingGlass}
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 peer-focus:text-black peer:transition-all peer:duration-200"
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 peer-focus:text-black peer:transition-all peer:duration-200 fa-sm"
           />
         </div>
 

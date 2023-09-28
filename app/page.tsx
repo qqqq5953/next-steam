@@ -4,6 +4,8 @@ import { addBlurredDataURL } from '@/lib/getPlaceholder'
 import Dropdown from '@/components/global/Dropdown'
 import DisplayOptions from '@/app/_components/DisplayOptions'
 import GameCard from '@/app/_components/GameCard'
+import Sidebar from '@/app/_components/Sidebar'
+
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined }
@@ -384,47 +386,52 @@ export default async function Home({ searchParams }: Props) {
 
   return (
     <>
-      <main className="space-y-4">
-        <div className="text-center py-6">
-          <h2 className="text-3xl font-bold">New and trending</h2>
-          <h3 className="text-sm font-light pt-2">
-            Based on player counts and release date
-          </h3>
-        </div>
+      <main className='flex pt-6 gap-12'>
+        <Sidebar />
 
-        <div className="flex gap-2 items-center pb-4">
-          <div className="flex gap-2 grow sm:grow-0">
-            <div className="grow">
-              {/* <Select
-                selectedValuePrefix={'Order by:'}
-                options={orderOptions}
-                type="order"
-              /> */}
-              <Dropdown
-                selectedValuePrefix={'Order by:'}
-                options={orderOptions}
-                type="order"
-              />
-            </div>
-            <div className="grow lg:min-w-[100px]">
-              {/* <Select options={platformOptions} type="platform" /> */}
-              <Dropdown options={platformOptions} type="platform" />
-            </div>
+        <div className="space-y-4">
+          <div className="text-center pb-6 lg:text-left">
+            <h2 className="text-3xl font-bold lg:text-7xl">New and trending</h2>
+            <h3 className="text-sm font-light pt-2">
+              Based on player counts and release date
+            </h3>
           </div>
-          <div className="hidden lg:flex lg:gap-3 lg:items-center ml-auto">
-            <DisplayOptions />
-          </div>
-        </div>
 
-        <section className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-4">
-          {gameWithBlurDataURL.map((game, index) => {
-            return (
-              <div key={game.id}>
-                <GameCard game={game} index={index} />
+          <div className="flex gap-2 items-center pb-4">
+            <div className="flex gap-2 grow sm:grow-0">
+              <div className="grow">
+                {/* <Select
+                  selectedValuePrefix={'Order by:'}
+                  options={orderOptions}
+                  type="order"
+                /> */}
+                <Dropdown
+                  selectedValuePrefix={'Order by:'}
+                  options={orderOptions}
+                  type="order"
+                />
               </div>
-            )
-          })}
-        </section>
+              <div className="grow lg:min-w-[100px]">
+                {/* <Select options={platformOptions} type="platform" /> */}
+                <Dropdown options={platformOptions} type="platform" />
+              </div>
+            </div>
+            <div className="hidden lg:flex lg:gap-3 lg:items-center ml-auto">
+              <DisplayOptions />
+            </div>
+          </div>
+
+          <section className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-4">
+            {gameWithBlurDataURL.map((game, index) => {
+              return (
+                <div key={game.id}>
+                  <GameCard game={game} index={index} />
+                </div>
+              )
+            })}
+          </section>
+
+        </div>
       </main>
     </>
   )
