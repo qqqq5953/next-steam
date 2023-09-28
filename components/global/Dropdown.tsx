@@ -54,28 +54,11 @@ export default function Dropdown({
     const newValue = target.textContent as string
     setSelectedValue(newValue)
 
-    let queryString = searchParams.toString()
+    const queryStrings = searchParams.toString()
+    const newSearchParams = new URLSearchParams(queryStrings);
+    newSearchParams.set(type, newValue)
 
-    if (!queryString) {
-      // add first
-      queryString += `${type}=${newValue}`
-    } else if (!searchParams.has(type)) {
-      // attach
-      queryString += `&${type}=${newValue}`
-    } else {
-      // replace
-      queryString = Array.from(searchParams.entries())
-        .map(([key, value]) => {
-          if (key === type) {
-            return `${key}=${newValue}`
-          } else {
-            return `${key}=${value}`
-          }
-        })
-        .join('&')
-    }
-
-    router.push(`?${queryString}`)
+    router.push(`?${newSearchParams}`)
   }
 
   return (
