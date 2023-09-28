@@ -386,7 +386,7 @@ export default async function Home({ searchParams }: Props) {
 
   return (
     <>
-      <main className='flex pt-6 gap-12'>
+      <main className='flex pt-6 gap-6'>
         <Sidebar />
 
         <div className="space-y-4">
