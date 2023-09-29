@@ -69,15 +69,15 @@ export default function Sidebar() {
     ]
 
     return (
-        <aside className='hidden lg:block shrink-0 '>
+        <aside className='hidden lg:block shrink-0 pt-8'>
             <ul>
                 {menu.map((item) => {
                     return <li key={item.path}>
-                        <Link href={item.path} className="block py-2 text-2xl font-medium pr-6 hover:text-neutral-500 transition-colors duration-300 ease-in-out">{item.name}</Link>
+                        <Link href={item.path} className="block py-2.5 text-2xl font-medium pr-11 hover:text-neutral-500 transition-colors duration-300 ease-in-out">{item.name}</Link>
                         {item.children && <ul>
                             {item.children.map((child) => {
                                 return <li key={child.path} >
-                                    <Link href={child.path} className="flex items-center gap-3 py-1.5 group pr-6">
+                                    <Link href={child.path} className="flex items-center gap-3 py-1.5 group pr-11">
                                         {child.icon &&
                                             <span className='bg-white/20 rounded w-8 h-8 grid place-items-center group-hover:bg-white group-hover:text-black'>
                                                 <FontAwesomeIcon icon={child.icon} className='fa-sm' />

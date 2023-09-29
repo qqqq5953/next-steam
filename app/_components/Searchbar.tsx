@@ -13,7 +13,7 @@ export default function Searchbar() {
     return (
         <>
             <Input
-                className="border-none rounded-full bg-white/25 pl-10 h-7 lg:h-9 text-black placeholder:text-neutral-300 placeholder:font-light focus:bg-white focus:placeholder:text-neutral-400 focus:outline-none focus:border-none peer transition-all duration-200 text-xs"
+                className="border-none rounded-full bg-white/25 pl-10 text-black text-xs placeholder:text-neutral-300 placeholder:font-light focus:bg-white focus:placeholder:text-neutral-400 focus:outline-none focus:border-none peer transition-all duration-200 h-7 lg:h-11 lg:text-sm"
                 type="search"
                 placeholder="Search for games"
                 value={search}

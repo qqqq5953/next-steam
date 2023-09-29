@@ -72,7 +72,7 @@ export default function Dropdown({
             <span className="shrink-0 font-light">
               {selectedValuePrefix}
             </span>
-            <span className={`${selectedValuePrefix ? 'ml-1' : 'mx-0'} mr-2`}>
+            <span className={`${selectedValuePrefix ? 'ml-1' : 'mx-0'} mr-2 md:mr-8`}>
               {selectedValue || initialValue}
             </span>
             <FontAwesomeIcon icon={faAngleDown} className='text-neutral-500' />
