@@ -2,6 +2,7 @@ import { getPlaiceholder } from 'plaiceholder'
 
 export async function getBase64(url: string) {
   try {
+    if (!url) return
     const res = await fetch(url)
     if (!res.ok)
       throw new Error(`Failed to fetch image: ${res.status} ${res.statusText} `)
@@ -11,7 +12,7 @@ export async function getBase64(url: string) {
 
     return base64
   } catch (err) {
-    console.log(err)
+    console.log('getBase64 error', err)
   }
 }
 
