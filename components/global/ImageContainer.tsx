@@ -7,7 +7,7 @@ type Props = {
 }
 
 export default function ImageContainer({ game, className }: Props) {
-  if (!game.background_image) {
+  if (!game.background_image || !game.blurDataURL) {
     return <div className='absolute grid place-items-center w-full h-full'>{game.name}</div>
   }
 

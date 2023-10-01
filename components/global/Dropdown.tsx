@@ -50,15 +50,19 @@ export default function Dropdown({
   }, [])
 
   function handleClick(e: MouseEvent<HTMLSpanElement>) {
+
     const target = e.target as HTMLElement
     const newValue = target.textContent as string
+    console.log('newValue', newValue);
     setSelectedValue(newValue)
 
     const queryStrings = searchParams.toString()
     const newSearchParams = new URLSearchParams(queryStrings);
     newSearchParams.set(type, newValue)
 
+
     router.push(`?${newSearchParams}`)
+    console.log('push', newValue);
   }
 
   return (

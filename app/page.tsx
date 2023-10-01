@@ -6,6 +6,7 @@ import GameCard from '@/app/_components/GameCard'
 import Sidebar from '@/app/_components/Sidebar'
 
 import { addBlurredDataURL } from '@/lib/getPlaceholder'
+import { Suspense } from 'react'
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined }
@@ -107,7 +108,7 @@ export default async function Home({ searchParams }: Props) {
     }
   ]
 
-  const { order, platform } = searchParams
+  const { order, platform, mode } = searchParams
   const orderValue = orderOptions.find((option) => option.name === order)?.value ?? '-relevance'
   const platformValue = platformOptions.find(
     (option) => option.name === platform
@@ -115,17 +116,22 @@ export default async function Home({ searchParams }: Props) {
 
   console.log('orderValue', orderValue)
   console.log('platformValue', platformValue)
+  console.log('mode', mode)
 
   // 如果不行再打測試的
   //api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}
 
-  const { data, error } = await useFetch(
+  const res = await fetch(
     `https://api.rawg.io/api/games?ordering=${orderValue}&parent_platforms=${platformValue}&key=${process.env.RAWG_API_KEY}`
   )
+
+  if (!res.ok) throw new Error(`Failed to fetch data`)
+
+  const data = await res.json()
   // `https://api.rawg.io/api/games?ordering=${orderValue}&parent_platforms=${platformValue}&key=${process.env.RAWG_API_KEY}`
 
   const games = data.results
-  // console.log(data.results[0])
+  console.log("games: ", data.results[0])
 
   // const games: Game[] = [
   //   {
@@ -421,27 +427,30 @@ export default async function Home({ searchParams }: Props) {
             </div>
           </div>
 
-          {searchParams.mode === 'grid' ?
-            <section className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-4">
-              {gameWithBlurDataURL.map((game, index) => {
-                return (
-                  <div key={game.id}>
-                    <GameCard game={game} index={index} />
-                  </div>
-                )
-              })}
-            </section>
-            :
-            <section className='space-y-8'>
-              {gameWithBlurDataURL.map((game, index) => {
-                return (
-                  <div key={game.id} className='max-w-2xl mx-auto'>
-                    <GameCard game={game} index={index} />
-                  </div>
-                )
-              })}
-            </section>
-          }
+          <Suspense fallback={<div className='bg-red-300'>loading...</div>}>
+            {mode === 'grid' || !mode ?
+              <section className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-4">
+                {gameWithBlurDataURL.map((game, index) => {
+                  return (
+                    <div key={game.id}>
+                      <GameCard game={game} index={index} />
+                    </div>
+                  )
+                })}
+              </section>
+              :
+              <section className='space-y-8'>
+                {gameWithBlurDataURL.map((game, index) => {
+                  return (
+                    <div key={game.id} className='max-w-2xl mx-auto'>
+                      <GameCard game={game} index={index} />
+                    </div>
+                  )
+                })}
+              </section>
+            }
+          </Suspense>
+
 
         </div>
       </main>

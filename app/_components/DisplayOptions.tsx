@@ -17,11 +17,17 @@ export default function Display() {
   function handleClick(type: string) {
     setSelectedValue(type)
 
+    console.log('type', type);
+
+
     const queryStrings = searchParams.toString()
     const newSearchParams = new URLSearchParams(queryStrings);
     newSearchParams.set("mode", type)
 
     router.push(`?${newSearchParams}`)
+
+    console.log('push', type);
+
   }
 
   return (
