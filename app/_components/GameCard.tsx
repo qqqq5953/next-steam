@@ -90,14 +90,3 @@ export default function GameCard({ game, index }: Props) {
     </Card>
   )
 }
-
-function fetchTailer() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        data: 'https://steamcdn-a.akamaihd.net/steam/apps/256693661/movie480.mp4',
-        error: null
-      })
-    }, 2000)
-  })
-}

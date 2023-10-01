@@ -8,6 +8,7 @@ import {
   SelectValue
 } from '@/components/base-ui/select'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { memo } from 'react'
 
 type Option = {
   name: string
@@ -21,11 +22,13 @@ type Props = {
   type: string
 }
 
-export default function CustomSelect({
+export default memo(function CustomSelect({
   selectedValuePrefix,
   options,
   type
 }: Props) {
+  console.log('renfer')
+
   const router = useRouter()
   const searchParams = useSearchParams()
   const initialValue = searchParams.get(type) || options[0].name
@@ -33,26 +36,31 @@ export default function CustomSelect({
   function setFilter(newValue: string) {
     let queryString = searchParams.toString()
 
-    if (!queryString) {
-      // add first
-      queryString += `${type}=${newValue}`
-    } else if (!searchParams.has(type)) {
-      // attach
-      queryString += `&${type}=${newValue}`
-    } else {
-      // replace
-      queryString = Array.from(searchParams.entries())
-        .map(([key, value]) => {
-          if (key === type) {
-            return `${key}=${newValue}`
-          } else {
-            return `${key}=${value}`
-          }
-        })
-        .join('&')
-    }
+    const newSearchParams = new URLSearchParams(queryString)
+    newSearchParams.set(type, newValue)
 
-    router.push(`?${queryString}`)
+    router.push(`?${newSearchParams}`)
+
+    // if (!queryString) {
+    //   // add first
+    //   queryString += `${type}=${newValue}`
+    // } else if (!searchParams.has(type)) {
+    //   // attach
+    //   queryString += `&${type}=${newValue}`
+    // } else {
+    //   // replace
+    //   queryString = Array.from(searchParams.entries())
+    //     .map(([key, value]) => {
+    //       if (key === type) {
+    //         return `${key}=${newValue}`
+    //       } else {
+    //         return `${key}=${value}`
+    //       }
+    //     })
+    //     .join('&')
+    // }
+
+    // router.push(`?${queryString}`)
   }
 
   return (
@@ -69,11 +77,18 @@ export default function CustomSelect({
         {options.map((option) => {
           return (
             <div key={option.value}>
-              <SelectItem value={option.name}>{option.name}</SelectItem>
+              <SelectItem
+                value={option.name}
+                className={`${
+                  initialValue === option.name ? 'font-bold' : ''
+                } pl-3`}
+              >
+                {option.name}
+              </SelectItem>
             </div>
           )
         })}
       </SelectContent>
     </Select>
   )
-}
+})

@@ -7,8 +7,12 @@ type Props = {
 }
 
 export default function ImageContainer({ game, className }: Props) {
-  if (!game.background_image || !game.blurDataURL) {
-    return <div className='absolute grid place-items-center w-full h-full'>{game.name}</div>
+  if (!game.background_image) {
+    return (
+      <div className="absolute grid place-items-center w-full h-full">
+        {game.name}
+      </div>
+    )
   }
 
   return (
@@ -16,8 +20,8 @@ export default function ImageContainer({ game, className }: Props) {
       src={game.background_image}
       fill
       sizes="(min-width: 1480px) 1368px, calc(94.83vw - 16px)"
-      placeholder="blur"
-      blurDataURL={game.blurDataURL}
+      // placeholder="blur"
+      // blurDataURL={game.blurDataURL}
       alt={game.name}
       className={`object-cover object-top absolute ${className}`}
     ></Image>

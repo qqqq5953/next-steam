@@ -2,17 +2,21 @@ import useFetch from '@/hooks/useFetch'
 
 import Dropdown from '@/components/global/Dropdown'
 import DisplayOptions from '@/app/_components/DisplayOptions'
-import GameCard from '@/app/_components/GameCard'
+import CardsSection from '@/app/_components/CardsSection'
 import Sidebar from '@/app/_components/Sidebar'
 
 import { addBlurredDataURL } from '@/lib/getPlaceholder'
 import { Suspense } from 'react'
+import Test from '@/app/_components/Test'
+import Test1 from '@/app/_components/Test1'
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
 export default async function Home({ searchParams }: Props) {
+  const time = process.hrtime.bigint()
+  console.log('time', time)
   // const { data, error } = await useFetch(
   //   'https://jsonplaceholder.typicode.com/posts/1'
   // )
@@ -37,7 +41,7 @@ export default async function Home({ searchParams }: Props) {
     },
     {
       name: 'Name',
-      value: 'name'
+      value: '-name'
     },
     {
       name: 'Release date',
@@ -109,17 +113,33 @@ export default async function Home({ searchParams }: Props) {
   ]
 
   const { order, platform, mode } = searchParams
-  const orderValue = orderOptions.find((option) => option.name === order)?.value ?? '-relevance'
-  const platformValue = platformOptions.find(
-    (option) => option.name === platform
-  )?.value ?? "1"
+  const orderValue =
+    orderOptions.find((option) => option.name === order)?.value ?? '-relevance'
+  const platformValue =
+    platformOptions.find((option) => option.name === platform)?.value ?? '1'
+  const displayMode = mode || 'grid'
 
   console.log('orderValue', orderValue)
   console.log('platformValue', platformValue)
-  console.log('mode', mode)
+  console.log('displayMode', displayMode)
+
+  // const obj = {
+  //   '-relevance': 'posts',
+  //   '-created': 'comments',
+  //   name: 'albums',
+  //   '-released': 'photos',
+  //   '-added': 'todos',
+  //   '-rating': 'users'
+  // }
+
+  // const res = await fetch(
+  //   `https://jsonplaceholder.typicode.com/${obj[orderValue]}`
+  // )
+  // const data = await res.json()
 
   // 如果不行再打測試的
   //api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}
+  // `https://api.rawg.io/api/games?ordering=${orderValue}&parent_platforms=${platformValue}&key=${process.env.RAWG_API_KEY}`
 
   const res = await fetch(
     `https://api.rawg.io/api/games?ordering=${orderValue}&parent_platforms=${platformValue}&key=${process.env.RAWG_API_KEY}`
@@ -128,10 +148,9 @@ export default async function Home({ searchParams }: Props) {
   if (!res.ok) throw new Error(`Failed to fetch data`)
 
   const data = await res.json()
-  // `https://api.rawg.io/api/games?ordering=${orderValue}&parent_platforms=${platformValue}&key=${process.env.RAWG_API_KEY}`
 
-  const games = data.results
-  console.log("games: ", data.results[0])
+  const games: Game[] = data.results
+  // console.log('games: ', data.results[0])
 
   // const games: Game[] = [
   //   {
@@ -389,21 +408,22 @@ export default async function Home({ searchParams }: Props) {
   //   }
   // ]
 
-  const gameWithBlurDataURL = await addBlurredDataURL(games)
+  // const gameWithBlurDataURL = await addBlurredDataURL(games)
 
   // console.log('gameWithBlurDataURL', gameWithBlurDataURL);
 
   // console.log('searchParams', searchParams);
 
-
   return (
     <>
-      <main className='flex pt-6 lg:pt-10 gap-11'>
+      <main className="flex pt-6 lg:pt-10 gap-11">
         <Sidebar />
 
         <div className="space-y-4 grow">
           <div className="text-center pb-6 lg:text-left">
-            <h2 className="font-bold text-3xl  lg:text-7xl">New and trending</h2>
+            <h2 className="font-bold text-3xl  lg:text-7xl">
+              New and trending
+            </h2>
             <h3 className="font-light pt-2 text-sm lg:text-base ">
               Based on player counts and release date
             </h3>
@@ -418,7 +438,7 @@ export default async function Home({ searchParams }: Props) {
                   type="order"
                 />
               </div>
-              <div className="grow lg:min-w-[150px]">
+              <div className="grow sm:min-w-[150px]">
                 <Dropdown options={platformOptions} type="platform" />
               </div>
             </div>
@@ -427,31 +447,26 @@ export default async function Home({ searchParams }: Props) {
             </div>
           </div>
 
-          <Suspense fallback={<div className='bg-red-300'>loading...</div>}>
-            {mode === 'grid' || !mode ?
-              <section className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-4">
-                {gameWithBlurDataURL.map((game, index) => {
-                  return (
-                    <div key={game.id}>
-                      <GameCard game={game} index={index} />
-                    </div>
-                  )
-                })}
-              </section>
-              :
-              <section className='space-y-8'>
-                {gameWithBlurDataURL.map((game, index) => {
-                  return (
-                    <div key={game.id} className='max-w-2xl mx-auto'>
-                      <GameCard game={game} index={index} />
-                    </div>
-                  )
-                })}
-              </section>
-            }
+          <Suspense fallback={<div className="bg-red-300">loading...</div>}>
+            <CardsSection games={games} displayMode={displayMode} />
           </Suspense>
 
-
+          {/* <Suspense fallback={<Loading />}>
+            <Test
+              orderValue={orderValue}
+              platformValue={platformValue}
+              mode={mode}
+            />
+          </Suspense> */}
+          {/* <Suspense fallback={<div className="bg-red-300">loading...</div>}>
+            <Test1
+              orderValue={orderValue}
+              platformValue={platformValue}
+              mode={mode}
+              data={data}
+              time={time}
+            />
+          </Suspense> */}
         </div>
       </main>
     </>
