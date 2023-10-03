@@ -4,14 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 
 type Props = {
-  videoSrc: string | null
-  showSlide: boolean
   isHover: boolean | null
   isLoading: boolean
   setShowSlide: Dispatch<SetStateAction<boolean>>
-  setVideoSrc: Dispatch<SetStateAction<string | null>>
   setIsLoading: Dispatch<SetStateAction<boolean>>
   id: number
+  // setMap: Dispatch<SetStateAction<Map<any, any>>>
+  // testMap: Map<any, any>
 }
 
 type Video = {
@@ -29,15 +28,14 @@ const initMap = new Map()
 let abortController = new AbortController()
 
 export default function Video({
-  videoSrc,
   isHover,
   isLoading,
-  showSlide,
   setShowSlide,
-  setVideoSrc,
   setIsLoading,
   id
-}: Props) {
+}: // setMap,
+// testMap
+Props) {
   const videoRef = useRef<HTMLVideoElement | null>(null)
 
   useEffect(() => {
@@ -61,7 +59,7 @@ export default function Video({
   // 整理props
 
   async function handleMouseEnter() {
-    console.log('handleMouseEnter', videoSrc)
+    console.log('handleMouseEnter')
 
     if (initMap.has(id)) {
       if (initMap.get(id)) {
@@ -75,21 +73,11 @@ export default function Video({
       if (!videos) return
       handleHoverResult(videos)
     }
-
-    // if (videoSrc) {
-    //   playVideo()
-    // } else if (hasLoadMap.has(id)) {
-    //   setShowSlide(true)
-    // } else {
-    //   const videos = await loadVideo()
-    //   if (!videos) return
-    //   handleHoverResult(videos)
-    //   hasLoadMap.set(id, true)
-    // }
   }
 
   async function handleMouseLeve() {
     console.log('handleMouseLeve')
+
     if (initMap.get(id)) {
       stopVideo()
     } else if (initMap.has(id) && !initMap.get(id)) {
@@ -97,13 +85,6 @@ export default function Video({
     } else {
       abortFetching()
     }
-    // if (videoSrc) {
-    //   stopVideo()
-    // } else if (showSlide) {
-    //   setShowSlide(false)
-    // } else {
-    //   abortFetching()
-    // }
   }
 
   function handleHoverResult(videos: Video[]) {
@@ -111,7 +92,6 @@ export default function Video({
       setShowSlide(true)
       initMap.set(id, null)
     } else {
-      setVideoSrc(videos[0].data['480'])
       initMap.set(id, videos[0].data['480'])
     }
   }

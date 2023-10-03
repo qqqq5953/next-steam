@@ -19,8 +19,9 @@ type Props = {
   index: number
 }
 
+// const map = new Map<any, any>()
+
 export default function GameCard({ game, index }: Props) {
-  const [videoSrc, setVideoSrc] = useState<string | null>(null)
   const [isHover, setIsHover] = useState<boolean | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [showSlide, setShowSlide] = useState(false)
@@ -34,12 +35,9 @@ export default function GameCard({ game, index }: Props) {
       >
         <Video
           id={game.id}
-          videoSrc={videoSrc}
           isHover={isHover}
           isLoading={isLoading}
-          showSlide={showSlide}
           setShowSlide={setShowSlide}
-          setVideoSrc={setVideoSrc}
           setIsLoading={setIsLoading}
         />
 
