@@ -16,6 +16,7 @@ import ImageContainer from '@/components/global/ImageContainer'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { getBrandIcon, getUniqueIcons, platformMap } from '@/lib/getBrandIcon'
+import Link from 'next/link'
 
 type Props = {
   game: Game
@@ -58,7 +59,9 @@ export default function GameCard({ game, index }: Props) {
       </div>
 
       <CardHeader>
-        <CardTitle>{game.name}</CardTitle>
+        <CardTitle>
+          <Link href={`/games/${game.name}/?id=${game.id}`}>{game.name}</Link>
+        </CardTitle>
         <CardDescription></CardDescription>
       </CardHeader>
 

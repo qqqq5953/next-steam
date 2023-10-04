@@ -6,7 +6,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue
-} from '@/components/base-ui/select'
+} from '@/components/base-ui/Select'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { memo } from 'react'
 
@@ -79,9 +79,8 @@ export default memo(function CustomSelect({
             <div key={option.value}>
               <SelectItem
                 value={option.name}
-                className={`${
-                  initialValue === option.name ? 'font-bold' : ''
-                } pl-3`}
+                className={`${initialValue === option.name ? 'font-bold' : ''
+                  } pl-3`}
               >
                 {option.name}
               </SelectItem>
