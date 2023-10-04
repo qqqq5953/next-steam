@@ -9,8 +9,6 @@ type Props = {
   setShowSlide: Dispatch<SetStateAction<boolean>>
   setIsLoading: Dispatch<SetStateAction<boolean>>
   id: number
-  // setMap: Dispatch<SetStateAction<Map<any, any>>>
-  // testMap: Map<any, any>
 }
 
 type Video = {
@@ -24,7 +22,6 @@ type Video = {
 }
 
 const hasLoadMap = new Map()
-const initMap = new Map()
 let abortController = new AbortController()
 
 export default function Video({
@@ -33,9 +30,8 @@ export default function Video({
   setShowSlide,
   setIsLoading,
   id
-}: // setMap,
-// testMap
-Props) {
+}:
+  Props) {
   const videoRef = useRef<HTMLVideoElement | null>(null)
 
   useEffect(() => {
@@ -46,23 +42,11 @@ Props) {
     }
   }, [isHover])
 
-  /* enter
-  已發過api？
-  1. 發過
-    1-1. 是否有影片？
-        1-1-1. 有，顯示影片
-        1-1-2. 沒有，顯示圖片
-  2. 還沒發過
-    發api
-  */
-
-  // 整理props
-
   async function handleMouseEnter() {
     console.log('handleMouseEnter')
 
-    if (initMap.has(id)) {
-      if (initMap.get(id)) {
+    if (hasLoadMap.has(id)) {
+      if (hasLoadMap.get(id)) {
         setShowSlide(false)
         playVideo()
       } else {
@@ -78,9 +62,9 @@ Props) {
   async function handleMouseLeve() {
     console.log('handleMouseLeve')
 
-    if (initMap.get(id)) {
+    if (hasLoadMap.get(id)) {
       stopVideo()
-    } else if (initMap.has(id) && !initMap.get(id)) {
+    } else if (hasLoadMap.has(id) && !hasLoadMap.get(id)) {
       setShowSlide(false)
     } else {
       abortFetching()
@@ -90,9 +74,9 @@ Props) {
   function handleHoverResult(videos: Video[]) {
     if (videos.length === 0) {
       setShowSlide(true)
-      initMap.set(id, null)
+      hasLoadMap.set(id, null)
     } else {
-      initMap.set(id, videos[0].data['480'])
+      hasLoadMap.set(id, videos[0].data['480'])
     }
   }
 
@@ -152,7 +136,7 @@ Props) {
         </div>
       ) : (
         <>
-          {initMap.get(id) && (
+          {hasLoadMap.get(id) && (
             <div className="absolute inset-0 z-50">
               <video
                 muted
@@ -162,10 +146,10 @@ Props) {
                 onCanPlay={playVideo}
                 ref={videoRef}
               >
-                <source src={initMap.get(id)} type="video/mp4" />
+                <source src={hasLoadMap.get(id)} type="video/mp4" />
                 <p>
                   Your browser doesn't support HTML5 video. Here is a
-                  <a href={initMap.get(id)}>link to the video</a> instead.
+                  <a href={hasLoadMap.get(id)}>link to the video</a> instead.
                 </p>
               </video>
               {isHover && (

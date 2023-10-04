@@ -14,17 +14,21 @@ import Video from '@/components/global/Video'
 import Swiper from '@/components/global/Swiper'
 import ImageContainer from '@/components/global/ImageContainer'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { getBrandIcon, getUniqueIcons, platformMap } from '@/lib/getBrandIcon'
+
 type Props = {
   game: Game
   index: number
 }
 
-// const map = new Map<any, any>()
-
 export default function GameCard({ game, index }: Props) {
   const [isHover, setIsHover] = useState<boolean | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [showSlide, setShowSlide] = useState(false)
+
+  const icons = game.platforms.map((item) => getBrandIcon(item.platform.name))
+  const uniqueIcons = getUniqueIcons(icons)
 
   return (
     <Card className="overflow-hidden bg-neutral-800/90 border-transparent  hover:border-neutral-700 transition-all duration-300">
@@ -60,12 +64,17 @@ export default function GameCard({ game, index }: Props) {
 
       <CardContent>
         <ul className="divide-y divide-neutral-700 text-xs">
+          <li className="flex items-center py-3">
+            {uniqueIcons.map((item, index) => {
+              return <span key={index} className='mr-2'>
+                <FontAwesomeIcon icon={platformMap[item as keyof typeof platformMap]}></FontAwesomeIcon>
+              </span>
+            })}
+          </li>
           <li className="flex justify-between items-center py-3">
             <span>Release date:</span>
             <div className="text-right">
-              {game.platforms.map((item) => {
-                return <span key={item.platform.id}>{item.platform.name}</span>
-              })}
+              {game.released}
             </div>
           </li>
           <li className="flex justify-between items-center py-3">
