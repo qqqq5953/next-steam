@@ -60,7 +60,7 @@ export default function GameCard({ game, index }: Props) {
 
       <CardHeader>
         <CardTitle>
-          <Link href={`/games/${game.name}/?id=${game.id}`}>{game.name}</Link>
+          <Link href={`/games/${game.slug}/?id=${game.id}`}>{game.name}</Link>
         </CardTitle>
         <CardDescription></CardDescription>
       </CardHeader>
