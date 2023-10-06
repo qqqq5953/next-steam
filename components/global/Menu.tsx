@@ -9,7 +9,8 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faRightToBracket,
-    faUserPlus
+    faUserPlus,
+    faBars
 } from '@fortawesome/free-solid-svg-icons'
 
 import Link from 'next/link'
@@ -51,7 +52,13 @@ export default function Menu() {
     ]
 
     return <Sheet>
-        <SheetTrigger>Menu</SheetTrigger>
+        <SheetTrigger>
+            <FontAwesomeIcon
+                icon={faBars}
+                className="fa-xl"
+            />
+
+        </SheetTrigger>
         <SheetContent className="bg-white rounded-2xl text-black">
             <SheetHeader className="relative">
                 <SheetTitle className="text-2xl text-left">Home</SheetTitle>
@@ -70,7 +77,7 @@ export default function Menu() {
                         <div className="grid place-items-center w-12 h-12 bg-black rounded-full">
                             <FontAwesomeIcon
                                 icon={faUserPlus}
-                                className="text-white fa-x"
+                                className="text-white fa-xl"
                             />
                         </div>
                         <div className="text-sm text-gray-500 font-light">
