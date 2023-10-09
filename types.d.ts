@@ -1,3 +1,5 @@
+import { type } from "os"
+
 type Platform = {
   platform: {
     id: number
@@ -33,4 +35,31 @@ type Game = {
   genres: Genre[]
   short_screenshots: ShortScreenshot[]
   blurDataURL?: string | undefined
+}
+
+type GameSingle = Game & {
+  description: string
+  ratings: Rating[]
+}
+
+type Rating = {
+  id: number,
+  title: string,
+  count: number,
+  percent: number
+}
+
+type RatingColor = {
+  exceptional: string,
+  recommended: string,
+  meh: string,
+  skip: string,
+}
+
+type AgeRatingPrefix = {
+  "Everyone": string,
+  "Everyone 10+": string,
+  "Teen": string,
+  "Mature": string,
+  "Adults only": string,
 }

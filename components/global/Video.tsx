@@ -98,7 +98,7 @@ export default function Video({
       setIsLoading(true)
 
       const response = await fetch(
-        `https://api.rawg.io/api/games/${id}/movies?key=${process.env.RAWG_API_KEY}`,
+        `https://api.rawg.io/api/games/${id}/movies?key=04fd56d2bfc34a73964433ff1117f1d1`,
         { signal: abortController.signal }
       )
       const data = await response.json()
