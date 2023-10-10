@@ -9,6 +9,7 @@ import { addBlurredDataURL } from '@/lib/getPlaceholder'
 import { Suspense } from 'react'
 import Test from '@/app/_components/Test'
 import Test1 from '@/app/_components/Test1'
+import { Game } from '@/types'
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined }
