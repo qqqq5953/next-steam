@@ -17,6 +17,7 @@ import ImageContainer from '@/components/global/ImageContainer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { getBrandIcon, getUniqueIcons, platformMap } from '@/lib/getBrandIcon'
 import Link from 'next/link'
+import { Game } from '@/types'
 
 type Props = {
   game: Game
@@ -69,16 +70,18 @@ export default function GameCard({ game, index }: Props) {
         <ul className="divide-y divide-neutral-700 text-xs">
           <li className="flex items-center py-3">
             {uniqueIcons.map((item, index) => {
-              return <span key={index} className='mr-2'>
-                <FontAwesomeIcon icon={platformMap[item as keyof typeof platformMap]}></FontAwesomeIcon>
-              </span>
+              return (
+                <span key={index} className="mr-2">
+                  <FontAwesomeIcon
+                    icon={platformMap[item as keyof typeof platformMap]}
+                  ></FontAwesomeIcon>
+                </span>
+              )
             })}
           </li>
           <li className="flex justify-between items-center py-3">
             <span>Release date:</span>
-            <div className="text-right">
-              {game.released}
-            </div>
+            <div className="text-right">{game.released}</div>
           </li>
           <li className="flex justify-between items-center py-3">
             <span>Genres:</span>

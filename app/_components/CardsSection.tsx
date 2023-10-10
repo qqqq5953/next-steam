@@ -1,4 +1,5 @@
 import GameCard from '@/app/_components/GameCard'
+import { Game } from '@/types'
 
 type Props = {
   games: Game[]
@@ -10,15 +11,21 @@ export default function CardsSection({ games, displayMode }: Props) {
     <section
       className={
         displayMode === 'film'
-          ? 'space-y-8'
-          : 'grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-4'
+          ? 'columns-1 space-y-8'
+          : 'columns-1 sm:columns-2 lg:columns-3 xl:columns-4 3xl:columns-5 gap-4 sm:gap-6'
+        // : 'grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-4'
       }
+      style={{
+        columnWidth: '100px'
+      }}
     >
       {games.map((game, index) => {
         return (
           <div
             key={game.id}
-            className={displayMode === 'film' ? 'max-w-2xl mx-auto' : ''}
+            className={
+              displayMode === 'film' ? 'max-w-2xl mx-auto' : 'mb-4 sm:mb-6'
+            }
           >
             <GameCard game={game} index={index} />
           </div>
