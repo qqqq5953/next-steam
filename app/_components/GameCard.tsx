@@ -21,7 +21,7 @@ import { Game } from '@/types'
 
 type Props = {
   game: Game
-  index: number
+  index?: number
 }
 
 export default function GameCard({ game, index }: Props) {

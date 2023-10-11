@@ -14,6 +14,7 @@ import Sidebar from '@/app/_components/Sidebar'
 import { Suspense } from 'react'
 
 import { AgeRatingPrefix, Platform } from '@/types'
+import Suggestions from './_components/Suggestions'
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined }
@@ -169,14 +170,13 @@ export default async function Games({ searchParams }: Props) {
 
             <Suspense
               fallback={
-                <div className="rounded-lg bg-neutral-800/90 w-full min-h-[200px]"></div>
+                <div className='rounded bg-slate-200/20  w-full min-h-[260px] animate-pulse'></div>
               }
             >
               <Gallery
                 game={game}
                 id={id}
                 className="flex gap-4 pb-4 -mx-4 snap-x overflow-auto"
-                // className="flex gap-4 pb-4 -mx-4 snap-x overflow-auto lg:hidden"
                 mediaQuery="(max-width:1023px)"
               />
             </Suspense>
@@ -259,7 +259,7 @@ export default async function Games({ searchParams }: Props) {
                   <span>
                     {
                       ageRatingPrefix[
-                        game.esrb_rating.name as keyof AgeRatingPrefix
+                      game.esrb_rating.name as keyof AgeRatingPrefix
                       ]
                     }
                     &nbsp;
@@ -370,14 +370,13 @@ export default async function Games({ searchParams }: Props) {
           <div className="hidden lg:block lg:col-span-5">
             <Suspense
               fallback={
-                <div className="rounded-lg bg-neutral-800/90 w-full min-h-[500px]"></div>
+                <div className='rounded bg-slate-200/20  w-full min-h-[260px] animate-pulse'></div>
               }
             >
               <Gallery
                 game={game}
                 id={id}
                 className="lg:flex lg:mx-0 lg:py-12 lg:flex-col lg:space-y-4"
-                // className="hidden lg:flex lg:mx-0 lg:py-12 lg:flex-col lg:space-y-4"
                 mediaQuery="(min-width:1024px)"
               />
             </Suspense>
@@ -433,7 +432,7 @@ export default async function Games({ searchParams }: Props) {
         </div>
 
         <section className="">
-          <div>similar games</div>
+          <Suggestions game={game} id={id} />
           <div>creators</div>
         </section>
       </div>

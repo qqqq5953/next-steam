@@ -2,8 +2,8 @@ import Image from 'next/image'
 
 type Props = {
   game: Game
-  index: number
-  className: string
+  index?: number
+  className?: string
 }
 
 export default function ImageContainer({ game, className }: Props) {

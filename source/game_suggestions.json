@@ -1,5 +1,3 @@
-// https://rawg.io/api/games/grand-theft-auto-v/suggested?page=1&page_size=4&key=c542e67aec3a4340908f9de9e86038af
-
 {
   "count": 421,
   "next": "https://api.rawg.io/api/games/grand-theft-auto-v/suggested?key=c542e67aec3a4340908f9de9e86038af&page=2&page_size=4",
