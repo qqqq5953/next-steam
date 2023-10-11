@@ -63,3 +63,13 @@ type AgeRatingPrefix = {
   "Mature": string,
   "Adults only": string,
 }
+
+type Trailer = {
+  id: number
+  name: string
+  preview: string
+  data: {
+    "480": string
+    "max": string
+  }
+}

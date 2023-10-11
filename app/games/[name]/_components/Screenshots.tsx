@@ -2,11 +2,11 @@
 
 import useMediaQuery from '@/hooks/useMediaQuery'
 import Image from 'next/image'
-import { GameSingle } from '@/types'
+import { GameSingle, ShortScreenshot } from '@/types'
 
 type Props = {
   game: GameSingle
-  screenshots: any
+  screenshots: ShortScreenshot[]
   mediaQuery: string
 }
 
@@ -17,7 +17,7 @@ export default function Screenshots({ game, screenshots, mediaQuery }: Props) {
     <>
       {isShow && (
         <div className="flex gap-4 lg:grid lg:grid-cols-2">
-          {screenshots.results.map((item, index) => {
+          {screenshots.map((item, index) => {
             return (
               <div
                 className="aspect-video shadow-md shadow-neutral-700/90 snap-center lg:snap-align-none"
