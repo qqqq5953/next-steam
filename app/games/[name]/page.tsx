@@ -15,6 +15,7 @@ import { Suspense } from 'react'
 
 import { AgeRatingPrefix, Platform } from '@/types'
 import Suggestions from './_components/Suggestions'
+import Creators from './_components/Creators'
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined }
@@ -433,7 +434,7 @@ export default async function Games({ searchParams }: Props) {
 
         <section className="">
           <Suggestions game={game} id={id} />
-          <div>creators</div>
+          <Creators game={game} id={id} />
         </section>
       </div>
     </main>

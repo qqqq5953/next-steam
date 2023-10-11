@@ -1,13 +1,14 @@
+import { Game } from '@/types'
 import Image from 'next/image'
 
 type Props = {
-  game: Game
+  game: Game | any
   index?: number
   className?: string
 }
 
 export default function ImageContainer({ game, className }: Props) {
-  if (!game.background_image) {
+  if (!game.background_image && !game.image_background && !game.image) {
     return (
       <div className="absolute grid place-items-center w-full h-full">
         {game.name}
@@ -17,7 +18,7 @@ export default function ImageContainer({ game, className }: Props) {
 
   return (
     <Image
-      src={game.background_image}
+      src={game.background_image || game.image_background}
       fill
       sizes="(min-width: 1480px) 1368px, calc(94.83vw - 16px)"
       // placeholder="blur"
