@@ -171,7 +171,7 @@ export default async function Games({ searchParams }: Props) {
 
             <Suspense
               fallback={
-                <div className='rounded bg-slate-200/20  w-full min-h-[260px] animate-pulse'></div>
+                <div className="rounded bg-slate-200/20  w-full min-h-[260px] animate-pulse"></div>
               }
             >
               <Gallery
@@ -260,7 +260,7 @@ export default async function Games({ searchParams }: Props) {
                   <span>
                     {
                       ageRatingPrefix[
-                      game.esrb_rating.name as keyof AgeRatingPrefix
+                        game.esrb_rating.name as keyof AgeRatingPrefix
                       ]
                     }
                     &nbsp;
@@ -357,7 +357,7 @@ export default async function Games({ searchParams }: Props) {
                   return (
                     <Link
                       key={item.store.name}
-                      className="shrink-0 rounded p-2 bg-neutral-800/90 text-neutral-500 text-center hover:bg-slate-50 hover-text-black transition-colors duration-300"
+                      className="text-base shrink-0 rounded p-2 bg-neutral-800/90 text-neutral-500 text-center hover:bg-slate-50 hover-text-black transition-colors duration-300"
                       href={`/games/${item.store.slug}?${item.store.id}`}
                     >
                       {item.store.name}
@@ -371,7 +371,7 @@ export default async function Games({ searchParams }: Props) {
           <div className="hidden lg:block lg:col-span-5">
             <Suspense
               fallback={
-                <div className='rounded bg-slate-200/20  w-full min-h-[260px] animate-pulse'></div>
+                <div className="rounded bg-slate-200/20  w-full min-h-[260px] animate-pulse"></div>
               }
             >
               <Gallery
@@ -432,7 +432,7 @@ export default async function Games({ searchParams }: Props) {
           </div>
         </div>
 
-        <section className="">
+        <section className="grid grid-cols-1 gap-4">
           <Suggestions game={game} id={id} />
           <Creators game={game} id={id} />
         </section>

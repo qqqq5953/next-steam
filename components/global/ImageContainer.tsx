@@ -5,9 +5,10 @@ type Props = {
   game: Game | any
   index?: number
   className?: string
+  style?: object
 }
 
-export default function ImageContainer({ game, className }: Props) {
+export default function ImageContainer({ game, className, style }: Props) {
   if (!game.background_image && !game.image_background && !game.image) {
     return (
       <div className="absolute grid place-items-center w-full h-full">
@@ -25,6 +26,7 @@ export default function ImageContainer({ game, className }: Props) {
       // blurDataURL={game.blurDataURL}
       alt={game.name}
       className={`object-cover object-top absolute ${className}`}
+      style={style}
     ></Image>
   )
 }
