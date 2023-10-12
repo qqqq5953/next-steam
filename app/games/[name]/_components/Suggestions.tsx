@@ -10,7 +10,7 @@ type Props = {
 export default function Suggestions({ game, id }: Props) {
     // https://rawg.io/api/games/grand-theft-auto-v/suggested?page=1&page_size=4&key=c542e67aec3a4340908f9de9e86038af
     return <section className='space-y-6'>
-        <h3 className='text-center text-xl lg:text-2xl'>Games like {game.name}</h3>
+        <h3 className='text-center text-xl lg:text-4xl'>Games like {game.name}</h3>
         <div className='grid grid-cols-1 gap-2 lg:grid-cols-4 lg:gap-6'>
             {suggestions.results.map(suggestion => {
                 return <div key={suggestion.id} >
