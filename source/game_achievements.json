@@ -1,0 +1,42 @@
+{
+    "count": 57,
+    "next": "https://api.rawg.io/api/games/3498/achievements?key=04fd56d2bfc34a73964433ff1117f1d1&page=2",
+    "previous": null,
+    "results": [
+        {
+            "id": 102967,
+            "name": "Los Santos Legend",
+            "description": "Congratulations! You're Vinewood's biggest star!",
+            "image": "https://media.rawg.io/media/achievements/f13/f13c99de8b72a8d6f50fa84aa44346ef.jpg",
+            "percent": "0.63"
+        },
+        {
+            "id": 103588,
+            "name": "Masterminds",
+            "description": "GTA Online: Complete all 3 Criminal Mastermind challenges in The Doomsday Heist.",
+            "image": "https://media.rawg.io/media/achievements/f83/f83b9a6e9459cb20058ca6354b319520.jpg",
+            "percent": "1.55"
+        },
+        {
+            "id": 103589,
+            "name": "Elitist",
+            "description": "GTA Online: Complete all 3 Elite Challenges in The Doomsday Heist.",
+            "image": "https://media.rawg.io/media/achievements/360/3601d762ef64efb8c4b88b883856cb0a.jpg",
+            "percent": "1.57"
+        },
+        {
+            "id": 102446,
+            "name": "Humans of Los Santos",
+            "description": "Unlock all Special Characters and enter Director Mode as an actor from this category.",
+            "image": "https://media.rawg.io/media/achievements/ab5/ab5e928bfd212b78e574e5b5aa383b12.jpg",
+            "percent": "2.95"
+        },
+        {
+            "id": 104845,
+            "name": "Majestic",
+            "description": "Create and export 10 videos using the Rockstar Editor.",
+            "image": "https://media.rawg.io/media/achievements/6ce/6cebc793a5a16c2052e7d2487f6de47f.jpg",
+            "percent": "3.22"
+        }
+    ]
+}

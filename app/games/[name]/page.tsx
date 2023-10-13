@@ -16,6 +16,7 @@ import { Suspense } from 'react'
 import { AgeRatingPrefix, Platform } from '@/types'
 import Suggestions from './_components/Suggestions'
 import Creators from './_components/Creators'
+import Achievements from './_components/Achievements'
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined }
@@ -260,7 +261,7 @@ export default async function Games({ searchParams }: Props) {
                   <span>
                     {
                       ageRatingPrefix[
-                        game.esrb_rating.name as keyof AgeRatingPrefix
+                      game.esrb_rating.name as keyof AgeRatingPrefix
                       ]
                     }
                     &nbsp;
@@ -432,9 +433,10 @@ export default async function Games({ searchParams }: Props) {
           </div>
         </div>
 
-        <section className="grid grid-cols-1 gap-4">
+        <section className="grid grid-cols-1 gap-8">
           <Suggestions game={game} id={id} />
           <Creators game={game} id={id} />
+          <Achievements game={game} id={id} />
         </section>
       </div>
     </main>

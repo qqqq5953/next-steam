@@ -16,12 +16,15 @@ type Props = {
 }
 
 export default function Creators({ game, id }: Props) {
-  // https://rawg.io/api/games/grand-theft-auto-v/suggested?page=1&page_size=4&key=c542e67aec3a4340908f9de9e86038af
+  // https://api.rawg.io/api/games/{id}/development-team?page_size=5&key={process.env.RAWG_API_KEY}
   return (
     <section className="space-y-6">
-      <h3 className="font-semibold text-center text-2xl lg:text-left">
-        {game.name} created by
-      </h3>
+      <div className='flex justify-between items-center'>
+        <h3 className="mr-2 font-semibold text-2xl lg:text-left">
+          {game.name} created by
+        </h3>
+        <Link href={`/games/${game.slug}/team`} className='shrink-0 underline text-neutral-500 text-xs font-light'>{developers.count} creators</Link>
+      </div>
       <div className="flex gap-4 pb-4 snap-x overflow-auto">
         {developers.results.map((developer) => {
           return (
@@ -98,16 +101,16 @@ export default function Creators({ game, id }: Props) {
           )
         })}
         <div className="shrink-0 w-3/4 lg:w-[30%]">
-            <Card className="overflow-hidden bg-black border-transparent h-full">
-                <div className="flex p-12 h-full">
-                    <button className="rounded px-2 py-3.5 bg-neutral-800/90 text-neutral-500 text-center hover:bg-slate-50 hover:text-black transition-colors duration-300 w-full m-auto">
-                    More
-                    </button>
-                </div>
-            </Card>
+          <Card className="overflow-hidden bg-black border-transparent h-full">
+            <div className="flex p-12 h-full">
+              <button className="rounded px-2 py-3.5 bg-neutral-800/90 text-neutral-500 text-center hover:bg-slate-50 hover:text-black transition-colors duration-300 w-full m-auto">
+                More
+              </button>
+            </div>
+          </Card>
         </div>
       </div>
-      
+
     </section>
   )
 }

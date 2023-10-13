@@ -6,26 +6,8 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'media.rawg.io',
         port: '',
-        pathname: '/media/games/**'
+        pathname: '/media/**'
       },
-      {
-        protocol: 'https',
-        hostname: 'media.rawg.io',
-        port: '',
-        pathname: '/media/screenshots/**'
-      },
-      {
-        protocol: 'https',
-        hostname: 'media.rawg.io',
-        port: '',
-        pathname: '/media/persons/**'
-      },
-      {
-        protocol: 'https',
-        hostname: 'media.rawg.io',
-        port: '',
-        pathname: '/media/persons_wiki/**'
-      }
     ]
   },
   experimental: {

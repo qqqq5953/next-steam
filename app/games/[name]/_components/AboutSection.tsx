@@ -10,6 +10,15 @@ type Props = {
 export default function AboutSection({ game }: Props) {
   const [isReadMore, setIsReadMore] = useState(false)
 
+  // development team add page_size
+  // fetch(
+  //   `https://api.rawg.io/api/games/3498/achievements?page_size=5&key=04fd56d2bfc34a73964433ff1117f1d1`
+  // ).then(res => {
+  //   return res.json()
+  // }).then(res => {
+  //   console.log('achievements', res)
+  // })
+
   return (
     <section>
       <h3 className="text-xl pb-2 lg:text-2xl">About</h3>
@@ -20,11 +29,11 @@ export default function AboutSection({ game }: Props) {
           isReadMore
             ? {}
             : {
-                overflow: 'hidden',
-                display: '-webkit-box',
-                WebkitBoxOrient: 'vertical',
-                WebkitLineClamp: '9'
-              }
+              overflow: 'hidden',
+              display: '-webkit-box',
+              WebkitBoxOrient: 'vertical',
+              WebkitLineClamp: '9'
+            }
         }
       />
       <button

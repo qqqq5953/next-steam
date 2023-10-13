@@ -3,7 +3,6 @@ import Image from 'next/image'
 
 type Props = {
   game: Game | any
-  index?: number
   className?: string
   style?: object
 }
@@ -19,7 +18,7 @@ export default function ImageContainer({ game, className, style }: Props) {
 
   return (
     <Image
-      src={game.background_image || game.image_background}
+      src={game.background_image || game.image_background || game.image}
       fill
       sizes="(min-width: 1480px) 1368px, calc(94.83vw - 16px)"
       // placeholder="blur"
