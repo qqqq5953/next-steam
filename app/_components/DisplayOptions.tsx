@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import useMediaQuery from '@/hooks/useMediaQuery'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGrip, faFilm } from '@fortawesome/free-solid-svg-icons'
@@ -17,18 +18,18 @@ export default function Display() {
   function handleClick(type: string) {
     setSelectedValue(type)
 
-    console.log('type', type);
-
-
     const queryStrings = searchParams.toString()
     const newSearchParams = new URLSearchParams(queryStrings);
     newSearchParams.set("mode", type)
 
     router.push(`?${newSearchParams}`)
-
-    console.log('push', type);
-
   }
+
+  const isWeb = useMediaQuery('(min-width: 1024px)')
+
+  useEffect(() => {
+    if (!isWeb) handleClick('grid')
+  }, [isWeb])
 
   return (
     <>

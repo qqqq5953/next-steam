@@ -1,47 +1,50 @@
 import game from '@/source/game_example.json'
 import same_series from '@/source/game_same_series.json'
 import dlc from '@/source/games_dlc&edition.json'
+import stores_link from '@/source/game_store.json'
+
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { getBrandIcon, getUniqueIcons, platformMap } from '@/lib/getBrandIcon'
-import Link from 'next/link'
+
 import AboutSection from './_components/AboutSection'
 import RatingSection from './_components/RatingSection'
 import GridColumnContainer from './_components/GridColumnContainer'
 import Gallery from './_components/Gallery'
+import Suggestions from './_components/Suggestions'
+import Creators from './_components/Creators'
+import Achievements from './_components/Achievements'
+import Requirements from './_components/Requirements'
 import Sidebar from '@/app/_components/Sidebar'
 import { Suspense } from 'react'
 
 import { AgeRatingPrefix, Platform } from '@/types'
-import Suggestions from './_components/Suggestions'
-import Creators from './_components/Creators'
-import Achievements from './_components/Achievements'
 
 type Props = {
-  searchParams: { [key: string]: string | string[] | undefined }
+  params: { name: string }
 }
 
-export default async function Games({ searchParams }: Props) {
-  const { id } = searchParams
-  console.log('id', id)
+export default async function Games({ params: { name } }: Props) {
+  // https://api.rawg.io/api/games/${name}?key={process.env.RAWG_API_KEY}
 
-  // https://api.rawg.io/api/games/${id}
-  // https://api.rawg.io/api/games/{game_pk}/screenshots
-
-  // const res = await fetch(
-  //   `https://api.rawg.io/api/games/${id}?key=${process.env.RAWG_API_KEY}`
-  // )
-  // const game = await res.json()
-  // console.log('ratings', game.stores)
-
-  // const res = await fetch(`https://api.rawg.io/api/games/${id}/game-series?key=${process.env.RAWG_API_KEY}`)
+  // const res = await fetch(`https://api.rawg.io/api/games/${name}/game-series?key=${process.env.RAWG_API_KEY}`)
   // const data = await res.json()
   // console.log('game-series', data)
 
-  // const res = await fetch(`https://api.rawg.io/api/games/${id}/additions?key=${process.env.RAWG_API_KEY}`)
+  // const res = await fetch(`https://api.rawg.io/api/games/${name}/additions?key=${process.env.RAWG_API_KEY}`)
   // const data = await res.json()
-  // console.log('additions', data)
+  // console.log('dlc additions', data)
+
+  // const res = await fetch(`https://api.rawg.io/api/games/${name}/stores?key=${process.env.RAWG_API_KEY}`)
+  // const data = await res.json()
+  // console.log('stores', data)
+
+  const storeLinkObj = stores_link.results.reduce((obj, store) => {
+    obj[store.store_id] = store.url
+    return obj
+  }, {} as { [key: number]: string })
 
   const breadcrumbs = [
     { name: 'HOME', path: '/' },
@@ -68,7 +71,7 @@ export default async function Games({ searchParams }: Props) {
     <main className="flex pt-6 lg:pt-10 gap-11">
       <Sidebar />
 
-      <div className="space-y-4 max-w-lg mx-auto lg:max-w-5xl">
+      <div className="space-y-4 max-w-lg mx-auto lg:max-w-[944px]">
         <Image
           src={game.background_image}
           alt={game.name}
@@ -137,39 +140,6 @@ export default async function Games({ searchParams }: Props) {
               </h2>
             </header>
 
-            {/* video and screenshots */}
-
-            {/* <div className="flex gap-4 pb-4 -mx-4 snap-x overflow-auto lg:hidden">
-              <div className="rounded-lg overflow-hidden shadow-md shadow-neutral-600/50 snap-center max-h-[150px] max-w-[260px]">
-                <video
-                  controls
-                  autoPlay
-                  muted
-                  loop
-                  src={trailer?.results[0]?.data['480']}
-                ></video>
-              </div>
-              <div className="flex gap-4">
-                {screenshot.results.map((item, index) => {
-                  return (
-                    <div
-                      className="aspect-video shadow-md shadow-neutral-700/90 snap-center"
-                      key={item.id}
-                    >
-                      <Image
-                        src={item.image}
-                        alt={game.name}
-                        width={100}
-                        height={50}
-                        priority={index === 0}
-                        className="rounded-lg object-cover w-full"
-                      />
-                    </div>
-                  )
-                })}
-              </div>
-            </div> */}
-
             <Suspense
               fallback={
                 <div className="rounded bg-slate-200/20  w-full min-h-[260px] animate-pulse"></div>
@@ -177,7 +147,6 @@ export default async function Games({ searchParams }: Props) {
             >
               <Gallery
                 game={game}
-                id={id}
                 className="flex gap-4 pb-4 -mx-4 snap-x overflow-auto"
                 mediaQuery="(max-width:1023px)"
               />
@@ -205,9 +174,10 @@ export default async function Games({ searchParams }: Props) {
               <GridColumnContainer
                 title="Metascore"
                 spanNum="1"
-                className="border rounded px-1.5 py-0.5 inline-block font-bold"
               >
-                {game.metacritic}
+                <div className="border rounded px-1.5 py-0.5 inline-block font-bold">
+                  {game.metacritic}
+                </div>
               </GridColumnContainer>
 
               <GridColumnContainer title="Genre" spanNum="1">
@@ -323,48 +293,27 @@ export default async function Games({ searchParams }: Props) {
                 </Link>
               </GridColumnContainer>
 
-              <GridColumnContainer
-                title="System requirements"
-                spanNum="2"
-                className="space-y-4"
-              >
-                {game.platforms.map((item) => {
-                  return (
-                    <div key={item.platform.id} className="space-y-4">
-                      <div className="font-light  text-lg">
-                        System requirements for {item.platform.name}
-                      </div>
-                      {item.requirements.minimum && (
-                        <div className="font-extralight">
-                          {item.requirements.minimum}
-                        </div>
-                      )}
-                      {item.requirements.recommended && (
-                        <div className="font-extralight">
-                          {item.requirements.recommended}
-                        </div>
-                      )}
-                    </div>
-                  )
-                })}
-              </GridColumnContainer>
+              <Requirements game={game} />
 
               <GridColumnContainer
                 title="Where to buy"
                 spanNum="2"
-                className="flex flex-nowrap gap-2 overflow-auto pb-4 lg:hidden"
+                className='lg:hidden'
               >
-                {game.stores.map((item) => {
-                  return (
-                    <Link
-                      key={item.store.name}
-                      className="text-base shrink-0 rounded p-2 bg-neutral-800/90 text-neutral-500 text-center hover:bg-slate-50 hover-text-black transition-colors duration-300"
-                      href={`/games/${item.store.slug}?${item.store.id}`}
-                    >
-                      {item.store.name}
-                    </Link>
-                  )
-                })}
+                <div className="flex flex-nowrap gap-2 overflow-auto pb-4 lg:hidden">
+                  {game.stores.map((item) => {
+                    return (
+                      <Link
+                        key={item.store.name}
+                        className="text-base shrink-0 rounded p-2 bg-neutral-800/90 text-neutral-500 text-center hover:bg-slate-50 hover-text-black transition-colors duration-300"
+                        href={storeLinkObj[item.store.id]}
+                        target='blank'
+                      >
+                        {item.store.name}
+                      </Link>
+                    )
+                  })}
+                </div>
               </GridColumnContainer>
             </section>
           </div>
@@ -377,66 +326,37 @@ export default async function Games({ searchParams }: Props) {
             >
               <Gallery
                 game={game}
-                id={id}
                 className="lg:flex lg:mx-0 lg:py-12 lg:flex-col lg:space-y-4"
                 mediaQuery="(min-width:1024px)"
               />
             </Suspense>
-            {/* <div className="lg:py-12 lg:flex-col space-y-4">
-              <div className="aspect-video rounded-lg overflow-hidden">
-                <video
-                  controls
-                  autoPlay
-                  muted
-                  loop
-                  src="https://steamcdn-a.akamaihd.net/steam/apps/256693661/movie_max.mp4"
-                ></video>
-              </div>
-              <div className="flex lg:grid lg:grid-cols-2 gap-4">
-                {screenshot.results.map((item) => {
-                  return (
-                    <div
-                      className="lg:col-span-1 aspect-video shadow-md shadow-neutral-700/90"
-                      key={item.id}
-                    >
-                      <Image
-                        src={item.image}
-                        alt={game.name}
-                        width={100}
-                        height={50}
-                        priority={true}
-                        className="rounded-lg object-cover w-full"
-                      />
-                    </div>
-                  )
-                })}
-              </div>
-            </div> */}
 
             <GridColumnContainer
               title="Where to buy"
               spanNum="1"
-              className="hidden lg:grid lg:grid-cols-2 lg:gap-4"
             >
-              {game.stores.map((item) => {
-                return (
-                  <Link
-                    key={item.store.name}
-                    className="col-span-1 rounded p-2 bg-neutral-800/90 text-neutral-500 text-center hover:bg-slate-50 hover-text-black transition-colors duration-300"
-                    href={`/games/${item.store.slug}?${item.store.id}`}
-                  >
-                    {item.store.name}
-                  </Link>
-                )
-              })}
+              <div className="hidden lg:grid lg:grid-cols-2 lg:gap-4">
+                {game.stores.map((item) => {
+                  return (
+                    <Link
+                      key={item.store.name}
+                      className="col-span-1 rounded p-2 bg-neutral-800/90 text-neutral-500 text-center hover:bg-slate-50 hover-text-black transition-colors duration-300"
+                      href={storeLinkObj[item.store.id]}
+                      target='blank'
+                    >
+                      {item.store.name}
+                    </Link>
+                  )
+                })}
+              </div>
             </GridColumnContainer>
           </div>
         </div>
 
         <section className="grid grid-cols-1 gap-8">
-          <Suggestions game={game} id={id} />
-          <Creators game={game} id={id} />
-          <Achievements game={game} id={id} />
+          <Suggestions game={game} />
+          <Creators game={game} />
+          <Achievements game={game} />
         </section>
       </div>
     </main>

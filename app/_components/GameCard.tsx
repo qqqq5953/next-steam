@@ -21,10 +21,10 @@ import { Game } from '@/types'
 
 type Props = {
   game: Game
-  index?: number
+  displayMode?: string | string[]
 }
 
-export default function GameCard({ game, index }: Props) {
+export default function GameCard({ game, displayMode }: Props) {
   const [isHover, setIsHover] = useState<boolean | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [showSlide, setShowSlide] = useState(false)
@@ -33,7 +33,7 @@ export default function GameCard({ game, index }: Props) {
   const uniqueIcons = getUniqueIcons(icons)
 
   return (
-    <Card className="overflow-hidden bg-neutral-800/90 border-transparent  hover:border-neutral-700 transition-all duration-300">
+    <Card className={`overflow-hidden bg-neutral-800/90 border-transparent transition-all duration-300 ${displayMode === 'grid' && 'lg:hover:scale-105'}`}>
       <div
         className="relative aspect-video group/video"
         onMouseEnter={() => setIsHover(true)}
@@ -49,7 +49,6 @@ export default function GameCard({ game, index }: Props) {
 
         <ImageContainer
           game={game}
-          index={index}
           className={showSlide ? 'invisible' : 'visible'}
         />
 
@@ -61,14 +60,7 @@ export default function GameCard({ game, index }: Props) {
 
       <CardHeader>
         <CardTitle>
-          <Link href={`/games/${game.slug}/?id=${game.id}`}>{game.name}</Link>
-        </CardTitle>
-        <CardDescription></CardDescription>
-      </CardHeader>
-
-      <CardContent>
-        <ul className="divide-y divide-neutral-700 text-xs">
-          <li className="flex items-center py-3">
+          <div className="flex items-center py-3 text-sm">
             {uniqueIcons.map((item, index) => {
               return (
                 <span key={index} className="mr-2">
@@ -78,28 +70,62 @@ export default function GameCard({ game, index }: Props) {
                 </span>
               )
             })}
-          </li>
+          </div>
+
+          <Link href={`/games/${game.slug}`}>{game.name}</Link>
+
+          {displayMode === 'film' && <ul className="flex flex-wrap items-center gap-x-6 gap-y-3 w-full text-sm pt-4 font-light">
+            <li className="flex justify-between items-center">
+              <span className='text-neutral-500 text-sm mr-2'>Metascore:</span>
+              <span className="border rounded px-1.5 py-0.5 inline-block font-bold">{game.metacritic}</span>
+            </li>
+            <li>
+              <span className='text-neutral-500 text-sm mr-2'>Release date:</span>
+              <span>{game.released}</span>
+            </li>
+            <li>
+              <span className='text-neutral-500 text-sm mr-2'>Genres:</span>
+              <div className='inline-block'>
+                {game.genres.map((genre) => {
+                  return (
+                    <span
+                      key={genre.id}
+                      className="ml-1.5 first-of-type:ml-0 after:content-[','] last-of-type:after:content-[''] underline underline-offset-2 decoration-neutral-500 inline-block"
+                    >
+                      {genre.name}
+                    </span>
+                  )
+                })}
+              </div>
+            </li>
+          </ul>}
+        </CardTitle>
+        <CardDescription></CardDescription>
+      </CardHeader>
+
+      {displayMode === 'grid' && <CardContent>
+        <ul className="divide-y divide-neutral-700 text-xs">
           <li className="flex justify-between items-center py-3">
-            <span>Release date:</span>
+            <span className='text-neutral-500 text-sm lg:text-xs'>Release date:</span>
             <div className="text-right">{game.released}</div>
           </li>
-          <li className="flex justify-between items-center py-3">
-            <span>Genres:</span>
-            <div className="text-right ">
+          <li className="flex justify-between items-center lg:items-start py-3 gap-2">
+            <span className='text-neutral-500 text-sm lg:text-xs'>Genres:</span>
+            <div className="text-right">
               {game.genres.map((genre) => {
                 return (
                   <span
                     key={genre.id}
-                    className="after:content-[','] last-of-type:after:content-['']"
+                    className="ml-1.5 first-of-type:ml-0 after:content-[','] last-of-type:after:content-[''] underline underline-offset-2 decoration-neutral-500 inline-block"
                   >
-                    &nbsp;{genre.name}
+                    {genre.name}
                   </span>
                 )
               })}
             </div>
           </li>
         </ul>
-      </CardContent>
+      </CardContent>}
     </Card>
   )
 }

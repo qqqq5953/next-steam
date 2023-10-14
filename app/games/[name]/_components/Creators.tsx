@@ -12,23 +12,22 @@ import Link from 'next/link'
 
 type Props = {
   game: GameSingle
-  id: string
 }
 
-export default function Creators({ game, id }: Props) {
-  // https://api.rawg.io/api/games/{id}/development-team?page_size=5&key={process.env.RAWG_API_KEY}
+export default function Creators({ game }: Props) {
+  // https://api.rawg.io/api/games/{game.id}/development-team?page_size=5&key={process.env.RAWG_API_KEY}
   return (
     <section className="space-y-6">
       <div className='flex justify-between items-center'>
         <h3 className="mr-2 font-semibold text-2xl lg:text-left">
           {game.name} created by
         </h3>
-        <Link href={`/games/${game.slug}/team`} className='shrink-0 underline text-neutral-500 text-xs font-light'>{developers.count} creators</Link>
+        <Link href={`/games/${game.slug}/team`} className='shrink-0 underline text-neutral-500 text-xs font-light lg:text-sm'>{developers.count} creators</Link>
       </div>
       <div className="flex gap-4 pb-4 snap-x overflow-auto">
         {developers.results.map((developer) => {
           return (
-            <div key={developer.id} className="shrink-0 w-3/4 lg:w-[30%]">
+            <div key={developer.id} className="shrink-0 w-3/4 max-w-[264px] lg:w-[33%] lg:max-w-[304px]">
               <Card className="overflow-hidden bg-neutral-800/90 border-transparent  hover:border-neutral-700 transition-all duration-300 h-full">
                 <div className="relative" style={{ aspectRatio: '7/6' }}>
                   <ImageContainer
@@ -56,7 +55,7 @@ export default function Creators({ game, id }: Props) {
                     )}
                     <Link
                       className="underline underline-offset-[3px] decoration-0 decoration-neutral-500 font-bold"
-                      href={`/games/${developer.slug}/?id=${developer.id}`}
+                      href={`/creators/${developer.slug}`}
                     >
                       {developer.name}
                     </Link>
@@ -84,7 +83,7 @@ export default function Creators({ game, id }: Props) {
                         >
                           <Link
                             className="max-w-[75%] truncate underline underline-offset-[3px] decoration-0 decoration-neutral-500"
-                            href={`/games/${game.slug}/?id=${game.id}`}
+                            href={`/games/${game.slug}`}
                           >
                             {game.name}
                           </Link>
@@ -103,9 +102,7 @@ export default function Creators({ game, id }: Props) {
         <div className="shrink-0 w-3/4 lg:w-[30%]">
           <Card className="overflow-hidden bg-black border-transparent h-full">
             <div className="flex p-12 h-full">
-              <button className="rounded px-2 py-3.5 bg-neutral-800/90 text-neutral-500 text-center hover:bg-slate-50 hover:text-black transition-colors duration-300 w-full m-auto">
-                More
-              </button>
+              <Link href={`/games/${game.slug}/team`} className="rounded px-2 py-3.5 bg-neutral-800/90 text-neutral-500 text-center hover:bg-slate-50 hover:text-black transition-colors duration-300 w-full m-auto">More</Link>
             </div>
           </Card>
         </div>

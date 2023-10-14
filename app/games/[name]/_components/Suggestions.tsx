@@ -5,10 +5,9 @@ import Link from 'next/link'
 
 type Props = {
   game: GameSingle
-  id: string
 }
 
-export default function Suggestions({ game, id }: Props) {
+export default function Suggestions({ game }: Props) {
   // https://rawg.io/api/games/grand-theft-auto-v/suggested?page=1&page_size=4&key=c542e67aec3a4340908f9de9e86038af
   return <section className='space-y-6'>
     <h3 className='text-center text-xl lg:text-4xl underline underline-offset-4 decoration-neutral-500 decoration-1'>

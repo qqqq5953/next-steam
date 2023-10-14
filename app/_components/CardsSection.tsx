@@ -19,7 +19,7 @@ export default function CardsSection({ games, displayMode }: Props) {
         columnWidth: '100px'
       }}
     >
-      {games.map((game, index) => {
+      {games.map((game) => {
         return (
           <div
             key={game.id}
@@ -27,7 +27,7 @@ export default function CardsSection({ games, displayMode }: Props) {
               displayMode === 'film' ? 'max-w-2xl mx-auto' : 'mb-4 sm:mb-6'
             }
           >
-            <GameCard game={game} index={index} />
+            <GameCard game={game} displayMode={displayMode} />
           </div>
         )
       })}

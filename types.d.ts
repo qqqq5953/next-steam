@@ -8,10 +8,10 @@ type Platform = {
     // year_start: number | null
     // year_end: number | null
   }
-  // requirements_en: {
-  //   minimum: string
-  //   recommended: string
-  // }
+  requirements: {
+    minimum: string
+    recommended: string
+  }
 }
 type Genre = {
   id: number
@@ -34,6 +34,7 @@ type Game = {
   platforms: Platform[]
   genres: Genre[]
   short_screenshots: ShortScreenshot[]
+  metacritic: number
   blurDataURL?: string | undefined
 }
 
