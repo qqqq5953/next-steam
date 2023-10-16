@@ -33,7 +33,7 @@ export default function GameCard({ game, displayMode }: Props) {
   const uniqueIcons = getUniqueIcons(icons)
 
   return (
-    <Card className={`overflow-hidden bg-neutral-800/90 border-transparent transition-all duration-300 ${displayMode === 'grid' && 'lg:hover:scale-105'}`}>
+    <Card className={`overflow-hidden bg-neutral-800/90 border-transparent transition-all duration-300 ${displayMode !== 'film' && 'lg:hover:scale-105'}`}>
       <div
         className="relative aspect-video group/video"
         onMouseEnter={() => setIsHover(true)}
@@ -72,7 +72,7 @@ export default function GameCard({ game, displayMode }: Props) {
             })}
           </div>
 
-          <Link href={`/games/${game.slug}`}>{game.name}</Link>
+          <Link href={`/games/${game.slug}`} className='hover:text-neutral-500 transition-colors duration-300'>{game.name}</Link>
 
           {displayMode === 'film' && <ul className="flex flex-wrap items-center gap-x-6 gap-y-3 w-full text-sm pt-4 font-light">
             <li className="flex justify-between items-center">

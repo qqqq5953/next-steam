@@ -13,11 +13,9 @@ import {
 } from '@/components/base-ui/DropdownMenu'
 import { Button } from '@/components/base-ui/Button'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
-
 import { useState, MouseEvent } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import Icon from "@/components/global/Icon"
 
 type Option = {
   name: string
@@ -47,7 +45,6 @@ export default function Dropdown({
   function handleClick(e: MouseEvent<HTMLSpanElement>) {
     const target = e.target as HTMLElement
     const newValue = target.textContent as string
-    console.log('newValue', newValue)
     setSelectedValue(newValue)
 
     const queryStrings = searchParams.toString()
@@ -55,7 +52,6 @@ export default function Dropdown({
     newSearchParams.set(type, newValue)
 
     router.push(`?${newSearchParams}`)
-    console.log('push', newValue)
   }
 
   return (
@@ -68,7 +64,7 @@ export default function Dropdown({
           >
             {selectedValue || initialValue}
           </span>
-          <FontAwesomeIcon icon={faAngleDown} className="text-neutral-500" />
+          <Icon name="chevron-down" size={22} className='text-neutral-500' />
         </Button>
       </DropdownMenuTrigger>
 
@@ -84,11 +80,10 @@ export default function Dropdown({
                   <DropdownMenuSubContent className=" bg-white text-black">
                     <DropdownMenuItem
                       onClick={(e) => handleClick(e)}
-                      className={`${
-                        initialValue === option.name
-                          ? 'font-bold pointer-events-none'
-                          : 'w-full'
-                      }`}
+                      className={`${initialValue === option.name
+                        ? 'font-bold pointer-events-none'
+                        : 'w-full'
+                        }`}
                     >
                       {option.name}
                     </DropdownMenuItem>
@@ -97,11 +92,10 @@ export default function Dropdown({
                         <DropdownMenuItem key={childOption.name}>
                           <span
                             onClick={(e) => handleClick(e)}
-                            className={`${
-                              initialValue === childOption.name
-                                ? 'font-bold pointer-events-none'
-                                : 'w-full'
-                            }`}
+                            className={`${initialValue === childOption.name
+                              ? 'font-bold pointer-events-none'
+                              : 'w-full'
+                              }`}
                           >
                             {childOption.name}
                           </span>
@@ -115,11 +109,10 @@ export default function Dropdown({
               <DropdownMenuItem key={option.name}>
                 <div
                   onClick={(e) => handleClick(e)}
-                  className={`${
-                    initialValue === option.name
-                      ? 'font-bold pointer-events-none'
-                      : 'w-full'
-                  }`}
+                  className={`${initialValue === option.name
+                    ? 'font-bold pointer-events-none'
+                    : 'w-full'
+                    }`}
                 >
                   {option.name}
                 </div>

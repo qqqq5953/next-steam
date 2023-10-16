@@ -1,8 +1,7 @@
 import achievements from '@/source/game_achievements.json'
 import Link from 'next/link'
 import ImageContainer from '@/components/global/ImageContainer'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
+import Icon from "@/components/global/Icon"
 import { GameSingle } from '@/types'
 
 type Props = {
@@ -35,7 +34,9 @@ export default function Achievement({ game }: Props) {
           )
         })}
         <Link href={`/games/${game.slug}/achievements`} className="flex gap-4 py-2 lg:py-4 lg:border-b lg:border-neutral-700 group">
-          <div className='grid place-content-center w-12 h-12 rounded-lg bg-neutral-800/90 text-neutral-500 group-hover:bg-slate-50 group-hover:text-black transition-colors duration-300 lg:w-14 lg:h-14'><FontAwesomeIcon icon={faEllipsis} /></div>
+          <div className='grid place-content-center w-12 h-12 rounded-lg bg-neutral-800/90 text-neutral-500 group-hover:bg-slate-50 group-hover:text-black transition-colors duration-300 lg:w-14 lg:h-14'>
+            <Icon name="more-horizontal" />
+          </div>
           <div className='space-y-px group-hover:opacity-50 transition-opacity duration-300'>
             <div className='text-sm font-semibold'>View all achievement</div>
             <div className='text-xs text-neutral-500 font-light'>{achievements.count} items</div>

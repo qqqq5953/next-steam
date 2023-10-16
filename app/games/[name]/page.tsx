@@ -60,13 +60,13 @@ export default async function Games({ params: { name } }: Props) {
     'Adults only': '18+'
   }
 
-  const icons = game.platforms.map((item: Platform) =>
+  const icons = game.platforms.map((item) =>
     getBrandIcon(item.platform.name)
   )
   const uniqueIcons = getUniqueIcons(icons)
 
   const itemClass =
-    "ml-1.5 first-of-type:ml-0 after:content-[','] last-of-type:after:content-[''] leading-5 underline underline-offset-2 decoration-neutral-500"
+    "ml-1.5 first-of-type:ml-0 after:content-[','] last-of-type:after:content-[''] leading-5 underline underline-offset-2 decoration-neutral-500 hover:text-neutral-500 transition-colors duration-300"
 
   return (
     <main className="flex pt-6 lg:pt-10 gap-11">
@@ -341,7 +341,7 @@ export default async function Games({ params: { name } }: Props) {
                   return (
                     <Link
                       key={item.store.name}
-                      className="col-span-1 rounded p-2 bg-neutral-800/90 text-neutral-400/70 text-center hover:bg-slate-50 hover-text-black transition-colors duration-300"
+                      className="col-span-1 rounded p-2 bg-neutral-800/90 text-neutral-400/70 text-center hover:bg-slate-50 hover:text-black transition-colors duration-300"
                       href={storeLinkObj[item.store.id]}
                       target='blank'
                     >

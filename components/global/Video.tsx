@@ -1,7 +1,6 @@
 import useFetch from '@/hooks/useFetch'
 import { Dispatch, SetStateAction, useRef, useEffect } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import Icon from "@/components/global/Icon"
 
 type Props = {
   isHover: boolean | null
@@ -129,9 +128,11 @@ export default function Video({
     <>
       {isLoading ? (
         <div className="bg-black/50 absolute inset-0 z-50 grid place-items-center">
-          <FontAwesomeIcon
-            icon={faCircleNotch}
-            className="animate-spin text-4xl text-white/50"
+          <Icon
+            name="loader-2"
+            useSuspense={false}
+            size={36}
+            className="animate-spin text-white/50"
           />
         </div>
       ) : (
@@ -140,9 +141,7 @@ export default function Video({
             <div className="absolute inset-0 z-50">
               <video
                 muted
-                width="100%"
-                height="100%"
-                className="absolute inset-x-0 z-50 opacity-0 group-hover/video:opacity-100 transition-all duration-500 ease-in-out"
+                className="absolute inset-x-0 z-50 object-cover w-full h-full opacity-0 group-hover/video:opacity-100 transition duration-500 ease-in-out"
                 onCanPlay={playVideo}
                 ref={videoRef}
               >
