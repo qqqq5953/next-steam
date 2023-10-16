@@ -13,11 +13,11 @@ export default function Achievement({ game }: Props) {
   // https://api.rawg.io/api/games/${game.id}/achievements?page_size=5&key=04fd56d2bfc34a73964433ff1117f1d1
   return (
     <section className="space-y-6">
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-between items-baseline'>
         <h3 className="mr-2 font-semibold text-2xl lg:text-left">
           {game.name} achievements
         </h3>
-        <Link href={`/games/${game.slug}/achievements`} className='shrink-0 underline text-neutral-500 text-xs font-light lg:text-sm'>{achievements.count} achievements</Link>
+        <Link href={`/games/${game.slug}/achievements`} className='shrink-0 underline underline-offset-2 decoration-neutral-500 text-neutral-500 text-xs hover:text-white transition-colors duration-300 font-light lg:text-sm'>{achievements.count} achievements</Link>
       </div>
       <div className="grid grid-cols-1 snap-x overflow-auto lg:grid-cols-3 lg:gap-6">
         {achievements.results.map((achievement) => {

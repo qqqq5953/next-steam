@@ -23,7 +23,7 @@ export default function Suggestions({ game }: Props) {
       })}
     </div>
     <div className='text-center'>
-      <button className="rounded px-2 py-3.5 bg-neutral-800/90 text-neutral-500 text-center hover:bg-slate-50 hover-text-black transition-colors duration-300 w-full lg:w-1/5 max-w-xs">load more</button>
+      <button className="rounded px-2 py-3.5 bg-neutral-800/90 text-neutral-400/70 text-center hover:bg-slate-50 hover:text-black transition-colors duration-300 w-full lg:w-1/5 lg:max-w-xs">Load more</button>
     </div>
   </section>
 }

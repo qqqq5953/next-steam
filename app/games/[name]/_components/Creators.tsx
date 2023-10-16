@@ -18,11 +18,11 @@ export default function Creators({ game }: Props) {
   // https://api.rawg.io/api/games/{game.id}/development-team?page_size=5&key={process.env.RAWG_API_KEY}
   return (
     <section className="space-y-6">
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-between items-baseline'>
         <h3 className="mr-2 font-semibold text-2xl lg:text-left">
           {game.name} created by
         </h3>
-        <Link href={`/games/${game.slug}/team`} className='shrink-0 underline text-neutral-500 text-xs font-light lg:text-sm'>{developers.count} creators</Link>
+        <Link href={`/games/${game.slug}/team`} className='shrink-0 underline underline-offset-2 decoration-neutral-500 text-neutral-500 text-xs hover:text-white transition-colors duration-300 font-light lg:text-sm'>{developers.count} creators</Link>
       </div>
       <div className="flex gap-4 pb-4 snap-x overflow-auto">
         {developers.results.map((developer) => {

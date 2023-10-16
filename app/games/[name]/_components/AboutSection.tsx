@@ -12,11 +12,11 @@ export default function AboutSection({ game }: Props) {
 
   // development team add page_size
   // fetch(
-  //   `https://api.rawg.io/api/games/3498/achievements?page_size=5&key=04fd56d2bfc34a73964433ff1117f1d1`
+  //   `https://api.rawg.io/api/games/grand-theft-auto-v/reddit?page_size=5&key=04fd56d2bfc34a73964433ff1117f1d1`
   // ).then(res => {
   //   return res.json()
   // }).then(res => {
-  //   console.log('achievements', res)
+  //   console.log('reddit', res)
   // })
 
   return (

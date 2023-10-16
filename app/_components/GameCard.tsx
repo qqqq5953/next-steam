@@ -103,7 +103,7 @@ export default function GameCard({ game, displayMode }: Props) {
         <CardDescription></CardDescription>
       </CardHeader>
 
-      {displayMode === 'grid' && <CardContent>
+      {displayMode !== 'film' && <CardContent>
         <ul className="divide-y divide-neutral-700 text-xs">
           <li className="flex justify-between items-center py-3">
             <span className='text-neutral-500 text-sm lg:text-xs'>Release date:</span>

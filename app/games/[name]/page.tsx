@@ -17,6 +17,7 @@ import Suggestions from './_components/Suggestions'
 import Creators from './_components/Creators'
 import Achievements from './_components/Achievements'
 import Requirements from './_components/Requirements'
+import Reddit from './_components/Reddit'
 import Sidebar from '@/app/_components/Sidebar'
 import { Suspense } from 'react'
 
@@ -305,7 +306,7 @@ export default async function Games({ params: { name } }: Props) {
                     return (
                       <Link
                         key={item.store.name}
-                        className="text-base shrink-0 rounded p-2 bg-neutral-800/90 text-neutral-500 text-center hover:bg-slate-50 hover-text-black transition-colors duration-300"
+                        className="text-base shrink-0 rounded p-2 bg-neutral-800/90 text-neutral-400/70 text-center hover:bg-slate-50 hover-text-black transition-colors duration-300"
                         href={storeLinkObj[item.store.id]}
                         target='blank'
                       >
@@ -340,7 +341,7 @@ export default async function Games({ params: { name } }: Props) {
                   return (
                     <Link
                       key={item.store.name}
-                      className="col-span-1 rounded p-2 bg-neutral-800/90 text-neutral-500 text-center hover:bg-slate-50 hover-text-black transition-colors duration-300"
+                      className="col-span-1 rounded p-2 bg-neutral-800/90 text-neutral-400/70 text-center hover:bg-slate-50 hover-text-black transition-colors duration-300"
                       href={storeLinkObj[item.store.id]}
                       target='blank'
                     >
@@ -357,6 +358,7 @@ export default async function Games({ params: { name } }: Props) {
           <Suggestions game={game} />
           <Creators game={game} />
           <Achievements game={game} />
+          <Reddit game={game} />
         </section>
       </div>
     </main>
