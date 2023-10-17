@@ -21,7 +21,7 @@ import Reddit from './_components/Reddit'
 import Sidebar from '@/app/_components/Sidebar'
 import { Suspense } from 'react'
 
-import { AgeRatingPrefix, Platform } from '@/types'
+import { AgeRatingPrefix } from '@/types'
 
 type Props = {
   params: { name: string }
@@ -88,11 +88,11 @@ export default async function Games({ params: { name } }: Props) {
           }}
         />
 
-        <div className="pt-8 lg:grid lg:grid-cols-12 lg:gap-8">
-          <div className="lg:col-span-7 space-y-6">
+        <div className="pt-8 grid grid-cols-1 lg:grid lg:grid-cols-12 lg:gap-8">
+          <div className="col-span-1 space-y-6 lg:col-span-7">
             <header className="flex flex-col items-center justify-center gap-3 lg:gap-6 lg:justify-start lg:items-start">
               {/* breadcrumb */}
-              <ul className="flex items-center gap-1.5 text-sm tracking-widest text-neutral-300/60 flex-wrap">
+              <ul className="flex items-center justify-center gap-1.5 text-sm tracking-widest text-neutral-300/60 flex-wrap">
                 {breadcrumbs.map((item, index) => {
                   return (
                     <li key={index} className="after:content-['/']">
@@ -143,12 +143,12 @@ export default async function Games({ params: { name } }: Props) {
 
             <Suspense
               fallback={
-                <div className="rounded bg-slate-200/20  w-full min-h-[260px] animate-pulse"></div>
+                <div className="rounded-lg bg-neutral-600/30 h-[149px] animate-pulse lg:hidden"></div>
               }
             >
               <Gallery
                 game={game}
-                className="flex gap-4 pb-4 -mx-4 snap-x overflow-auto"
+                className="flex gap-4 pb-4 -mx-4 snap-x overflow-auto sm:mx-0 lg:hidden"
                 mediaQuery="(max-width:1023px)"
               />
             </Suspense>
@@ -319,15 +319,25 @@ export default async function Games({ params: { name } }: Props) {
             </section>
           </div>
 
-          <div className="hidden lg:block lg:col-span-5">
+          <div className="hidden col-span-1 lg:block lg:col-span-5">
             <Suspense
               fallback={
-                <div className="rounded bg-slate-200/20  w-full min-h-[260px] animate-pulse"></div>
+                <div className='lg:py-12 lg:space-y-4'>
+                  <div className="hidden rounded bg-neutral-600/30 w-full min-h-[210px] animate-pulse lg:block"></div>
+                  <div className='hidden lg:grid lg:grid-cols-2 lg:gap-4'>
+                    {[...Array(6)].map((e, i) => {
+                      return <div
+                        className="rounded bg-neutral-600/30 animate-pulse aspect-video"
+                        key={i}
+                      ></div>
+                    })}
+                  </div>
+                </div>
               }
             >
               <Gallery
                 game={game}
-                className="lg:flex lg:mx-0 lg:py-12 lg:flex-col lg:space-y-4"
+                className="hidden lg:flex lg:mx-0 lg:py-12 lg:flex-col lg:space-y-4"
                 mediaQuery="(min-width:1024px)"
               />
             </Suspense>

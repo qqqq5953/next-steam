@@ -16,17 +16,6 @@ export default async function Gallery({
   className,
   mediaQuery
 }: Props) {
-  // const res = await fetch(
-  //   `https://api.rawg.io/api/games/${game.id}/movies?key=${process.env.RAWG_API_KEY}`
-  // )
-  // const trailer = await res.json()
-  // console.log('movies', trailer)
-
-  // const res = await fetch(`https://api.rawg.io/api/games/${game.id}/screenshots?key=${process.env.RAWG_API_KEY}`)
-  // const data = await res.json()
-  // console.log('screenshots', data)
-
-
   // const data = await getGallery(game.id)
   // if (!data) return null
   // const { movies, screenshots } = data

@@ -18,6 +18,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { getBrandIcon, getUniqueIcons, platformMap } from '@/lib/getBrandIcon'
 import Link from 'next/link'
 import { Game } from '@/types'
+import Icon from '@/components/global/Icon'
 
 type Props = {
   game: Game
@@ -34,6 +35,63 @@ export default function GameCard({ game, displayMode }: Props) {
 
   return (
     <Card className={`overflow-hidden bg-neutral-800/90 border-transparent transition-all duration-300 ${displayMode !== 'film' && 'lg:hover:scale-105'}`}>
+      {/* <div
+        className="relative aspect-video group/video"
+      >
+        <div className='absolute w-full h-full z-50 flex items-end'
+          onClick={() => setIsHover(h => !h)}
+        >
+          <div className={`grid place-content-center rounded-full h-10 w-10 pl-1 m-4 bg-black/70 ${isHover ? 'opacity-0' : 'opacity-100'}`}>
+            <Icon name="play" className='fill-white' />
+          </div>
+        </div>
+
+        <Video
+          id={game.id}
+          isHover={isHover}
+          isLoading={isLoading}
+          setShowSlide={setShowSlide}
+          setIsLoading={setIsLoading}
+        />
+
+        <ImageContainer
+          game={game}
+          className={showSlide ? 'invisible' : 'visible'}
+        />
+
+        <Swiper
+          screenShots={game.short_screenshots.slice(1)}
+          showSlide={showSlide}
+        />
+      </div> */}
+
+      {/* <div
+        className="relative aspect-video group/video"
+      >
+        <div className='absolute top-0 w-full h-full z-50'
+          onMouseEnter={() => setIsHover(true)}
+          onMouseLeave={() => setIsHover(false)}
+        ></div>
+
+        <Video
+          id={game.id}
+          isHover={isHover}
+          isLoading={isLoading}
+          setShowSlide={setShowSlide}
+          setIsLoading={setIsLoading}
+        />
+
+        <ImageContainer
+          game={game}
+          className={showSlide ? 'invisible' : 'visible'}
+        />
+
+        <Swiper
+          screenShots={game.short_screenshots.slice(1)}
+          showSlide={showSlide}
+        />
+      </div> */}
+
       <div
         className="relative aspect-video group/video"
         onMouseEnter={() => setIsHover(true)}

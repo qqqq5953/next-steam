@@ -138,10 +138,10 @@ export default function Video({
       ) : (
         <>
           {hasLoadMap.get(id) && (
-            <div className="absolute inset-0 z-50">
+            <div className="absolute inset-0 z-40">
               <video
                 muted
-                className="absolute inset-x-0 z-50 object-cover w-full h-full opacity-0 group-hover/video:opacity-100 transition duration-500 ease-in-out"
+                className={`absolute inset-x-0 z-40 object-cover w-full h-full transition duration-500 ease-in-out ${isHover ? 'opacity-100' : 'opacity-0'}`}
                 onCanPlay={playVideo}
                 ref={videoRef}
               >
@@ -152,7 +152,7 @@ export default function Video({
                 </p>
               </video>
               {isHover && (
-                <button className="absolute bottom-0 right-0 text-white bg-black/50 z-50 px-1.5 py-1 m-2 rounded text-xs hover:border hover:border-neutral-400/60">
+                <button className="absolute bottom-0 right-0 text-white bg-black/50 z-40 px-1.5 py-1 m-2 rounded text-xs hover:border hover:border-neutral-400/60">
                   Play full video
                 </button>
               )}

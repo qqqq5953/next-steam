@@ -12,7 +12,7 @@ export default function Video({ url, mediaQuery }: Props) {
   return (
     <>
       {isShow && (
-        <div className="rounded-lg overflow-hidden shadow-md shadow-neutral-600/50 max-h-[150px] max-w-[260px] snap-center lg:snap-align-none lg:aspect-video lg:max-h-none lg:max-w-none">
+        <div className="shrink-0 rounded-lg overflow-hidden shadow-md shadow-neutral-600/50 w-[264px] aspect-video snap-center lg:snap-align-none lg:w-auto">
           <video controls autoPlay muted loop src={url}></video>
         </div>
       )}

@@ -20,7 +20,7 @@ export default function Screenshots({ game, screenshots, mediaQuery }: Props) {
           {screenshots.map((item, index) => {
             return (
               <div
-                className="aspect-video shadow-md shadow-neutral-700/90 snap-center lg:snap-align-none"
+                className="aspect-video shadow-md shadow-neutral-700/90 snap-center lg:snap-align-none w-[264px] lg:w-auto"
                 key={item.id}
               >
                 <Image
