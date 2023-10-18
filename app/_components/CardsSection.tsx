@@ -1,4 +1,4 @@
-import GameCard from '@/app/_components/GameCard'
+import GameCard from '@/app/_components/TestCard'
 import { Game } from '@/types'
 
 type Props = {
