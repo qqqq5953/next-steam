@@ -31,6 +31,16 @@ type Props = {
   displayMode?: string | string[]
 }
 
+type Trailer = {
+  id: number
+  name: string
+  preview: string
+  data: {
+    '480': string
+    max: string
+  }
+}
+
 const hasLoadMap = new Map()
 let abortController = new AbortController()
 
@@ -39,14 +49,13 @@ export default function GameCard({ game, displayMode }: Props) {
   const uniqueIcons = getUniqueIcons(icons)
 
   const [isActivate, setIsActivate] = useState<boolean | null>(null)
-  const [showItem, setShowItem] = useState<"" | "video" | "screenshot">("")
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [showItem, setShowItem] = useState<"" | "video" | "screenshot">("")
   const videoRef = useRef<HTMLVideoElement | null>(null)
 
   const isWeb = useMediaQuery('(min-width: 1024px)')
 
   useEffect(() => {
-    console.log('hasLoadMap', hasLoadMap);
     if (isActivate === true) {
       handleMouseEnter()
     } else if (isActivate === false) {
@@ -83,7 +92,7 @@ export default function GameCard({ game, displayMode }: Props) {
     }
   }
 
-  function handleHoverResult(videos) {
+  function handleHoverResult(videos: Trailer[]) {
     if (videos.length === 0) {
       setShowItem('screenshot')
     } else {
@@ -139,16 +148,16 @@ export default function GameCard({ game, displayMode }: Props) {
   }
 
   function handleClick() {
-    // if (isWeb) return
+    if (isWeb) return
     setIsActivate(h => !h)
   }
 
   function enterMask() {
-    // if (!isWeb) return
+    if (!isWeb) return
     setIsActivate(true)
   }
   function leaveMask() {
-    // if (!isWeb) return
+    if (!isWeb) return
     setIsActivate(false)
   }
 
@@ -156,12 +165,12 @@ export default function GameCard({ game, displayMode }: Props) {
     <Card className={`overflow-hidden bg-neutral-800/90 border-transparent transition-all duration-300 ${displayMode !== 'film' && 'lg:hover:scale-105'}`}>
       <div
         className="relative aspect-video group/video"
+        onMouseEnter={enterMask}
+        onMouseLeave={leaveMask}
       >
-        {/* mask */}
-        <div className="absolute w-full h-full z-50 flex items-end"
+        {/* mask z-index 40 及 50 是為了要同時適應手機及網頁*/}
+        <div className={`absolute w-full h-full flex items-end ${isActivate ? 'z-40' : 'z-50'}`}
           onClick={handleClick}
-        // onMouseEnter={enterMask}
-        // onMouseLeave={leaveMask}
         >
           <div className={`grid place-content-center rounded-full h-10 w-10 pl-1 m-4 bg-black/70 ${isActivate ? 'opacity-0' : 'opacity-100'}`}>
             <FontAwesomeIcon icon={faPlay} className='text-white fa-lg' />
@@ -169,34 +178,10 @@ export default function GameCard({ game, displayMode }: Props) {
         </div>
 
         {/* loading */}
-        {isLoading ? <div className="bg-black/50 absolute inset-0 z-40 grid place-items-center">
-          <Icon
-            name="loader-2"
-            useSuspense={false}
-            size={36}
-            className="animate-spin text-white/50"
-          />
-        </div>
-          :
+        {isLoading ? <Loading /> :
           <>
             {/* video */}
-            {hasLoadMap.get(game.id) && (
-              <div className="absolute inset-0 z-20">
-                <video
-                  muted
-                  className={`absolute inset-x-0 z-20 object-cover w-full h-full transition-opacity duration-500 ease-in-out ${showItem === 'video' ? 'opacity-100' : 'opacity-0'}`}
-                  onCanPlay={playVideo}
-                  ref={videoRef}
-                >
-                  <source src={hasLoadMap.get(game.id)} type="video/mp4" />
-                  <p>
-                    Your browser doesn't support HTML5 video. Here is a
-                    <a href={hasLoadMap.get(game.id)}>link to the video</a> instead.
-                  </p>
-                </video>
-              </div>
-            )}
-
+            {hasLoadMap.get(game.id) && <Video showItem={showItem} id={game.id} videoRef={videoRef} hasLoadMap={hasLoadMap} playVideo={playVideo} />}
           </>
         }
 
@@ -204,66 +189,23 @@ export default function GameCard({ game, displayMode }: Props) {
           game={game}
           className={`transition-opacity duration-500 ease-in-out ${isActivate && !isLoading ? 'opacity-0' : 'opacity-100'}`}
         />
+
         <Swiper
           screenShots={game.short_screenshots.slice(1)}
           showItem={showItem}
         />
       </div>
-
-      {/* <div
-        className="relative aspect-video group/video"
-      >
-        <div className="absolute w-full h-full z-50 flex items-end"
-          onClick={handleClick}
-        >
-          <div className={`grid place-content-center rounded-full h-10 w-10 pl-1 m-4 bg-black/70 ${isActivate ? 'opacity-0' : 'opacity-100'}`}>
-            <Icon name="play" className='fill-white' /> {showItem}
-          </div>
-        </div>
-
-        <Video
-          id={game.id}
-          isActivate={isActivate}
-          setShowItem={setShowItem}
-        />
-
-        <ImageContainer
-          game={game}
-          className={showItem === 'screenshot' ? 'invisible' : 'visible'}
-        />
-
-        <Swiper
-          screenShots={game.short_screenshots.slice(1)}
-          showItem={showItem}
-        />
-      </div> */}
-
-      {/* <div
-        className="relative aspect-video group/video"
-      >
-        <div className='absolute top-0 w-full h-full z-50'
-          onMouseEnter={() => setIsHover(true)}
-          onMouseLeave={() => setIsHover(false)}
-        ></div>
-
-        <Video
-          id={game.id}
-          isHover={isHover}
-          isLoading={isLoading}
-          setShowSlide={setShowSlide}
-          setIsLoading={setIsLoading}
-        />
-
-        <ImageContainer
-          game={game}
-          className={showSlide ? 'invisible' : 'visible'}
-        />
-
-        <Swiper
-          screenShots={game.short_screenshots.slice(1)}
-          showSlide={showSlide}
-        />
-      </div> */}
     </Card>
   )
+}
+
+function Loading() {
+  return <div className="bg-black/50 absolute inset-0 z-40 grid place-items-center">
+    <Icon
+      name="loader-2"
+      useSuspense={false}
+      size={72}
+      className="animate-spin text-white/50"
+    />
+  </div>
 }

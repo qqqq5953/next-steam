@@ -2,18 +2,23 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
+import useMediaQuery from '@/hooks/useMediaQuery'
+import { ShortScreenshot } from '@/types'
 
 type Props = {
   screenShots: ShortScreenshot[]
-  showSlide: boolean
+  showItem: "" | "video" | "screenshot"
 }
 
-export default function Swiper({ screenShots, showSlide }: Props) {
+export default function Swiper({ screenShots, showItem }: Props) {
   const divRef = useRef<HTMLDivElement>(null)
   const [barWidth, setBarWidth] = useState(0)
   const [currentIndex, setCurrentIndex] = useState(0)
 
+  const isWeb = useMediaQuery('(min-width: 1024px)')
+
   const toSlide = (index: number) => {
+    if (!isWeb) return
     setCurrentIndex(index)
   }
 
@@ -23,6 +28,9 @@ export default function Swiper({ screenShots, showSlide }: Props) {
 
   // Function to go to the next slide
   const nextSlide = () => {
+    console.log('nextSlide');
+
+    if (isWeb) return
     setCurrentIndex((prevIndex) =>
       prevIndex === screenShots.length - 1 ? 0 : prevIndex + 1
     )
@@ -37,10 +45,10 @@ export default function Swiper({ screenShots, showSlide }: Props) {
 
   return (
     <div
-      className={`relative overflow-hidden h-full ${
-        showSlide ? 'z-10' : '-z-10'
-      }`}
+      className={`relative overflow-hidden h-full transition-opacity duration-500 ease-in-out ${showItem === 'screenshot' ? 'z-50 opacity-100' : 'z-10 opacity-0'
+        }`}
       ref={divRef}
+      onClick={() => nextSlide()}
     >
       <div className="relative h-full">
         {screenShots.map((item, index) => (
@@ -51,12 +59,12 @@ export default function Swiper({ screenShots, showSlide }: Props) {
             fill
             sizes="(min-width: 1480px) 1368px, calc(94.83vw - 16px)"
             alt={`Slide ${index}`}
-            className={`transition-opacity duration-300 ease-in-out object-cover object-top ${
-              index === currentIndex ? 'opacity-100' : 'opacity-0'
-            }`}
+            className={` object-cover object-top ${index === currentIndex ? 'opacity-100' : 'opacity-0'
+              }`}
           ></Image>
         ))}
       </div>
+
       <div className="absolute top-0 h-full w-full flex items-center justify-center gap-2 px-2 z-10">
         {screenShots.map((_, index) => {
           return (
@@ -67,7 +75,8 @@ export default function Swiper({ screenShots, showSlide }: Props) {
               onMouseEnter={() => toSlide(index)}
             >
               <span
-                className={`w-full h-2 rounded-full bg-zinc-400/80 group-hover/slide:bg-white/80`}
+                className={`w-full h-2 rounded-full ${index === currentIndex ? 'bg-white/80' : 'bg-zinc-400/80'
+                  }`}
               ></span>
             </div>
           )

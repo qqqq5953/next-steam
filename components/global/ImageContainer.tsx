@@ -24,7 +24,7 @@ export default function ImageContainer({ game, className, style }: Props) {
       // placeholder="blur"
       // blurDataURL={game.blurDataURL}
       alt={game.name}
-      className={`object-cover object-top absolute ${className}`}
+      className={`object-cover object-top absolute z-30 ${className}`}
       style={style}
     ></Image>
   )
