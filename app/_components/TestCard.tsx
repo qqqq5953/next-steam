@@ -19,10 +19,12 @@ import ImageContainer from '@/app/_components/TestImageContainer'
 // import ImageContainer from '@/components/global/ImageContainer'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlay } from '@fortawesome/free-solid-svg-icons'
 import { getBrandIcon, getUniqueIcons, platformMap } from '@/lib/getBrandIcon'
 import Link from 'next/link'
 import { Game } from '@/types'
 import Icon from '@/components/global/Icon'
+import useMediaQuery from '@/hooks/useMediaQuery'
 
 type Props = {
   game: Game
@@ -41,12 +43,14 @@ export default function GameCard({ game, displayMode }: Props) {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const videoRef = useRef<HTMLVideoElement | null>(null)
 
+  const isWeb = useMediaQuery('(min-width: 1024px)')
+
   useEffect(() => {
     console.log('hasLoadMap', hasLoadMap);
     if (isActivate === true) {
       handleMouseEnter()
     } else if (isActivate === false) {
-      handleMouseLeve()
+      handleMouseLeave()
     }
   }, [isActivate])
 
@@ -67,13 +71,16 @@ export default function GameCard({ game, displayMode }: Props) {
     }
   }
 
-  async function handleMouseLeve() {
+  async function handleMouseLeave() {
     console.log('handleMouseLeve')
 
     if (hasLoadMap.get(game.id)) {
       stopVideo()
+    } else if (hasLoadMap.has(game.id) && !hasLoadMap.get(game.id)) {
+      setShowItem('video')
+    } else {
+      abortFetching()
     }
-    abortFetching()
   }
 
   function handleHoverResult(videos) {
@@ -132,8 +139,17 @@ export default function GameCard({ game, displayMode }: Props) {
   }
 
   function handleClick() {
-    // if (showSlide) return
+    // if (isWeb) return
     setIsActivate(h => !h)
+  }
+
+  function enterMask() {
+    // if (!isWeb) return
+    setIsActivate(true)
+  }
+  function leaveMask() {
+    // if (!isWeb) return
+    setIsActivate(false)
   }
 
   return (
@@ -143,12 +159,12 @@ export default function GameCard({ game, displayMode }: Props) {
       >
         {/* mask */}
         <div className="absolute w-full h-full z-50 flex items-end"
-          // onClick={handleClick}
-          onMouseEnter={() => setIsActivate(true)}
-          onMouseLeave={() => setIsActivate(false)}
+          onClick={handleClick}
+        // onMouseEnter={enterMask}
+        // onMouseLeave={leaveMask}
         >
           <div className={`grid place-content-center rounded-full h-10 w-10 pl-1 m-4 bg-black/70 ${isActivate ? 'opacity-0' : 'opacity-100'}`}>
-            <Icon name="play" className='fill-white' />
+            <FontAwesomeIcon icon={faPlay} className='text-white fa-lg' />
           </div>
         </div>
 
@@ -168,7 +184,7 @@ export default function GameCard({ game, displayMode }: Props) {
               <div className="absolute inset-0 z-20">
                 <video
                   muted
-                  className={`absolute inset-x-0 z-20 object-cover w-full h-full transition duration-500 ease-in-out ${showItem === 'video' ? 'opacity-100' : 'opacity-0'}`}
+                  className={`absolute inset-x-0 z-20 object-cover w-full h-full transition-opacity duration-500 ease-in-out ${showItem === 'video' ? 'opacity-100' : 'opacity-0'}`}
                   onCanPlay={playVideo}
                   ref={videoRef}
                 >
@@ -186,7 +202,7 @@ export default function GameCard({ game, displayMode }: Props) {
 
         <ImageContainer
           game={game}
-          className={isActivate && !isLoading ? 'invisible' : 'visible'}
+          className={`transition-opacity duration-500 ease-in-out ${isActivate && !isLoading ? 'opacity-0' : 'opacity-100'}`}
         />
         <Swiper
           screenShots={game.short_screenshots.slice(1)}

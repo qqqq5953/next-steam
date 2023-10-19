@@ -27,6 +27,8 @@ export default function Swiper({ screenShots, showItem }: Props) {
 
   // Function to go to the next slide
   const nextSlide = () => {
+    console.log('nextSlide');
+
     if (isWeb) return
     setCurrentIndex((prevIndex) =>
       prevIndex === screenShots.length - 1 ? 0 : prevIndex + 1
@@ -42,7 +44,7 @@ export default function Swiper({ screenShots, showItem }: Props) {
 
   return (
     <div
-      className={`relative overflow-hidden h-full ${showItem === 'screenshot' ? 'z-50 opacity-100' : 'z-10 opacity-0'
+      className={`relative overflow-hidden h-full transition-opacity duration-500 ease-in-out ${showItem === 'screenshot' ? 'z-50 opacity-100' : 'z-10 opacity-0'
         }`}
       ref={divRef}
       onClick={() => nextSlide()}
@@ -56,7 +58,7 @@ export default function Swiper({ screenShots, showItem }: Props) {
             fill
             sizes="(min-width: 1480px) 1368px, calc(94.83vw - 16px)"
             alt={`Slide ${index}`}
-            className={`transition-opacity duration-300 ease-in-out object-cover object-top ${index === currentIndex ? 'opacity-100' : 'opacity-0'
+            className={` object-cover object-top ${index === currentIndex ? 'opacity-100' : 'opacity-0'
               }`}
           ></Image>
         ))}
