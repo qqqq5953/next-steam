@@ -28,7 +28,7 @@ export default function Creators({ game }: Props) {
         {developers.results.map((developer) => {
           return (
             <div key={developer.id} className="shrink-0 w-3/4 max-w-[264px] lg:w-[33%] lg:max-w-[304px]">
-              <Card className="overflow-hidden bg-neutral-800/90 border-transparent  hover:border-neutral-700 transition-all duration-300 h-full">
+              <Card className="overflow-hidden bg-neutral-800/90 border-transparent h-full">
                 <div className="relative" style={{ aspectRatio: '7/6' }}>
                   <ImageContainer
                     game={developer}
@@ -41,7 +41,7 @@ export default function Creators({ game }: Props) {
                     }}
                   />
 
-                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col items-center gap-2">
+                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col items-center gap-2 z-40">
                     {developer?.image && (
                       <Avatar className="w-24 h-24">
                         <AvatarImage

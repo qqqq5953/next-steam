@@ -1,29 +1,67 @@
+"use client"
+
 import suggestions from '@/source/game_suggestions.json'
 import GameCard from '@/app/_components/GameCard'
 import { GameSingle } from '@/types'
 import Link from 'next/link'
+import { useState, useEffect } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 
 type Props = {
   game: GameSingle
 }
 
 export default function Suggestions({ game }: Props) {
-  // https://rawg.io/api/games/grand-theft-auto-v/suggested?page=1&page_size=4&key=c542e67aec3a4340908f9de9e86038af
+  // const [suggestions, setSuggestions] = useState<object | null>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  async function getSuggestions(url: string) {
+    const res = await fetch(`${url}&key=c542e67aec3a4340908f9de9e86038af`)
+    const data = await res.json()
+    return data
+  }
+
+  async function loadData(url: string) {
+    setIsLoading(true)
+
+    const res = await getSuggestions(url)
+    setSuggestions(prevSuggestions => {
+      setIsLoading(false)
+      return {
+        ...(typeof prevSuggestions === 'object' ? prevSuggestions : {}),
+        next: res.next,
+        results: prevSuggestions?.results ? [...prevSuggestions?.results, ...res.results] : res.results
+      }
+    })
+  }
+
+  useEffect(() => {
+    // loadData("https://rawg.io/api/games/grand-theft-auto-v/suggested?page=1&page_size=6")
+  }, [])
+
   return <section className='space-y-6'>
     <h3 className='text-center text-xl lg:text-4xl underline underline-offset-4 decoration-neutral-500 decoration-1'>
       <Link href={`/games/${game.slug}/suggestions`}>Games like {game.name}</Link>
     </h3>
-    <div className='grid grid-cols-1 gap-2 lg:grid-cols-4 lg:gap-6'>
-      {suggestions.results.map(suggestion => {
-        return <div key={suggestion.id} >
+    {suggestions && <div className='columns-1 lg:columns-4 gap-2 sm:gap-6'>
+      {suggestions?.results.map((suggestion) => {
+        return <div key={suggestion.id} className='mb-2 sm:mb-6'>
           <GameCard
             game={suggestion}
           />
         </div>
       })}
-    </div>
-    <div className='text-center'>
-      <button className="rounded px-2 py-3.5 bg-neutral-800/90 text-neutral-400/70 text-center hover:bg-slate-50 hover:text-black transition-colors duration-300 w-full lg:w-1/5 lg:max-w-xs">Load more</button>
-    </div>
+    </div>}
+    {suggestions?.next && <div className='text-center'>
+      {isLoading ?
+        <button className="rounded px-2 py-3.5 bg-neutral-800/90 text-center w-full lg:w-1/5 lg:max-w-xs">
+          <FontAwesomeIcon icon={faCircleNotch} className='animate-spin fa-xl text-neutral-400/70' />
+        </button> :
+        <button className="rounded px-2 py-3.5 bg-neutral-800/90 text-neutral-400/70 text-center hover:bg-slate-50 hover:text-black transition-colors duration-300 w-full lg:w-1/5 lg:max-w-xs" onClick={() => loadData(suggestions.next)}>
+          Load more
+        </button>
+      }
+    </div>}
   </section>
 }

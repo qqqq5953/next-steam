@@ -7,7 +7,6 @@ import Sidebar from '@/app/_components/Sidebar'
 
 import { addBlurredDataURL } from '@/lib/getPlaceholder'
 import { Suspense } from 'react'
-import Test from '@/app/_components/TestCard'
 import { Game } from '@/types'
 import games_all from "@/source/games_all.json"
 
@@ -142,15 +141,15 @@ export default async function Home({ searchParams }: Props) {
   //api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}
   // `https://api.rawg.io/api/games?ordering=${orderValue}&parent_platforms=${platformValue}&key=${process.env.RAWG_API_KEY}`
 
-  // const res = await fetch(
-  //   `https://api.rawg.io/api/games?ordering=${orderValue}&parent_platforms=${platformValue}&key=${process.env.RAWG_API_KEY}`
-  // )
+  const res = await fetch(
+    `https://api.rawg.io/api/games?ordering=${orderValue}&parent_platforms=${platformValue}&key=${process.env.RAWG_API_KEY}`
+  )
 
-  // if (!res.ok) throw new Error(`Failed to fetch data`)
+  if (!res.ok) throw new Error(`Failed to fetch data`)
 
-  // const data = await res.json()
+  const data = await res.json()
 
-  // const games: Game[] = data.results
+  const games: Game[] = data.results
   // console.log('games: ', data.results[0])
 
   // const gameWithBlurDataURL = await addBlurredDataURL(games)
@@ -159,7 +158,7 @@ export default async function Home({ searchParams }: Props) {
 
   // console.log('searchParams', searchParams);
 
-  const games: Game[] = games_all.result
+  // const games: Game[] = games_all.result
 
   return (
     <>

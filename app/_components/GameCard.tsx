@@ -10,8 +10,8 @@ import {
   CardTitle
 } from '@/components/base-ui/Card'
 
-import Video from '@/components/global/Video'
-import Swiper from '@/components/global/Swiper'
+import Video from '@/app/_components/Video'
+import Swiper from '@/app/_components/Swiper'
 import ImageContainer from '@/components/global/ImageContainer'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

@@ -12,12 +12,12 @@ export default function CardsSection({ games, displayMode }: Props) {
       className={
         displayMode === 'film'
           ? 'columns-1 space-y-8'
-          : 'columns-1 sm:columns-2 lg:columns-3 2xl:columns-4 3xl:columns-5 gap-4 sm:gap-6'
+          : 'columns-1 sm:columns-2 md:columns-3 2xl:columns-4 3xl:columns-5 gap-4 sm:gap-6'
         // : 'grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-4'
       }
-      style={{
-        columnWidth: '100px'
-      }}
+    // style={{
+    //   columnWidth: '100px'
+    // }}
     >
       {games.map((game) => {
         return (
