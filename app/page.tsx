@@ -5,10 +5,8 @@ import DisplayOptions from '@/app/_components/DisplayOptions'
 import CardsSection from '@/app/_components/CardsSection'
 import Sidebar from '@/app/_components/Sidebar'
 
-import { addBlurredDataURL } from '@/lib/getPlaceholder'
 import { Suspense } from 'react'
-import { Game } from '@/types'
-import games_all from "@/source/games_all.json"
+import Icon from '@/components/global/Icon'
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined }
@@ -123,15 +121,6 @@ export default async function Home({ searchParams }: Props) {
   console.log('platformValue', platformValue)
   console.log('displayMode', displayMode)
 
-  // const obj = {
-  //   '-relevance': 'posts',
-  //   '-created': 'comments',
-  //   name: 'albums',
-  //   '-released': 'photos',
-  //   '-added': 'todos',
-  //   '-rating': 'users'
-  // }
-
   // const res = await fetch(
   //   `https://jsonplaceholder.typicode.com/${obj[orderValue]}`
   // )
@@ -140,25 +129,6 @@ export default async function Home({ searchParams }: Props) {
   // 如果不行再打測試的
   //api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}
   // `https://api.rawg.io/api/games?ordering=${orderValue}&parent_platforms=${platformValue}&key=${process.env.RAWG_API_KEY}`
-
-  const res = await fetch(
-    `https://api.rawg.io/api/games?ordering=${orderValue}&parent_platforms=${platformValue}&key=${process.env.RAWG_API_KEY}`
-  )
-
-  if (!res.ok) throw new Error(`Failed to fetch data`)
-
-  const data = await res.json()
-
-  const games: Game[] = data.results
-  // console.log('games: ', data.results[0])
-
-  // const gameWithBlurDataURL = await addBlurredDataURL(games)
-
-  // console.log('gameWithBlurDataURL', gameWithBlurDataURL);
-
-  // console.log('searchParams', searchParams);
-
-  // const games: Game[] = games_all.result
 
   return (
     <>
@@ -179,13 +149,12 @@ export default async function Home({ searchParams }: Props) {
             <div className="flex gap-2 grow sm:grow-0">
               <div className="grow">
                 <Dropdown
-                  selectedValuePrefix={'Order by:'}
-                  options={orderOptions}
+                  selectedValuePrefix='Order by:'
                   type="order"
                 />
               </div>
               <div className="grow sm:min-w-[150px]">
-                <Dropdown options={platformOptions} type="platform" />
+                <Dropdown type="platform" />
               </div>
             </div>
             <div className="hidden lg:flex lg:gap-3 lg:items-center ml-auto">
@@ -193,24 +162,25 @@ export default async function Home({ searchParams }: Props) {
             </div>
           </div>
 
-          <Suspense fallback={<div className="bg-red-300">loading...</div>}>
-            <CardsSection games={games} displayMode={displayMode} />
-          </Suspense>
+          <CardsSection
+            order={order}
+            platform={platform}
+            mode={mode}
+          />
 
-          {/* <Suspense fallback={<Loading />}>
-            <Test
-              orderValue={orderValue}
-              platformValue={platformValue}
-              mode={mode}
+          {/* <Suspense fallback={<div className="text-center text-2xl">
+            <Icon
+              name="loader-2"
+              useSuspense={false}
+              size={72}
+              strokeWidth={1}
+              className="animate-spin text-white/50 inline"
             />
-          </Suspense> */}
-          {/* <Suspense fallback={<div className="bg-red-300">loading...</div>}>
-            <Test1
-              orderValue={orderValue}
-              platformValue={platformValue}
+          </div>}>
+            <CardsSection
+              order={order}
+              platform={platform}
               mode={mode}
-              data={data}
-              time={time}
             />
           </Suspense> */}
         </div>

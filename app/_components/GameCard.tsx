@@ -42,7 +42,7 @@ let abortController = new AbortController()
 
 export default function GameCard({ game, displayMode }: Props) {
   const icons = game.platforms.map((item) => getBrandIcon(item.platform.name))
-  const uniqueIcons = getUniqueIcons(icons)
+  const uniqueIcons = getUniqueIcons(icons) as (keyof typeof platformMap)[]
 
   const [isActivate, setIsActivate] = useState<boolean | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -184,10 +184,10 @@ export default function GameCard({ game, displayMode }: Props) {
           className={`transition-opacity duration-500 ease-in-out ${isActivate && !isLoading ? 'opacity-0' : 'opacity-100'}`}
         />
 
-        <Swiper
+        {game.short_screenshots && <Swiper
           screenShots={game.short_screenshots.slice(1)}
           showItem={showItem}
-        />
+        />}
       </div>
 
       <CardHeader>
@@ -196,9 +196,9 @@ export default function GameCard({ game, displayMode }: Props) {
             {uniqueIcons.map((item, index) => {
               return (
                 <span key={index} className="mr-2">
-                  <FontAwesomeIcon
-                    icon={platformMap[item as keyof typeof platformMap]}
-                  ></FontAwesomeIcon>
+                  {platformMap[item] && <FontAwesomeIcon
+                    icon={platformMap[item]}
+                  ></FontAwesomeIcon>}
                 </span>
               )
             })}
@@ -268,6 +268,7 @@ function Loading() {
       name="loader-2"
       useSuspense={false}
       size={108}
+      strokeWidth={1}
       className="animate-spin text-white/50"
     />
   </div>

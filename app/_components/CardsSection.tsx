@@ -1,23 +1,121 @@
+import games_all from "@/source/games_all.json"
+// import { addBlurredDataURL } from '@/lib/getPlaceholder'
 import GameCard from '@/app/_components/GameCard'
 import { Game } from '@/types'
 
 type Props = {
-  games: Game[]
-  displayMode: string | string[]
+  // displayMode: string | string[]
+  order: string | string[] | undefined
+  platform: string | string[] | undefined
+  mode: string | string[] | undefined
 }
 
-export default function CardsSection({ games, displayMode }: Props) {
+const orderOptions = [
+  {
+    name: 'Relevance',
+    value: '-relevance'
+  },
+  {
+    name: 'Date added',
+    value: '-created'
+  },
+  {
+    name: 'Name',
+    value: '-name'
+  },
+  {
+    name: 'Release date',
+    value: '-released'
+  },
+  {
+    name: 'Popularity',
+    value: '-added'
+  },
+  {
+    name: 'Average rating',
+    value: '-rating'
+  }
+]
+
+const platformOptions = [
+  {
+    name: 'PC',
+    value: '1'
+  },
+  {
+    name: 'PlayStation',
+    value: '2',
+    children: [
+      {
+        name: 'PlayStation 4',
+        value: '18'
+      },
+      {
+        name: 'PlayStation 5',
+        value: '187'
+      }
+    ]
+  },
+  {
+    name: 'Xbox',
+    value: '3',
+    children: [
+      {
+        name: 'Xbox One',
+        value: '1'
+      },
+      {
+        name: 'Xbox Series S/X',
+        value: '186'
+      }
+    ]
+  },
+  {
+    name: 'iOS',
+    value: '4'
+  },
+  {
+    name: 'Android',
+    value: '8'
+  },
+  {
+    name: 'Macintosh',
+    value: '5'
+  },
+  {
+    name: 'Linux',
+    value: '6'
+  },
+  {
+    name: 'Nintendo',
+    value: '7'
+  }
+]
+
+export default async function CardsSection({ order, platform, mode }: Props) {
+  const orderValue =
+    orderOptions.find((option) => option.name === order)?.value ?? '-relevance'
+  const platformValue =
+    platformOptions.find((option) => option.name === platform)?.value ?? '1'
+  const displayMode = mode || 'grid'
+
+  const res = await fetch(
+    `https://api.rawg.io/api/games?ordering=${orderValue}&parent_platforms=${platformValue}&page_size=6&key=${process.env.RAWG_API_KEY}`
+  )
+
+  if (!res.ok) throw new Error(`Failed to fetch data`)
+  const data = await res.json()
+  const games: Game[] = data.results
+  // const games: Game[] = games_all.result
+  // const gameWithBlurDataURL = await addBlurredDataURL(games)
+
   return (
     <section
       className={
         displayMode === 'film'
           ? 'columns-1 space-y-8'
           : 'columns-1 sm:columns-2 md:columns-3 2xl:columns-4 3xl:columns-5 gap-4 sm:gap-6'
-        // : 'grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-4'
       }
-    // style={{
-    //   columnWidth: '100px'
-    // }}
     >
       {games.map((game) => {
         return (
