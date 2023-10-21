@@ -9,6 +9,7 @@ import {
 } from '@/components/base-ui/Select'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { memo } from 'react'
+import { orderOptions, platformOptions } from '@/lib/dropdownOptions'
 
 type Option = {
   name: string
@@ -18,49 +19,26 @@ type Option = {
 
 type Props = {
   selectedValuePrefix?: string
-  options: Option[]
   type: string
 }
 
 export default memo(function CustomSelect({
   selectedValuePrefix,
-  options,
   type
 }: Props) {
   console.log('renfer')
+  const options: Option[] = type === 'order' ? orderOptions : platformOptions
 
   const router = useRouter()
   const searchParams = useSearchParams()
   const initialValue = searchParams.get(type) || options[0].name
 
   function setFilter(newValue: string) {
-    let queryString = searchParams.toString()
-
+    const queryString = searchParams.toString()
     const newSearchParams = new URLSearchParams(queryString)
     newSearchParams.set(type, newValue)
 
     router.push(`?${newSearchParams}`)
-
-    // if (!queryString) {
-    //   // add first
-    //   queryString += `${type}=${newValue}`
-    // } else if (!searchParams.has(type)) {
-    //   // attach
-    //   queryString += `&${type}=${newValue}`
-    // } else {
-    //   // replace
-    //   queryString = Array.from(searchParams.entries())
-    //     .map(([key, value]) => {
-    //       if (key === type) {
-    //         return `${key}=${newValue}`
-    //       } else {
-    //         return `${key}=${value}`
-    //       }
-    //     })
-    //     .join('&')
-    // }
-
-    // router.push(`?${queryString}`)
   }
 
   return (

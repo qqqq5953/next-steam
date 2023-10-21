@@ -2,24 +2,21 @@ import games_all from '@/source/games_all.json'
 // import { addBlurredDataURL } from '@/lib/getPlaceholder'
 import GameCard from '@/app/_components/GameCard'
 import { Game } from '@/types'
-import { orderOptions, platformOptions } from '@/lib/dropdownOptions'
+import { platformMap, orderMap } from '@/lib/dropdownOptions'
 
 type Props = {
-  // displayMode: string | string[]
-  order: string | string[] | undefined
-  platform: string | string[] | undefined
-  mode: string | string[] | undefined
+  order: string | undefined
+  platform: string | undefined
+  mode: string | undefined
 }
 
 export default async function CardsSection({ order, platform, mode }: Props) {
-  const orderValue =
-    orderOptions.find((option) => option.name === order)?.value ?? '-relevance'
-  const platformValue =
-    platformOptions.find((option) => option.name === platform)?.value ?? '1'
+  const orderValue = orderMap[order as keyof typeof orderMap] || '-relevance'
+  const platformValue = platformMap[platform as keyof typeof platformMap] || '1'
   const displayMode = mode || 'grid'
 
   const res = await fetch(
-    `https://api.rawg.io/api/games?ordering=${orderValue}&parent_platforms=${platformValue}&page_size=6&key=${process.env.RAWG_API_KEY}`
+    `https://api.rawg.io/api/games?ordering=${orderValue}&parent_platforms=${platformValue}&page_size=24&key=${process.env.RAWG_API_KEY}`
   )
 
   if (!res.ok) throw new Error(`Failed to fetch data`)
@@ -50,15 +47,4 @@ export default async function CardsSection({ order, platform, mode }: Props) {
       })}
     </section>
   )
-}
-
-function fetchTailer() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        data: 'https://steamcdn-a.akamaihd.net/steam/apps/256693661/movie480.mp4',
-        error: null
-      })
-    }, 2000)
-  })
 }

@@ -53,6 +53,19 @@ export const platformOptions = [
   }
 ]
 
+export const platformMap = {
+  PC: '1',
+  'PlayStation 4': '18',
+  'PlayStation 5': '187',
+  'Xbox One': '1',
+  'Xbox Series S/X': '186',
+  iOS: '4',
+  Android: '8',
+  Macintosh: '5',
+  Linux: '6',
+  Nintendo: '7'
+}
+
 export const orderOptions = [
   {
     name: 'Relevance',
@@ -79,3 +92,12 @@ export const orderOptions = [
     value: '-rating'
   }
 ]
+
+export const orderMap = {
+  Relevance: '-relevance',
+  'Date added': '-created',
+  Name: '-name',
+  'Release date': '-released',
+  Popularity: '-added',
+  'Average rating': '-rating'
+}

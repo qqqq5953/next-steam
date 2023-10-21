@@ -79,27 +79,21 @@ export default memo(function Dropdown({ selectedValuePrefix, type }: Props) {
                   <DropdownMenuSubContent className=" bg-white text-black">
                     <DropdownMenuItem
                       onClick={(e) => handleClick(e)}
-                      className={`${
-                        initialValue === option.name
-                          ? 'font-bold pointer-events-none'
-                          : 'w-full'
-                      }`}
+                      className={`hover:bg-neutral-200/80 ${initialValue === option.name
+                        ? 'font-bold pointer-events-none'
+                        : 'w-full'
+                        }`}
                     >
                       {option.name}
                     </DropdownMenuItem>
                     {option.children.map((childOption) => {
                       return (
-                        <DropdownMenuItem key={childOption.name}>
-                          <span
-                            onClick={(e) => handleClick(e)}
-                            className={`${
-                              initialValue === childOption.name
-                                ? 'font-bold pointer-events-none'
-                                : 'w-full'
-                            }`}
-                          >
-                            {childOption.name}
-                          </span>
+                        <DropdownMenuItem key={childOption.name} onClick={(e) => handleClick(e)}
+                          className={`hover:bg-neutral-200/80  ${initialValue === childOption.name
+                            ? 'font-bold pointer-events-none'
+                            : 'w-full'
+                            }`}>
+                          {childOption.name}
                         </DropdownMenuItem>
                       )
                     })}
@@ -107,17 +101,12 @@ export default memo(function Dropdown({ selectedValuePrefix, type }: Props) {
                 </DropdownMenuPortal>
               </DropdownMenuSub>
             ) : (
-              <DropdownMenuItem key={option.name}>
-                <div
-                  onClick={(e) => handleClick(e)}
-                  className={`${
-                    [selectedValue, initialValue].includes(option.name)
-                      ? 'font-bold pointer-events-none'
-                      : 'w-full'
-                  }`}
-                >
-                  {option.name}
-                </div>
+              <DropdownMenuItem key={option.name} onClick={(e) => handleClick(e)}
+                className={`hover:bg-neutral-200/80 ${[selectedValue, initialValue].includes(option.name)
+                  ? 'font-bold pointer-events-none'
+                  : 'w-full'
+                  }`}>
+                {option.name}
               </DropdownMenuItem>
             )
           })}

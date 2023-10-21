@@ -5,9 +5,10 @@ import DisplayOptions from '@/app/_components/DisplayOptions'
 import CardsSection from '@/app/_components/CardsSection'
 import Sidebar from '@/app/_components/Sidebar'
 import { Suspense } from 'react'
+import Icon from '@/components/global/Icon'
 
 type Props = {
-  searchParams: { [key: string]: string | string[] | undefined }
+  searchParams: { [key: string]: string | undefined }
 }
 
 export default async function Home({ searchParams }: Props) {
@@ -66,13 +67,13 @@ export default async function Home({ searchParams }: Props) {
             </div>
           </div>
 
-          <CardsSection
+          {/* <CardsSection
             order={order}
             platform={platform}
             mode={mode}
-          />
+          /> */}
 
-          {/* <Suspense fallback={<div className="text-center text-2xl">
+          <Suspense fallback={<div className="text-center text-2xl">
             <Icon
               name="loader-2"
               useSuspense={false}
@@ -86,7 +87,7 @@ export default async function Home({ searchParams }: Props) {
               platform={platform}
               mode={mode}
             />
-          </Suspense> */}
+          </Suspense>
         </div>
       </main>
     </>
