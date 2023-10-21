@@ -15,7 +15,8 @@ import { Button } from '@/components/base-ui/Button'
 
 import { useState, MouseEvent, memo } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import Icon from "@/components/global/Icon"
+import Icon from '@/components/global/Icon'
+import { orderOptions, platformOptions } from '@/lib/dropdownOptions'
 
 type Option = {
   name: string
@@ -28,92 +29,9 @@ type Props = {
   type: string
 }
 
-const platformOptions = [
-  {
-    name: 'PC',
-    value: '1'
-  },
-  {
-    name: 'PlayStation',
-    value: '2',
-    children: [
-      {
-        name: 'PlayStation 4',
-        value: '18'
-      },
-      {
-        name: 'PlayStation 5',
-        value: '187'
-      }
-    ]
-  },
-  {
-    name: 'Xbox',
-    value: '3',
-    children: [
-      {
-        name: 'Xbox One',
-        value: '1'
-      },
-      {
-        name: 'Xbox Series S/X',
-        value: '186'
-      }
-    ]
-  },
-  {
-    name: 'iOS',
-    value: '4'
-  },
-  {
-    name: 'Android',
-    value: '8'
-  },
-  {
-    name: 'Macintosh',
-    value: '5'
-  },
-  {
-    name: 'Linux',
-    value: '6'
-  },
-  {
-    name: 'Nintendo',
-    value: '7'
-  }
-]
+export default memo(function Dropdown({ selectedValuePrefix, type }: Props) {
+  console.log('type')
 
-const orderOptions = [
-  {
-    name: 'Relevance',
-    value: '-relevance'
-  },
-  {
-    name: 'Date added',
-    value: '-created'
-  },
-  {
-    name: 'Name',
-    value: '-name'
-  },
-  {
-    name: 'Release date',
-    value: '-released'
-  },
-  {
-    name: 'Popularity',
-    value: '-added'
-  },
-  {
-    name: 'Average rating',
-    value: '-rating'
-  }
-]
-
-export default memo(function Dropdown({
-  selectedValuePrefix,
-  type
-}: Props) {
   const options: Option[] = type === 'order' ? orderOptions : platformOptions
 
   const [selectedValue, setSelectedValue] = useState<string>()
@@ -125,12 +43,14 @@ export default memo(function Dropdown({
   function handleClick(e: MouseEvent<HTMLSpanElement>) {
     const target = e.target as HTMLElement
     const newValue = target.textContent as string
-    setSelectedValue(newValue)
+
     const queryStrings = searchParams.toString()
     const newSearchParams = new URLSearchParams(queryStrings)
     newSearchParams.set(type, newValue)
 
     router.push(`?${newSearchParams}`)
+
+    setSelectedValue(newValue)
   }
 
   return (
@@ -143,7 +63,7 @@ export default memo(function Dropdown({
           >
             {selectedValue || initialValue}
           </span>
-          <Icon name="chevron-down" size={22} className='text-neutral-500' />
+          <Icon name="chevron-down" size={22} className="text-neutral-500" />
         </Button>
       </DropdownMenuTrigger>
 
@@ -159,10 +79,11 @@ export default memo(function Dropdown({
                   <DropdownMenuSubContent className=" bg-white text-black">
                     <DropdownMenuItem
                       onClick={(e) => handleClick(e)}
-                      className={`${initialValue === option.name
-                        ? 'font-bold pointer-events-none'
-                        : 'w-full'
-                        }`}
+                      className={`${
+                        initialValue === option.name
+                          ? 'font-bold pointer-events-none'
+                          : 'w-full'
+                      }`}
                     >
                       {option.name}
                     </DropdownMenuItem>
@@ -171,10 +92,11 @@ export default memo(function Dropdown({
                         <DropdownMenuItem key={childOption.name}>
                           <span
                             onClick={(e) => handleClick(e)}
-                            className={`${initialValue === childOption.name
-                              ? 'font-bold pointer-events-none'
-                              : 'w-full'
-                              }`}
+                            className={`${
+                              initialValue === childOption.name
+                                ? 'font-bold pointer-events-none'
+                                : 'w-full'
+                            }`}
                           >
                             {childOption.name}
                           </span>
@@ -188,10 +110,11 @@ export default memo(function Dropdown({
               <DropdownMenuItem key={option.name}>
                 <div
                   onClick={(e) => handleClick(e)}
-                  className={`${initialValue === option.name
-                    ? 'font-bold pointer-events-none'
-                    : 'w-full'
-                    }`}
+                  className={`${
+                    [selectedValue, initialValue].includes(option.name)
+                      ? 'font-bold pointer-events-none'
+                      : 'w-full'
+                  }`}
                 >
                   {option.name}
                 </div>

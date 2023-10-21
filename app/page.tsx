@@ -4,17 +4,14 @@ import Dropdown from '@/components/global/Dropdown'
 import DisplayOptions from '@/app/_components/DisplayOptions'
 import CardsSection from '@/app/_components/CardsSection'
 import Sidebar from '@/app/_components/Sidebar'
-
 import { Suspense } from 'react'
-import Icon from '@/components/global/Icon'
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
 export default async function Home({ searchParams }: Props) {
-  const time = process.hrtime.bigint()
-  console.log('time', time)
+  const { order, platform, mode } = searchParams
   // const { data, error } = await useFetch(
   //   'https://jsonplaceholder.typicode.com/posts/1'
   // )
@@ -27,99 +24,6 @@ export default async function Home({ searchParams }: Props) {
   // )
 
   // console.log(data);
-
-  const orderOptions = [
-    {
-      name: 'Relevance',
-      value: '-relevance'
-    },
-    {
-      name: 'Date added',
-      value: '-created'
-    },
-    {
-      name: 'Name',
-      value: '-name'
-    },
-    {
-      name: 'Release date',
-      value: '-released'
-    },
-    {
-      name: 'Popularity',
-      value: '-added'
-    },
-    {
-      name: 'Average rating',
-      value: '-rating'
-    }
-  ]
-
-  const platformOptions = [
-    {
-      name: 'PC',
-      value: '1'
-    },
-    {
-      name: 'PlayStation',
-      value: '2',
-      children: [
-        {
-          name: 'PlayStation 4',
-          value: '18'
-        },
-        {
-          name: 'PlayStation 5',
-          value: '187'
-        }
-      ]
-    },
-    {
-      name: 'Xbox',
-      value: '3',
-      children: [
-        {
-          name: 'Xbox One',
-          value: '1'
-        },
-        {
-          name: 'Xbox Series S/X',
-          value: '186'
-        }
-      ]
-    },
-    {
-      name: 'iOS',
-      value: '4'
-    },
-    {
-      name: 'Android',
-      value: '8'
-    },
-    {
-      name: 'Macintosh',
-      value: '5'
-    },
-    {
-      name: 'Linux',
-      value: '6'
-    },
-    {
-      name: 'Nintendo',
-      value: '7'
-    }
-  ]
-
-  const { order, platform, mode } = searchParams
-  const orderValue =
-    orderOptions.find((option) => option.name === order)?.value ?? '-relevance'
-  const platformValue =
-    platformOptions.find((option) => option.name === platform)?.value ?? '1'
-  const displayMode = mode || 'grid'
-
-  console.log('orderValue', orderValue)
-  console.log('platformValue', platformValue)
-  console.log('displayMode', displayMode)
 
   // const res = await fetch(
   //   `https://jsonplaceholder.typicode.com/${obj[orderValue]}`
