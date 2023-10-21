@@ -41,7 +41,7 @@ export default function Creators({ game }: Props) {
                     }}
                   />
 
-                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col items-center gap-2 z-40">
+                  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col items-center gap-2">
                     {developer?.image && (
                       <Avatar className="w-24 h-24">
                         <AvatarImage

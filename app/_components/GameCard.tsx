@@ -181,7 +181,7 @@ export default function GameCard({ game, displayMode }: Props) {
 
         <ImageContainer
           game={game}
-          className={`transition-opacity duration-500 ease-in-out ${isActivate && !isLoading ? 'opacity-0' : 'opacity-100'}`}
+          className={`z-30 transition-opacity duration-500 ease-in-out ${isActivate && !isLoading ? 'opacity-0' : 'opacity-100'}`}
         />
 
         {game.short_screenshots && <Swiper
