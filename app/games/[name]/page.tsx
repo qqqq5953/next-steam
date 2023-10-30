@@ -3,11 +3,15 @@ import same_series from '@/source/game_same_series.json'
 import dlc from '@/source/games_dlc&edition.json'
 import stores_link from '@/source/game_store.json'
 
-import Image from 'next/image'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
+import { Suspense } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { getBrandIcon, getUniqueIcons, platformMap } from '@/lib/getBrandIcon'
+
+import { AgeRatingPrefix, GameDetails } from '@/types'
+import getGameDetails from '@/lib/getGameDetails'
 
 import AboutSection from './_components/AboutSection'
 import RatingSection from './_components/RatingSection'
@@ -18,34 +22,22 @@ import Creators from './_components/Creators'
 import Achievements from './_components/Achievements'
 import Requirements from './_components/Requirements'
 import Reddit from './_components/Reddit'
-import Sidebar from '@/app/_components/Sidebar'
-import { Suspense } from 'react'
-
-import { AgeRatingPrefix } from '@/types'
+const RefreshButton = dynamic(() => import("./_components/RefreshButton"))
 
 type Props = {
   params: { name: string }
 }
 
 export default async function Games({ params: { name } }: Props) {
-  // https://api.rawg.io/api/games/${name}?key={process.env.RAWG_API_KEY}
 
-  // const res = await fetch(`https://api.rawg.io/api/games/${name}/game-series?key=${process.env.RAWG_API_KEY}`)
-  // const data = await res.json()
-  // console.log('game-series', data)
+  const { game, same_series, dlc, stores_link, errors }: GameDetails = await getGameDetails(name)
 
-  // const res = await fetch(`https://api.rawg.io/api/games/${name}/additions?key=${process.env.RAWG_API_KEY}`)
-  // const data = await res.json()
-  // console.log('dlc additions', data)
+  if (!game) return null
 
-  // const res = await fetch(`https://api.rawg.io/api/games/${name}/stores?key=${process.env.RAWG_API_KEY}`)
-  // const data = await res.json()
-  // console.log('stores', data)
-
-  const storeLinkObj = stores_link.results.reduce((obj, store) => {
+  const storeLinkObj = stores_link?.results.reduce((obj, store) => {
     obj[store.store_id] = store.url
     return obj
-  }, {} as { [key: number]: string })
+  }, {} as { [key: number]: string }) || {}
 
   const breadcrumbs = [
     { name: 'HOME', path: '/' },
@@ -63,8 +55,7 @@ export default async function Games({ params: { name } }: Props) {
   const icons = game.platforms.map((item) => getBrandIcon(item.platform.name))
   const uniqueIcons = getUniqueIcons(icons)
 
-  const itemClass =
-    "ml-1.5 first-of-type:ml-0 after:content-[','] last-of-type:after:content-[''] leading-5 underline underline-offset-2 decoration-neutral-500 hover:text-neutral-500 transition-colors duration-300"
+  const itemClass = "separate-with-comma link-style leading-5"
 
   return (
     <>
@@ -72,7 +63,7 @@ export default async function Games({ params: { name } }: Props) {
         <div className="col-span-1 space-y-6 lg:col-span-7">
           <header className="flex flex-col items-center justify-center gap-3 lg:gap-6 lg:justify-start lg:items-start">
             {/* breadcrumb */}
-            <ul className="flex items-center justify-center gap-1.5 text-sm tracking-widest text-neutral-300/60 flex-wrap">
+            <ul className="flex items-center justify-center gap-1.5 text-sm tracking-widest text-neutral-400/60 flex-wrap font-light">
               {breadcrumbs.map((item, index) => {
                 return (
                   <li key={index} className="after:content-['/']">
@@ -204,7 +195,7 @@ export default async function Games({ params: { name } }: Props) {
                 <span>
                   {
                     ageRatingPrefix[
-                      game.esrb_rating.name as keyof AgeRatingPrefix
+                    game.esrb_rating.name as keyof AgeRatingPrefix
                     ]
                   }
                   &nbsp;
