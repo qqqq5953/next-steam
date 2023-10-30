@@ -18,7 +18,7 @@ export default function Achievement({ game }: Props) {
         </h3>
         <Link href={`/games/${game.slug}/achievements`} className='shrink-0 underline underline-offset-2 decoration-neutral-500 text-neutral-500 text-xs hover:text-white transition-colors duration-300 font-light lg:text-sm'>{achievements.count} achievements</Link>
       </div>
-      <div className="grid grid-cols-1 snap-x overflow-auto lg:grid-cols-3 lg:gap-6">
+      <div className="grid grid-cols-1 overflow-auto lg:grid-cols-3 lg:gap-6">
         {achievements.results.map((achievement) => {
           return (
             <div key={achievement.id} className="flex gap-4 py-4 border-b border-neutral-700">

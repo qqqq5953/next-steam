@@ -250,7 +250,7 @@ export default function GameCard({ game, displayMode }: Props) {
                     return (
                       <span
                         key={genre.id}
-                        className="ml-1.5 first-of-type:ml-0 after:content-[','] last-of-type:after:content-[''] underline underline-offset-2 decoration-neutral-500 inline-block"
+                        className="separate-with-comma underline underline-offset-2 decoration-neutral-500 inline-block"
                       >
                         {genre.name}
                       </span>
@@ -276,7 +276,7 @@ export default function GameCard({ game, displayMode }: Props) {
                   return (
                     <span
                       key={genre.id}
-                      className="ml-1.5 first-of-type:ml-0 after:content-[','] last-of-type:after:content-[''] underline underline-offset-2 decoration-neutral-500 inline-block"
+                      className="separate-with-comma link-style inline-block"
                     >
                       {genre.name}
                     </span>

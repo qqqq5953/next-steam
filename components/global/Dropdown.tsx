@@ -15,7 +15,8 @@ import { Button } from '@/components/base-ui/Button'
 
 import { useState, MouseEvent, memo } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import Icon from '@/components/global/Icon'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 import { orderOptions, platformOptions } from '@/lib/dropdownOptions'
 
 type Option = {
@@ -63,7 +64,8 @@ export default memo(function Dropdown({ selectedValuePrefix, type }: Props) {
           >
             {selectedValue || initialValue}
           </span>
-          <Icon name="chevron-down" size={22} className="text-neutral-500" />
+          <FontAwesomeIcon icon={faAngleDown} className='text-neutral-500 text-lg font-light' />
+
         </Button>
       </DropdownMenuTrigger>
 

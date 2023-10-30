@@ -20,15 +20,13 @@ export default function Navbar() {
   //   })
 
   return (
-    <header>
-      <nav className="flex justify-between items-center gap-x-6">
-        <h1 className="font-black tracking-[0.2em] text-lg">STEAM</h1>
-        <div className="relative grow">
-          <Searchbar
-          />
-        </div>
-        <Menu />
-      </nav>
-    </header>
+    <nav className="flex justify-between items-center gap-x-6">
+      <h1 className="font-black tracking-[0.2em] text-lg">STEAM</h1>
+      <div className="relative grow">
+        <Searchbar
+        />
+      </div>
+      <Menu />
+    </nav>
   )
 }

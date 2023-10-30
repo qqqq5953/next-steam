@@ -24,7 +24,7 @@ export default async function GameLayout({
   return (
     <main className="flex pt-6 lg:pt-10 gap-11">
       <Sidebar />
-      <div className="space-y-4 max-w-lg mx-auto lg:max-w-[944px]">
+      <div className="space-y-4 max-w-lg mx-auto lg:w-full lg:max-w-none xl:max-w-[944px]">
         <Image
           src={game.background_image}
           alt={game.name}
