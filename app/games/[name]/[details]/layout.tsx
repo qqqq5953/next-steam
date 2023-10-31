@@ -104,8 +104,8 @@ export default async function GameLayout({
         <h2 className="text-2xl font-semibold lg:text-7xl leading-7 text-center lg:text-start">{pageTitle}</h2>
       </header>
 
-      <section className='flex flex-col gap-4 lg:gap-8 lg:flex-row-reverse'>
-        <nav className="overflow-auto py-3.5 lg:w-1/3 lg:pl-16">
+      <section className='flex flex-col lg:flex-row-reverse'>
+        <nav className="overflow-auto py-3.5 lg:w-1/3 lg:pl-16 lg:pt-8">
           <ul className="flex gap-4 lg:flex-col">
             {navLists.map((nav) => {
               return (
@@ -126,11 +126,10 @@ export default async function GameLayout({
             })}
           </ul>
         </nav>
-        <div className='lg:w-2/3'>
+        <div className='lg:w-2/3 pt-8'>
           {children}
         </div>
       </section>
-
     </div>
   )
 }
