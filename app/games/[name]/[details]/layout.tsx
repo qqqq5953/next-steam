@@ -70,7 +70,7 @@ export default async function GameLayout({
 
   return (
     <div className="grid grid-cols-1">
-      <header className="flex flex-col items-center justify-center gap-2.5 lg:gap-6 lg:justify-start lg:items-start">
+      <header className="flex flex-col items-center justify-center gap-2.5 lg:justify-start lg:items-start">
         {/* breadcrumb */}
         <ul className="flex items-center justify-center gap-1.5 text-xs tracking-widest text-neutral-400/60 flex-wrap font-light">
           {breadcrumbs.map((item, index) => {
@@ -86,7 +86,7 @@ export default async function GameLayout({
         </ul>
 
         {/* platform */}
-        <div>
+        <div className='lg:pt-4'>
           <span className="space-x-2">
             {uniqueIcons.map((item, index) => {
               return (
@@ -101,7 +101,7 @@ export default async function GameLayout({
         </div>
 
         {/* game name */}
-        <h2 className="text-2xl font-semibold lg:text-7xl leading-7 text-center lg:text-start">{pageTitle}</h2>
+        <h2 className="text-2xl font-semibold lg:text-7xl leading-7 text-center lg:text-start tracking-tight">{pageTitle}</h2>
       </header>
 
       <section className='flex flex-col lg:flex-row-reverse'>

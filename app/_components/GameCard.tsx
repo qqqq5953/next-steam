@@ -276,7 +276,7 @@ export default function GameCard({ game, displayMode }: Props) {
                   return (
                     <span
                       key={genre.id}
-                      className="separate-with-comma link-style inline-block"
+                      className="separate-with-comma link-style-underline inline-block"
                     >
                       {genre.name}
                     </span>

@@ -26,7 +26,7 @@ export default function Reddit() {
         const text = replaceText(reddit.text.substring(3, 375))
 
         return <div key={reddit.id} className='pt-8 first-of-type:pt-0'>
-          <h3 className='text-2xl font-semibold pb-4 hover:text-neutral-500 hover:brightness-70 transition-all duration-300 ease-in-out'>
+          <h3 className='text-2xl font-semibold pb-4 link-style hover:brightness-75'>
             <Link href={reddit.url} target='blank'>{reddit.name}</Link>
           </h3>
           <div>{text}...</div>

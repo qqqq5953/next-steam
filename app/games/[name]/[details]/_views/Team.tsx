@@ -21,15 +21,17 @@ export default async function Team({ name }: Props) {
       {developers.results.map((developer: Developer) => {
         return <div key={developer.id}>
           <div className='flex flex-col lg:flex-row lg:justify-between'>
-            <div className='flex-1'>
+            <div className='lg:w-2/5'>
               {developer.positions.map(position => {
-                return <span key={position.id} className="separate-with-comma font-light capitalize text-sm">{position.name}</span>
+                return <span key={position.id} className="separate-with-comma font-light capitalize text-sm lg:text-base">{position.name}</span>
               })}
             </div>
-            <div className='flex-1'>
-              <div className='flex items-center justify-between'>
-                <h3><Link href={'/'} className='text-xl link-style'>{developer.name}</Link></h3>
-                <span className='text-xs text-neutral-500 font-light'>{developer.games_count - developer.games.length} more games</span>
+            <div className='lg:w-3/5'>
+              <div className='flex items-center justify-between lg:flex-col lg:items-start'>
+                <h3>
+                  <Link href={`/creators/${developer.name}`} className='link-style-underline hover:text-neutral-500 text-xl lg:text-2xl'>{developer.name}</Link>
+                </h3>
+                <span className='text-xs text-neutral-500 font-light lg:text-sm'>{developer.games_count - developer.games.length} more games</span>
               </div>
               <ul className='space-y-4 py-4 divide divide-y-[0.5px] divide-neutral-700'>
                 {developer.games.map(game => {
@@ -49,7 +51,7 @@ function DeveloperList({ game }: { game: Game }) {
   const uniqueIcons = getUniqueIcons(icons)
 
   return <li key={game.id} className='flex gap-4 pt-4 first-of-type:pt-0'>
-    <div className='relative w-20 h-24 rounded-lg overflow-hidden shrink-0'>
+    <div className='relative w-20 h-24 rounded-lg overflow-hidden shrink-0 hover:brightness-50 transition-all duration-300 ease-in-out'>
       <Image src={game.background_image} width="100" height="200" alt={game.name} className='object-cover h-full' />
     </div>
     <div>
@@ -64,7 +66,9 @@ function DeveloperList({ game }: { game: Game }) {
           )
         })}
       </span>
-      <h4 className='font-medium text-lg'>{game.name}</h4>
+      <h4 className='font-medium text-lg'>
+        <Link href={`/games/${game.slug}`} className='text-xl link-style'>{game.name}</Link>
+      </h4>
     </div>
   </li>
 }

@@ -55,7 +55,7 @@ export default async function Games({ params: { name } }: Props) {
   const icons = game.platforms.map((item) => getBrandIcon(item.platform.name))
   const uniqueIcons = getUniqueIcons(icons)
 
-  const itemClass = "separate-with-comma link-style leading-5"
+  const itemClass = "separate-with-comma link-style-underline leading-5"
 
   return (
     <>
