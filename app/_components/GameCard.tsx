@@ -9,7 +9,7 @@ import { faPlay } from '@fortawesome/free-solid-svg-icons'
 import { faYoutube } from '@fortawesome/free-brands-svg-icons'
 import { getBrandIcon, getUniqueIcons, platformMap } from '@/lib/getBrandIcon'
 
-import { Game } from '@/types'
+import { Game, Suggestion } from '@/types'
 import useMediaQuery from '@/hooks/useMediaQuery'
 
 import {
@@ -33,8 +33,9 @@ const FullVideo = dynamic(() => import('@/app/_components/FullVideo'), { ssr: fa
 const VideoLoader = dynamic(() => import('@/app/_components/VideoLoader'), { ssr: false })
 
 type Props = {
-  game: Game
+  game: Game | Suggestion
   displayMode?: string | string[]
+  showDescription?: boolean
 }
 
 type Trailer = {
@@ -50,7 +51,7 @@ type Trailer = {
 const hasLoadMap = new Map()
 let abortController = new AbortController()
 
-export default function GameCard({ game, displayMode }: Props) {
+export default function GameCard({ game, displayMode, showDescription = false }: Props) {
   const icons = game.platforms.map((item) => getBrandIcon(item.platform.name))
   const uniqueIcons = getUniqueIcons(icons) as (keyof typeof platformMap)[]
 
@@ -218,7 +219,7 @@ export default function GameCard({ game, displayMode }: Props) {
           />}
         </div>
 
-        <CardHeader>
+        <CardHeader className={`pb-0 ${displayMode !== 'film' && 'px-4'}`}>
           <CardTitle>
             <div className="flex items-center py-3 text-sm">
               {uniqueIcons.map((item, index) => {
@@ -234,7 +235,7 @@ export default function GameCard({ game, displayMode }: Props) {
 
             <Link href={`/games/${game.slug}`} className='hover:text-neutral-500 transition-colors duration-300'>{game.name}</Link>
 
-            {displayMode === 'film' && <ul className="flex flex-wrap items-center gap-x-6 gap-y-3 w-full text-sm pt-4 font-light">
+            {displayMode === 'film' && <ul className="flex flex-wrap items-center gap-x-6 gap-y-2.5 w-full text-sm pt-4 font-light">
               <li className="flex justify-between items-center">
                 <span className='text-neutral-500 text-sm mr-2'>Metascore:</span>
                 <span className="border rounded px-1.5 py-0.5 inline-block font-bold">{game.metacritic}</span>
@@ -263,9 +264,9 @@ export default function GameCard({ game, displayMode }: Props) {
           <CardDescription></CardDescription>
         </CardHeader>
 
-        {displayMode !== 'film' && <CardContent>
+        {displayMode !== 'film' && <CardContent className={`${displayMode !== 'film' && 'px-4'}`}>
           <ul className="divide-y divide-neutral-700 text-xs">
-            <li className="flex justify-between items-center py-3">
+            <li className="flex justify-between items-center py-2.5">
               <span className='text-neutral-500 text-sm lg:text-xs'>Release date:</span>
               <div className="text-right">{game.released}</div>
             </li>
@@ -285,6 +286,10 @@ export default function GameCard({ game, displayMode }: Props) {
               </div>
             </li>
           </ul>
+          {showDescription && ("short_description" in game) && <p className='text-sm font-light lg:hidden'>
+            {game.short_description}
+          </p>
+          }
         </CardContent>}
       </Card>
     </>

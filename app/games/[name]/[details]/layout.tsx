@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Icon from '@/components/global/Icon'
+import { Suspense } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { getBrandIcon, getUniqueIcons, platformMap } from '@/lib/getBrandIcon'
@@ -104,7 +106,7 @@ export default async function GameLayout({
         <h2 className="text-2xl font-semibold lg:text-7xl leading-7 text-center lg:text-start tracking-tight">{pageTitle}</h2>
       </header>
 
-      <section className='flex flex-col lg:flex-row-reverse'>
+      <section className='flex flex-col lg:flex-row-reverse max-w-[496px] -mx-4 lg:max-w-none lg:mx-0'>
         <nav className="overflow-auto py-3.5 lg:w-1/3 lg:pl-16 lg:pt-8">
           <ul className="flex gap-4 lg:flex-col">
             {navLists.map((nav) => {
@@ -126,8 +128,18 @@ export default async function GameLayout({
             })}
           </ul>
         </nav>
-        <div className='lg:w-2/3 pt-8'>
-          {children}
+        <div className='lg:w-2/3 pt-4 px-2'>
+          <Suspense fallback={<div className="text-center text-2xl">
+            <Icon
+              name="loader-2"
+              useSuspense={false}
+              size={72}
+              strokeWidth={1}
+              className="animate-spin text-white/50 inline"
+            />
+          </div>}>
+            {children}
+          </Suspense>
         </div>
       </section>
     </div>

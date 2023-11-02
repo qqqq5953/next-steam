@@ -1,5 +1,5 @@
-import React from 'react'
 import dynamic from 'next/dynamic'
+
 
 const Screenshot = dynamic(() => import('@/app/games/[name]/[details]/_views/Screenshot'))
 const Suggestions = dynamic(() => import('@/app/games/[name]/[details]/_views/Suggestions'))
@@ -15,13 +15,13 @@ type Props = {
 export default function Details({ params: { details, name } }: Props) {
 
   return (
-    <div>
+    <>
       {details === 'screenshots' && <Screenshot />}
-      {details === 'suggestions' && <Suggestions />}
+      {details === 'suggestions' && <Suggestions name={name} />}
       {details === 'achievements' && <Achievements name={name} />}
       {details === 'reddit' && <Reddit />}
       {details === 'youtube' && <Youtube />}
       {details === 'team' && <Team name={name} />}
-    </div>
+    </>
   )
 }

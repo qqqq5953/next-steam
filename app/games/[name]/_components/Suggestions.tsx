@@ -2,7 +2,7 @@
 
 import suggestions from '@/source/game_suggestions.json'
 import GameCard from '@/app/_components/GameCard'
-import { GameSingle } from '@/types'
+import { GameSingle, Suggestion } from '@/types'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -12,8 +12,15 @@ type Props = {
   game: GameSingle
 }
 
+type Suggestions = {
+  count: number
+  next: string
+  previous: string
+  results: Suggestion[]
+}
+
 export default function Suggestions({ game }: Props) {
-  // const [suggestions, setSuggestions] = useState<object | null>(null)
+  //   const [suggestions, setSuggestions] = useState<Suggestions | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   async function getSuggestions(url: string) {
@@ -26,13 +33,15 @@ export default function Suggestions({ game }: Props) {
     setIsLoading(true)
 
     const res = await getSuggestions(url)
-    setSuggestions(prevSuggestions => {
+    setSuggestions((prevSuggestions: Suggestions | null) => {
       setIsLoading(false)
+
       return {
-        ...(typeof prevSuggestions === 'object' ? prevSuggestions : {}),
+        count: prevSuggestions?.count ?? 0, // Handle the count property
         next: res.next,
-        results: prevSuggestions?.results ? [...prevSuggestions?.results, ...res.results] : res.results
-      }
+        previous: prevSuggestions?.previous || '', // Handle the previous property
+        results: prevSuggestions?.results ? [...prevSuggestions?.results, ...res.results] : res.results,
+      };
     })
   }
 

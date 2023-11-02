@@ -147,3 +147,22 @@ type GameSingle = Game & {
   ratings: Rating[],
   stores: Store[]
 }
+
+type Suggestion = {
+  id: number
+  slug: string
+  name: string
+  released: string
+  background_image: string
+  tba: string
+  rating: number
+  platforms: Platform[]
+  genres: Genre[]
+  short_screenshots: ShortScreenshot[]
+  tags: Tag[]
+  metacritic: number
+  playtime: number
+  esrb_rating: { id: number, name: string, slug: string }
+  blurDataURL?: string | undefined
+  short_description: string
+}
