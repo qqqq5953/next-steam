@@ -4,6 +4,7 @@ import Icon from '@/components/global/Icon'
 import { Suspense } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faYoutube } from '@fortawesome/free-brands-svg-icons'
 import { getBrandIcon, getUniqueIcons, platformMap } from '@/lib/getBrandIcon'
 import { GameSingle } from '@/types'
 
@@ -103,7 +104,15 @@ export default async function GameLayout({
         </div>
 
         {/* game name */}
-        <h2 className="text-2xl font-semibold lg:text-7xl leading-7 text-center lg:text-start tracking-tight">{pageTitle}</h2>
+        <h2 className='text-2xl font-semibold lg:text-7xl leading-7 text-center lg:text-start tracking-tight'>
+          <span className='mr-3'>{pageTitle}</span>
+          {details === "youtube" && <span className='inline-block text-base'>
+            <span className='flex justify-center items-center gap-0.5 text-neutral-500 lg:items-end lg:px-4 lg:py-2'>
+              <FontAwesomeIcon icon={faYoutube} className='text-xl lg:text-4xl' />
+              <span className='tracking-tighter font-semibold lg:text-3xl'>YouTube</span>
+            </span>
+          </span>}
+        </h2>
       </header>
 
       <section className='flex flex-col lg:flex-row-reverse max-w-[496px] -mx-4 lg:max-w-none lg:mx-0'>

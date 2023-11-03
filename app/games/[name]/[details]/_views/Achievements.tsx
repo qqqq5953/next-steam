@@ -19,7 +19,7 @@ export default async function Achievements({ name }: Props) {
         return (
           <div key={achievement.id} className="flex gap-4 py-4 border-b border-neutral-700">
             <div className='relative shrink-0 rounded-lg overflow-hidden w-12 h-12 lg:w-14 lg:h-14'>
-              <ImageContainer game={achievement} className='' />
+              <ImageContainer url={achievement.image} name={achievement.name} />
             </div>
             <div className='space-y-px'>
               <div className='text-xs font-light'>{achievement.percent}%</div>

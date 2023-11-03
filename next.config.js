@@ -8,6 +8,12 @@ const nextConfig = {
         port: '',
         pathname: '/media/**'
       },
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+        port: '',
+        pathname: '/vi/**'
+      },
     ]
   },
   experimental: {

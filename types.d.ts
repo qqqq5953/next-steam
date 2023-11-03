@@ -166,3 +166,25 @@ type Suggestion = {
   blurDataURL?: string | undefined
   short_description: string
 }
+
+type Youtube = {
+  id: number
+  external_id: string
+  channel_id: string
+  channel_title: string
+  name: string
+  description: string
+  created: string
+  view_count: number
+  comments_count: number
+  like_count: number
+  dislike_count: number
+  favorite_count: number
+  thumbnails: {
+    high: { url: string, width: number, height: string }
+    medium: { url: string, width: number, height: string }
+    default: { url: string, width: number, height: string }
+    sddefault: { url: string, width: number, height: string }
+    maxresdefault: { url: string, width: number, height: string }
+  }
+}

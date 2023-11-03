@@ -20,7 +20,7 @@ export default function Details({ params: { details, name } }: Props) {
       {details === 'suggestions' && <Suggestions name={name} />}
       {details === 'achievements' && <Achievements name={name} />}
       {details === 'reddit' && <Reddit />}
-      {details === 'youtube' && <Youtube />}
+      {details === 'youtube' && <Youtube name={name} />}
       {details === 'team' && <Team name={name} />}
     </>
   )

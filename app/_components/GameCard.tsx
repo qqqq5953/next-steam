@@ -209,7 +209,8 @@ export default function GameCard({ game, displayMode, showDescription = false }:
           }
 
           <ImageContainer
-            game={game}
+            url={game.background_image}
+            name={game.name}
             className={`transition-opacity duration-500 ease-in-out ${isActivate && !isLoading ? 'opacity-0 z-10' : 'opacity-100 z-30'}`}
           />
 

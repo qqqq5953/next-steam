@@ -35,7 +35,7 @@ export default async function Team({ name }: Props) {
               </div>
               <ul className='space-y-4 py-4 divide divide-y-[0.5px] divide-neutral-700'>
                 {developer.games.map(game => {
-                  return <DeveloperList game={game} />
+                  return <DeveloperList game={game} key={game.id} />
                 })}
               </ul>
             </div>
@@ -50,7 +50,7 @@ function DeveloperList({ game }: { game: Game }) {
   const icons = game.platforms.map(item => getBrandIcon(item.platform.name))
   const uniqueIcons = getUniqueIcons(icons)
 
-  return <li key={game.id} className='flex gap-4 pt-4 first-of-type:pt-0'>
+  return <li className='flex gap-4 pt-4 first-of-type:pt-0'>
     <div className='relative w-20 h-24 rounded-lg overflow-hidden shrink-0 hover:brightness-50 transition-all duration-300 ease-in-out'>
       <Image src={game.background_image} width="100" height="200" alt={game.name} className='object-cover h-full' />
     </div>

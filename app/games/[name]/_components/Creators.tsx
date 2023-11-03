@@ -31,7 +31,7 @@ export default function Creators({ game }: Props) {
               <Card className="overflow-hidden bg-neutral-800/90 border-transparent h-full">
                 <div className="relative" style={{ aspectRatio: '7/6' }}>
                   <ImageContainer
-                    game={developer}
+                    url={developer.image_background} name={developer.name}
                     className="opacity-50"
                     style={{
                       maskImage:
