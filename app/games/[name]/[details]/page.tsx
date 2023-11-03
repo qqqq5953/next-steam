@@ -16,7 +16,7 @@ export default function Details({ params: { details, name } }: Props) {
 
   return (
     <>
-      {details === 'screenshots' && <Screenshot />}
+      {details === 'screenshots' && <Screenshot name={name} />}
       {details === 'suggestions' && <Suggestions name={name} />}
       {details === 'achievements' && <Achievements name={name} />}
       {details === 'reddit' && <Reddit />}

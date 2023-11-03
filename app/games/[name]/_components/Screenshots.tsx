@@ -5,29 +5,31 @@ import Image from 'next/image'
 import { GameSingle, ShortScreenshot } from '@/types'
 
 type Props = {
-  game: GameSingle
+  name: string
   screenshots: ShortScreenshot[]
-  mediaQuery: string
+  className?: string
+  mediaQuery?: string
+  alwaysShow?: boolean
 }
 
-export default function Screenshots({ game, screenshots, mediaQuery }: Props) {
-  const isShow = useMediaQuery(mediaQuery)
+export default function Screenshots({ name, className = "flex gap-4 lg:grid lg:grid-cols-2", screenshots, mediaQuery = "(min-width:360px)", alwaysShow = false }: Props) {
+  const isShow = alwaysShow || useMediaQuery(mediaQuery)
 
   return (
     <>
       {isShow && (
-        <div className="flex gap-4 lg:grid lg:grid-cols-2">
+        <div className={className}>
           {screenshots.map((item, index) => {
             return (
               <div
-                className="aspect-video shadow-md shadow-neutral-700/90 snap-center lg:snap-align-none w-[264px] lg:w-auto"
+                className="aspect-video shadow-md shadow-neutral-700/90 snap-center lg:snap-align-none"
                 key={item.id}
               >
                 <Image
                   src={item.image}
-                  alt={game.name}
-                  width={100}
-                  height={50}
+                  alt={name}
+                  width={160}
+                  height={90}
                   priority={index === 0}
                   className="rounded-lg object-cover w-full"
                 />

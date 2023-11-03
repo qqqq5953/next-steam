@@ -14,11 +14,11 @@ type ScreenshotsResult = {
   "results": ShortScreenshot[]
 }
 
-export default async function getGallery(id: number): Promise<{ movies: MoviesResult, screenshots: ScreenshotsResult } | undefined> {
+export default async function getGallery({ id, name }: { id?: number, name?: string }): Promise<{ movies: MoviesResult, screenshots: ScreenshotsResult } | undefined> {
   try {
     const [moviesRes, screenshotsRes] = await Promise.all([
-      fetch(`https://api.rawg.io/api/games/${id}/movies?key=${process.env.RAWG_API_KEY}`),
-      fetch(`https://api.rawg.io/api/games/${id}/screenshots?key=${process.env.RAWG_API_KEY}`),
+      fetch(`https://api.rawg.io/api/games/${id ?? name}/movies?key=${process.env.RAWG_API_KEY}`),
+      fetch(`https://api.rawg.io/api/games/${id ?? name}/screenshots?key=${process.env.RAWG_API_KEY}`),
     ]);
 
     if (!moviesRes.ok || !screenshotsRes.ok) {
