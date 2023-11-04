@@ -15,14 +15,14 @@ export default async function CardsSection({ order, platform, mode }: Props) {
   const platformValue = platformMap[platform as keyof typeof platformMap] || '1'
   const displayMode = mode || 'grid'
 
-  const res = await fetch(
-    `https://api.rawg.io/api/games?ordering=${orderValue}&parent_platforms=${platformValue}&page_size=12&key=${process.env.RAWG_API_KEY}`
-  )
+  // const res = await fetch(
+  //   `https://api.rawg.io/api/games?ordering=${orderValue}&parent_platforms=${platformValue}&page_size=12&key=${process.env.RAWG_API_KEY}`
+  // )
 
-  if (!res.ok) throw new Error(`Failed to fetch data`)
-  const data = await res.json()
-  const games: Game[] = data.results
-  // const games: Game[] = games_all.result
+  // if (!res.ok) throw new Error(`Failed to fetch data`)
+  // const data = await res.json()
+  // const games: Game[] = data.results
+  const games: Game[] = games_all.result
   // const gameWithBlurDataURL = await addBlurredDataURL(games)
 
   return (

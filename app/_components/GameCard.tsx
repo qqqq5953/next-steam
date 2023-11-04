@@ -22,6 +22,7 @@ import {
 
 import {
   Sheet,
+  SheetContent,
   SheetTrigger
 } from '@/components/base-ui/Sheet'
 
@@ -29,7 +30,6 @@ import {
 import ImageContainer from '@/components/global/ImageContainer'
 import Video from '@/app/_components/Video'
 const Swiper = dynamic(() => import('@/app/_components/Swiper'), { ssr: false })
-const FullVideo = dynamic(() => import('@/app/_components/FullVideo'), { ssr: false })
 const VideoLoader = dynamic(() => import('@/app/_components/VideoLoader'), { ssr: false })
 
 type Props = {
@@ -199,7 +199,11 @@ export default function GameCard({ game, displayMode, showDescription = false }:
                 <span className='ml-2'>Play full video</span>
               </div>
             </SheetTrigger>
-            {isFull && <FullVideo />}
+            {isFull && <SheetContent className="bg-neutral-900" side="middle">
+              <div className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-4xl w-full px-4'>
+                <video controls autoPlay muted src={hasLoadMap.get(game.id)} onLoad={playTrailer} className='w-full mx-auto'></video>
+              </div>
+            </SheetContent>}
           </Sheet>
 
           {isLoading ? <VideoLoader /> :

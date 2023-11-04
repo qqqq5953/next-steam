@@ -14,7 +14,6 @@ export default async function Team({ name }: Props) {
   const res = await fetch(`https://api.rawg.io/api/games/${name}/development-team?page_size=5&key=${process.env.RAWG_API_KEY}`)
 
   const developers = await res.json()
-  console.log('developers', developers);
 
   return (
     <section className='space-y-8'>

@@ -1,5 +1,6 @@
 import Searchbar from '@/app/_components/Searchbar'
 import Menu from '@/components/global/Menu'
+import Link from 'next/link'
 
 export default function Navbar() {
 
@@ -21,7 +22,9 @@ export default function Navbar() {
 
   return (
     <nav className="flex justify-between items-center gap-x-6">
-      <h1 className="font-black tracking-[0.2em] text-lg">STEAM</h1>
+      <h1 className="font-black tracking-[0.2em] text-lg">
+        <Link href="/">STEAM</Link>
+      </h1>
       <div className="relative grow">
         <Searchbar
         />
