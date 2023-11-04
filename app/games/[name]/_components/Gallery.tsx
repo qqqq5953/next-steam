@@ -19,10 +19,12 @@ export default async function Gallery({
   const data = await getGallery({ id: game.id })
   if (!data) return null
   const { movies, screenshots } = data
+  console.log('movies', movies);
+
 
   return (
     <div className={className}>
-      <Video url={movies?.results[0]?.data['480']} mediaQuery={mediaQuery} />
+      {movies?.results.length !== 0 && <Video url={movies?.results[0]?.data['480']} mediaQuery={mediaQuery} />}
       <Screenshots
         name={game.name}
         screenshots={screenshots.results}

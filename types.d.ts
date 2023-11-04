@@ -188,3 +188,31 @@ type Youtube = {
     maxresdefault: { url: string, width: number, height: string }
   }
 }
+
+type SearchResult = {
+  slug: string
+  name: string
+  released: string
+  background_image: string
+  tba: string
+  rating: number
+  platforms: Platform[]
+  developers: {
+    id: number
+    name: string
+    slug: string
+  }[]
+  publishers: {
+    id: number
+    name: string
+    slug: string
+  }[]
+  genres: Genre[]
+  short_screenshots: ShortScreenshot[]
+  tags: Tag[]
+  metacritic: number
+  playtime: number
+  website: string
+  esrb_rating: { id: number, name: string, slug: string }
+  blurDataURL?: string | undefined
+}

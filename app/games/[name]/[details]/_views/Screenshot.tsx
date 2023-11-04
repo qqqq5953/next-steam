@@ -1,9 +1,9 @@
 // import screenshots from '@/source/screenshot.json'
 // import movies from '@/source/game_trailer.json'
-import Screenshots from '@/app/games/[name]/_components/Screenshots'
 import getGallery from '@/lib/getGallery'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay } from '@fortawesome/free-solid-svg-icons'
+import Image from 'next/image'
 
 type Props = {
   name: string
@@ -27,12 +27,25 @@ export default async function Screenshot({ name }: Props) {
         })}
       </div>}
 
-      <Screenshots
-        name={name}
-        className="grid grid-cols-2 gap-4 md:grid-cols-3 mt-4"
-        screenshots={screenshots.results}
-        alwaysShow
-      />
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 mt-4">
+        {screenshots.results.map((item, index) => {
+          return (
+            <div
+              className="aspect-video shadow-md shadow-neutral-700/90 snap-center lg:snap-align-none"
+              key={item.id}
+            >
+              <Image
+                src={item.image}
+                alt={name}
+                width={160}
+                height={90}
+                priority={index === 0}
+                className="rounded-lg object-cover w-full"
+              />
+            </div>
+          )
+        })}
+      </div>
     </section>
   )
 }

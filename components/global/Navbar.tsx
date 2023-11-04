@@ -1,4 +1,4 @@
-import Searchbar from '@/app/_components/Searchbar'
+import Searchbar from '@/components/global/Searchbar'
 import Menu from '@/components/global/Menu'
 import Link from 'next/link'
 
@@ -25,7 +25,7 @@ export default function Navbar() {
       <h1 className="font-black tracking-[0.2em] text-lg">
         <Link href="/">STEAM</Link>
       </h1>
-      <div className="relative grow">
+      <div className="grow">
         <Searchbar
         />
       </div>

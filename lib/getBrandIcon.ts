@@ -34,6 +34,7 @@ export function getBrandIcon(brand: string) {
   return mappedBrand
 }
 
-export function getUniqueIcons(icons: string[]) {
+export function getUniqueIcons(icons: string[] | null) {
+  if (icons == null) return []
   return Array.from(new Set(icons))
 }

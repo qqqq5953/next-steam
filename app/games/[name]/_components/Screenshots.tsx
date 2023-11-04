@@ -9,11 +9,10 @@ type Props = {
   screenshots: ShortScreenshot[]
   className?: string
   mediaQuery?: string
-  alwaysShow?: boolean
 }
 
-export default function Screenshots({ name, className = "flex gap-4 lg:grid lg:grid-cols-2", screenshots, mediaQuery = "(min-width:360px)", alwaysShow = false }: Props) {
-  const isShow = alwaysShow || useMediaQuery(mediaQuery)
+export default function Screenshots({ name, className = "flex gap-4 lg:grid lg:grid-cols-2", screenshots, mediaQuery = "(min-width:360px)" }: Props) {
+  const isShow = useMediaQuery(mediaQuery)
 
   return (
     <>
@@ -22,7 +21,7 @@ export default function Screenshots({ name, className = "flex gap-4 lg:grid lg:g
           {screenshots.map((item, index) => {
             return (
               <div
-                className="aspect-video shadow-md shadow-neutral-700/90 snap-center lg:snap-align-none"
+                className="aspect-video shadow-md shadow-neutral-700/90 snap-center lg:snap-align-none w-[264px] lg:w-auto"
                 key={item.id}
               >
                 <Image
@@ -31,7 +30,7 @@ export default function Screenshots({ name, className = "flex gap-4 lg:grid lg:g
                   width={160}
                   height={90}
                   priority={index === 0}
-                  className="rounded-lg object-cover w-full"
+                  className="rounded-lg object-cover w-full h-full"
                 />
               </div>
             )
