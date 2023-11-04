@@ -31,8 +31,6 @@ type Props = {
 }
 
 export default memo(function Dropdown({ selectedValuePrefix, type }: Props) {
-  console.log('type')
-
   const options: Option[] = type === 'order' ? orderOptions : platformOptions
 
   const [selectedValue, setSelectedValue] = useState<string>()

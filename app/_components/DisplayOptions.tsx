@@ -26,6 +26,7 @@ export default function Display() {
   const isWeb = useMediaQuery('(min-width: 1024px)')
 
   useEffect(() => {
+    if (isWeb == null) return
     if (!isWeb) handleClick('grid')
   }, [isWeb])
 

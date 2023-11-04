@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import useEventListener from './useEventListener'
 
 export default function useMediaQuery(mediaQuery: string) {
-  const [isMatch, setIsMatch] = useState(false)
+  const [isMatch, setIsMatch] = useState<null | boolean>(null)
   const [mediaQueryList, setMediaQueryList] = useState<
     (Window & typeof globalThis) | MediaQueryList | null
   >(null)
