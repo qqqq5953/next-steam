@@ -240,7 +240,7 @@ export default function GameCard({ game, displayMode, showDescription = false }:
 
             <Link href={`/games/${game.slug}`} className='hover:text-neutral-500 transition-colors duration-300'>{game.name}</Link>
 
-            {displayMode === 'film' && <ul className="flex flex-wrap items-center gap-x-6 gap-y-2.5 w-full text-sm pt-4 font-light">
+            {displayMode === 'film' && <ul className="flex flex-wrap items-center gap-x-6 gap-y-2.5 w-full text-sm py-4 font-light">
               <li className="flex justify-between items-center">
                 <span className='text-neutral-500 text-sm mr-2'>Metascore:</span>
                 <span className="border rounded px-1.5 py-0.5 inline-block font-bold">{game.metacritic}</span>

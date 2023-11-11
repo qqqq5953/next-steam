@@ -118,7 +118,7 @@ type Game = {
   slug: string
   name: string
   released: string
-  background_image: string
+  background_image: string | null
   tba: string
   rating: number
   platforms: Platform[]
@@ -153,7 +153,7 @@ type Suggestion = {
   slug: string
   name: string
   released: string
-  background_image: string
+  background_image: string | null
   tba: string
   rating: number
   platforms: Platform[]
@@ -193,7 +193,7 @@ type SearchResult = {
   slug: string
   name: string
   released: string
-  background_image: string
+  background_image: string | null
   tba: string
   rating: number
   platforms: Platform[]
