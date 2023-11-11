@@ -21,11 +21,11 @@ export default function Navbar() {
   //   })
 
   return (
-    <nav className="flex justify-between items-center gap-x-6">
+    <nav className="fixed top-0 inset-x-0 bg-[#181818]/50 backdrop-blur-md flex justify-between items-center gap-x-6 p-4 lg:px-10 lg:py-8 z-[60]">
       <h1 className="font-black tracking-[0.2em] text-lg">
         <Link href="/">STEAM</Link>
       </h1>
-      <div className="grow">
+      <div className="grow lg:max-w-2xl">
         <Searchbar
         />
       </div>

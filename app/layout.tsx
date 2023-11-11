@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`p-4 mx-auto lg:px-10 lg:py-8 bg-[#181818] text-slate-100 max-w-[1920px] ${inter.className}`}
+        className={`px-4 py-16 mx-auto lg:px-10 lg:py-20 bg-[#181818] text-slate-100 max-w-[1920px] ${inter.className}`}
         style={{
           WebkitTapHighlightColor: 'transparent'
         }}
