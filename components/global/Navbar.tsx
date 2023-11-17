@@ -1,35 +1,38 @@
+'use client'
+
+import { usePathname } from 'next/navigation'
+
 import Searchbar from '@/components/global/Searchbar'
 import Menu from '@/components/global/Menu'
 import Link from 'next/link'
 
 export default function Navbar() {
-
-  // fetch(
-  //   `https://api.rawg.io/api/games?page=1&search=grand&key=04fd56d2bfc34a73964433ff1117f1d1`
-  // )
-  //   .then((res) => res.json())
-  //   .then((res) => {
-  //     console.log('res', res)
-  //   })
-
-  // fetch(
-  //   `https://rawg.io/api/games/lists/main?discover=true&ordering=-relevance&page_size=40&page=1&key=c542e67aec3a4340908f9de9e86038af`
-  // )
-  //   .then((res) => res.json())
-  //   .then((res) => {
-  //     console.log('res', res)
-  //   })
+  const pathname = usePathname()
 
   return (
-    <nav className="fixed top-0 inset-x-0 bg-[#181818]/50 backdrop-blur-md flex justify-between items-center gap-x-6 p-4 lg:px-10 lg:py-8 z-[60]">
+    <nav className={`flex justify-between items-center gap-x-6 p-4 lg:px-10 lg:py-8 ${pathname.startsWith('/games') ? "relative -my-16 lg:-my-20" : 'fixed top-0 inset-x-0 z-[60] bg-[#181818]/50 backdrop-blur-md'}`}>
       <h1 className="font-black tracking-[0.2em] text-lg">
         <Link href="/">STEAM</Link>
       </h1>
-      <div className="grow lg:max-w-2xl">
+      <div className="grow lg:max-w-3xl">
         <Searchbar
         />
       </div>
-      <Menu />
+
+      <div className='xl:hidden'>
+        <Menu />
+      </div>
+      <ul className='hidden xl:flex xl:items-center xl:gap-4 xl:text-sm'>
+        <li className='border-b-2 border-transparent hover:border-current'>
+          <Link href="https://rawg.io/apidocs">API</Link>
+        </li>
+        <li className='border-b-2 border-transparent hover:border-current'>
+          <Link href="https://discord.com/invite/erNybDp">DISCORD</Link>
+        </li>
+        <li className='border-b-2 border-transparent hover:border-current'>
+          <Link href="https://twitter.com/rawgtheworld">TWITTER</Link>
+        </li>
+      </ul>
     </nav>
   )
 }

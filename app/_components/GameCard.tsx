@@ -199,7 +199,7 @@ export default function GameCard({ game, displayMode, showDescription = false }:
                 <span className='ml-2'>Play full video</span>
               </div>
             </SheetTrigger>
-            {isFull && <SheetContent className="bg-neutral-900" side="middle">
+            {isFull && <SheetContent className="bg-neutral-900 z-[60]" side="middle">
               <div className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-4xl w-full px-4'>
                 <video controls autoPlay muted src={hasLoadMap.get(game.id)} onLoad={playTrailer} className='w-full mx-auto'></video>
               </div>

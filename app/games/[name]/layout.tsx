@@ -22,26 +22,23 @@ export default async function GameLayout({
   const game = await res.json()
 
   return (
-    <main className="flex pt-6 lg:pt-10 gap-11">
-      <Sidebar />
-      <div className="space-y-4 max-w-lg mx-auto lg:w-full lg:max-w-none xl:max-w-[944px]">
-        <Image
-          src={game.background_image}
-          alt={game.name}
-          width={400}
-          height={200}
-          priority={true}
-          className="rounded absolute top-0 inset-x-0 -z-10 object-cover opacity-[0.22] w-full h-72 lg:h-[500px]"
-          style={{
-            maskImage:
-              'linear-gradient(to bottom, #000000,#50509d 80%, transparent)',
-            WebkitMaskImage:
-              'linear-gradient(to bottom, #000000,#50509d 80%, transparent)'
-          }}
-        />
+    <div className="max-w-lg mx-auto lg:max-w-none xl:max-w-[944px]">
+      <Image
+        src={game.background_image}
+        alt={game.name}
+        width={400}
+        height={200}
+        priority={true}
+        className="rounded absolute top-0 inset-x-0 -z-10 object-cover opacity-[0.22] w-full h-72 lg:h-[500px]"
+        style={{
+          maskImage:
+            'linear-gradient(to bottom, #000000,#50509d 80%, transparent)',
+          WebkitMaskImage:
+            'linear-gradient(to bottom, #000000,#50509d 80%, transparent)'
+        }}
+      />
 
-        {children}
-      </div>
-    </main>
+      {children}
+    </div>
   )
 }

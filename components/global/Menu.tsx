@@ -53,7 +53,7 @@ export default function Menu() {
       />
 
     </SheetTrigger>
-    <SheetContent className="bg-white rounded-2xl text-black">
+    <SheetContent className="bg-white rounded-2xl text-black z-[60]">
       <SheetHeader className="relative">
         <SheetTitle className="text-2xl text-left">Home</SheetTitle>
         <SheetTitle className="text-2xl text-left">Browse</SheetTitle>

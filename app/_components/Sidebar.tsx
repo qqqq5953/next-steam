@@ -1,3 +1,6 @@
+'use client'
+
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -10,8 +13,10 @@ import {
   faHashtag,
   faCode
 } from '@fortawesome/free-solid-svg-icons'
+import path from 'path'
 
 export default function Sidebar() {
+  const pathname = usePathname()
   const menu = [
     {
       path: '/',
@@ -74,14 +79,14 @@ export default function Sidebar() {
   ]
 
   return (
-    <aside className="hidden xl:block shrink-0 pt-8">
+    <aside className={`hidden xl:block shrink-0 w-1/6 ${pathname.startsWith('/games') ? "pt-28" : "pt-16"}`}>
       <ul>
         {menu.map((item) => {
           return (
             <li key={item.path}>
               <Link
                 href={item.path}
-                className="block py-2.5 text-2xl font-medium pr-11 hover:text-neutral-500 transition-colors duration-300 ease-in-out"
+                className="block py-2.5 text-2xl font-medium pr-11 hover:text-neutral-500 transition-colors duration-300 ease-in-out xl:text-[26px]"
               >
                 {item.name}
               </Link>

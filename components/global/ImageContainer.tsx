@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 type Props = {
-  url: string
+  url: string | null
   name: string
   className?: string
   style?: object

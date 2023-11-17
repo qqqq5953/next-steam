@@ -36,60 +36,54 @@ export default async function Home({ searchParams }: Props) {
   // `https://api.rawg.io/api/games?ordering=${orderValue}&parent_platforms=${platformValue}&key=${process.env.RAWG_API_KEY}`
 
   return (
-    <>
-      <main className="flex pt-6 lg:pt-10 gap-11">
-        <Sidebar />
+    <div className="space-y-4">
+      <div className="text-center pb-6 lg:text-left">
+        <h2 className="font-bold text-3xl  lg:text-7xl">
+          New and trending
+        </h2>
+        <h3 className="font-light pt-2 text-sm lg:text-base ">
+          Based on player counts and release date
+        </h3>
+      </div>
 
-        <div className="space-y-4 grow">
-          <div className="text-center pb-6 lg:text-left">
-            <h2 className="font-bold text-3xl  lg:text-7xl">
-              New and trending
-            </h2>
-            <h3 className="font-light pt-2 text-sm lg:text-base ">
-              Based on player counts and release date
-            </h3>
+      <div className="flex gap-2 items-center pb-4">
+        <div className="flex gap-2 grow sm:grow-0">
+          <div className="grow">
+            <Dropdown
+              selectedValuePrefix='Order by:'
+              type="order"
+            />
           </div>
-
-          <div className="flex gap-2 items-center pb-4">
-            <div className="flex gap-2 grow sm:grow-0">
-              <div className="grow">
-                <Dropdown
-                  selectedValuePrefix='Order by:'
-                  type="order"
-                />
-              </div>
-              <div className="grow sm:min-w-[150px]">
-                <Dropdown type="platform" />
-              </div>
-            </div>
-            <div className="hidden lg:flex lg:gap-3 lg:items-center ml-auto">
-              <DisplayOptions />
-            </div>
+          <div className="grow sm:min-w-[150px]">
+            <Dropdown type="platform" />
           </div>
+        </div>
+        <div className="hidden lg:flex lg:gap-3 lg:items-center ml-auto">
+          <DisplayOptions />
+        </div>
+      </div>
 
-          {/* <CardsSection
+      {/* <CardsSection
             order={order}
             platform={platform}
             mode={mode}
           /> */}
 
-          <Suspense fallback={<div className="text-center text-2xl">
-            <Icon
-              name="loader-2"
-              useSuspense={false}
-              size={72}
-              strokeWidth={1}
-              className="animate-spin text-white/50 inline"
-            />
-          </div>}>
-            <CardsSection
-              order={order}
-              platform={platform}
-              mode={mode}
-            />
-          </Suspense>
-        </div>
-      </main>
-    </>
+      <Suspense fallback={<div className="text-center text-2xl">
+        <Icon
+          name="loader-2"
+          useSuspense={false}
+          size={72}
+          strokeWidth={1}
+          className="animate-spin text-white/50 inline"
+        />
+      </div>}>
+        <CardsSection
+          order={order}
+          platform={platform}
+          mode={mode}
+        />
+      </Suspense>
+    </div>
   )
 }

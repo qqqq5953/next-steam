@@ -1,4 +1,5 @@
 import Navbar from '@/components/global/Navbar'
+import Sidebar from '@/app/_components/Sidebar'
 
 import './globals.css'
 import type { Metadata } from 'next'
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({
-  children
+  children,
 }: {
   children: React.ReactNode
 }) {
@@ -28,8 +29,13 @@ export default function RootLayout({
           WebkitTapHighlightColor: 'transparent'
         }}
       >
-        <Navbar></Navbar>
-        {children}
+        <Navbar />
+        <div className="flex">
+          <Sidebar />
+          <main className='grow lg:pt-10 w-5/6 xl:pr-11'>
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   )

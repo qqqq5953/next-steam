@@ -58,7 +58,7 @@ export default async function Games({ params: { name } }: Props) {
   const itemClass = "separate-with-comma link-style-underline leading-5"
 
   return (
-    <>
+    <div className='space-y-4 '>
       <div className="pt-8 grid grid-cols-1 lg:grid lg:grid-cols-12 lg:gap-8">
         <div className="col-span-1 space-y-6 lg:col-span-7">
           <header className="flex flex-col items-center justify-center gap-3 lg:gap-6 lg:justify-start lg:items-start">
@@ -329,6 +329,6 @@ export default async function Games({ params: { name } }: Props) {
         <Achievements game={game} />
         <Reddit game={game} />
       </section>
-    </>
+    </div>
   )
 }

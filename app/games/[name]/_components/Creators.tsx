@@ -14,8 +14,12 @@ type Props = {
   game: GameSingle
 }
 
-export default function Creators({ game }: Props) {
-  // https://api.rawg.io/api/games/{game.id}/development-team?page_size=5&key={process.env.RAWG_API_KEY}
+export default async function Creators({ game }: Props) {
+  // const res = await fetch(
+  //   `https://api.rawg.io/api/games/${game.id}/development-team?page_size=5&key=${process.env.RAWG_API_KEY}`
+  // )
+  // const developers = await res.json()
+
   return (
     <section className="space-y-6">
       <div className='flex justify-between items-baseline'>
@@ -107,7 +111,6 @@ export default function Creators({ game }: Props) {
           </Card>
         </div>
       </div>
-
     </section>
   )
 }

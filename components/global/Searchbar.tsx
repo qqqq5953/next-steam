@@ -44,7 +44,7 @@ export default function Searchbar() {
 
       <FontAwesomeIcon icon={faMagnifyingGlass} className='absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 peer-focus:text-black peer:transition-all peer:duration-200' />
 
-      <FontAwesomeIcon icon={faTimes} className='absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 peer-focus:text-black peer:transition-all peer:duration-200' onClick={() => setKeyword("")} />
+      <FontAwesomeIcon icon={faTimes} className='absolute right-3 lg:right-4 top-1/2 -translate-y-1/2 text-neutral-400 peer-focus:text-black peer:transition-all peer:duration-200 cursor-pointer' onClick={() => setKeyword("")} />
 
       {debouncedValue && <div className='fixed top-12 inset-x-0 bg-[#181818] overflow-auto overscroll-contain mt-4 p-4 md:rounded-xl group-focus-within:block hidden md:absolute md:top-full md:w-full md:bg-black
       max-h-[500px]
