@@ -1,6 +1,21 @@
 import { type } from "os"
 
 type Platform = {
+  id: number
+  name: string
+  slug: string
+  year_start: number
+  image_background: string
+  games_count: number
+  games: {
+    id: number
+    name: string
+    slug: string
+    added: number
+  }[]
+}
+
+type GamePlatform = {
   platform: {
     id: number
     name: string
@@ -121,7 +136,7 @@ type Game = {
   background_image: string | null
   tba: string
   rating: number
-  platforms: Platform[]
+  platforms: GamePlatform[]
   developers: {
     id: number
     name: string
@@ -156,7 +171,7 @@ type Suggestion = {
   background_image: string | null
   tba: string
   rating: number
-  platforms: Platform[]
+  platforms: GamePlatform[]
   genres: Genre[]
   short_screenshots: ShortScreenshot[]
   tags: Tag[]
@@ -196,7 +211,7 @@ type SearchResult = {
   background_image: string | null
   tba: string
   rating: number
-  platforms: Platform[]
+  platforms: GamePlatform[]
   developers: {
     id: number
     name: string

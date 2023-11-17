@@ -1,11 +1,6 @@
 import { Platform } from '@/types'
 import React from 'react'
-import { Card, CardContent } from '@/components/base-ui/Card'
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage
-} from '@/components/base-ui/Avatar'
+import { Card } from '@/components/base-ui/Card'
 import ImageContainer from '@/components/global/ImageContainer'
 import Link from 'next/link'
 
@@ -19,7 +14,7 @@ export default async function Platforms() {
     <div className='space-y-4'>
       <h2 className='text-4xl text-center font-semibold lg:text-left lg:text-7xl'>Platforms</h2>
       <section className='columns-1 gap-4 sm:gap-6 sm:columns-2 md:columns-3  3xl:columns-4 space-y-4 sm:space-y-6'>
-        {platforms.results.map((platform) => {
+        {platforms.results.map((platform: Platform) => {
           return <Card key={platform.id} className={`overflow-hidden  border-transparent bg-neutral-800/90 relative ${platform.year_start ? 'h-[300px]' : 'h-[280px]'}`}>
             <div className="relative h-2/3">
               <ImageContainer
@@ -78,39 +73,8 @@ export default async function Platforms() {
                 })}
               </ul>
             </div>
-
-            {/* <CardContent className='-mt-16'>
-              <div className="flex justify-between items-center py-2 border-b border-neutral-600/50">
-                <div className="font-semibold">Popular items</div>
-                <div className="text-right text-neutral-500 text-sm">
-                  {platform.games_count}
-                </div>
-              </div>
-              <ul className="text-sm">
-                {platform.games.slice(0, 3).map((game) => {
-                  return (
-                    <li
-                      key={game.id}
-                      className="flex justify-between items-center first-of-type:pt-2 pt-1 pb-1"
-                    >
-                      <Link
-                        className="max-w-[75%] truncate underline underline-offset-[3px] decoration-0 decoration-neutral-500"
-                        href={`/games/${game.slug}`}
-                      >
-                        {game.name}
-                      </Link>
-                      <div className="text-right text-neutral-500">
-                        {game.added}
-                      </div>
-                    </li>
-                  )
-                })}
-              </ul>
-            </CardContent> */}
           </Card>
         })}
-
-
       </section>
     </div>
   )
