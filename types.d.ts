@@ -93,10 +93,18 @@ type Trailer = {
 }
 
 type Store = {
-  store: {
+  id: number
+  name: string
+  domain: string
+  slug: string
+  games_count: number
+  image_background: string
+  games: {
     id: number
     name: string
-  }
+    slug: string
+    added: number
+  }[]
 }
 
 type StoreLink = {
@@ -160,7 +168,12 @@ type Game = {
 type GameSingle = Game & {
   description: string
   ratings: Rating[],
-  stores: Store[]
+  stores: {
+    store: {
+      id: number
+      name: string
+    }
+  }[]
 }
 
 type Suggestion = {
