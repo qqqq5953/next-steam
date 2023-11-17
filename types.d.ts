@@ -1,12 +1,56 @@
 import { type } from "os"
 
-type Platform = {
+type AllPlatform = {
   id: number
   name: string
   slug: string
   year_start: number
   image_background: string
   games_count: number
+  games: {
+    id: number
+    name: string
+    slug: string
+    added: number
+  }[]
+}
+
+type AllTags = {
+  id: number
+  name: string
+  domain: string
+  slug: string
+  games_count: number
+  image_background: string
+  games: {
+    id: number
+    name: string
+    slug: string
+    added: number
+  }[]
+}
+type AllStore = {
+  id: number
+  name: string
+  domain: string
+  slug: string
+  games_count: number
+  image_background: string
+  games: {
+    id: number
+    name: string
+    slug: string
+    added: number
+  }[]
+}
+
+type AllGenres = {
+  id: number
+  name: string
+  domain: string
+  slug: string
+  games_count: number
+  image_background: string
   games: {
     id: number
     name: string
@@ -92,20 +136,7 @@ type Trailer = {
   }
 }
 
-type Store = {
-  id: number
-  name: string
-  domain: string
-  slug: string
-  games_count: number
-  image_background: string
-  games: {
-    id: number
-    name: string
-    slug: string
-    added: number
-  }[]
-}
+
 
 type StoreLink = {
   count: number,

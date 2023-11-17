@@ -1,4 +1,4 @@
-import { Platform } from '@/types'
+import { AllPlatform } from '@/types'
 import { Card } from '@/components/base-ui/Card'
 import ImageContainer from '@/components/global/ImageContainer'
 import Link from 'next/link'
@@ -13,7 +13,7 @@ export default async function Platforms() {
     <div className='space-y-4'>
       <h2 className='text-4xl text-center font-semibold lg:text-left lg:text-7xl'>Platforms</h2>
       <section className='columns-1 gap-4 sm:gap-6 sm:columns-2 md:columns-3  3xl:columns-4 space-y-4 sm:space-y-6'>
-        {platforms.results.map((platform: Platform) => {
+        {platforms.results.map((platform: AllPlatform) => {
           return <Card key={platform.id} className={`overflow-hidden  border-transparent bg-neutral-800/90 relative ${platform.year_start ? 'h-[300px]' : 'h-[280px]'}`}>
             <div className="relative h-2/3">
               <ImageContainer

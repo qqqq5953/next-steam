@@ -1,23 +1,23 @@
-import { AllStore } from '@/types'
+import { AllGenres } from '@/types'
 import { Card } from '@/components/base-ui/Card'
 import ImageContainer from '@/components/global/ImageContainer'
 import Link from 'next/link'
 
-export default async function Stores() {
+export default async function Genres() {
   const res = await fetch(
-    `https://api.rawg.io/api/stores?key=${process.env.RAWG_API_KEY}`
+    `https://api.rawg.io/api/genres?key=${process.env.RAWG_API_KEY}`
   )
-  const stores = await res.json()
+  const genres = await res.json()
 
   return (
     <div className='space-y-4'>
-      <h2 className='text-4xl text-center font-semibold lg:text-left lg:text-7xl'>Stores</h2>
+      <h2 className='text-4xl text-center font-semibold lg:text-left lg:text-7xl'>Genres</h2>
       <section className='grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 md:grid-cols-3 3xl:grid-cols-4'>
-        {stores.results.map((store: AllStore) => {
-          return <Card key={store.id} className={`overflow-hidden  border-transparent bg-neutral-800/90 relative h-[280px]`}>
+        {genres.results.map((genre: AllGenres) => {
+          return <Card key={genre.id} className={`overflow-hidden  border-transparent bg-neutral-800/90 relative h-[280px]`}>
             <div className="relative h-2/3">
               <ImageContainer
-                url={store.image_background} name={store.name}
+                url={genre.image_background} name={genre.name}
                 className="opacity-50"
                 style={{
                   maskImage:
@@ -32,9 +32,9 @@ export default async function Stores() {
               <div className='grid place-items-center'>
                 <Link
                   className="underline underline-offset-4 decoration-0 decoration-neutral-500 font-bold text-lg lg:text-xl"
-                  href={`/games/${store.slug}`}
+                  href={`/games/${genre.slug}`}
                 >
-                  {store.name}
+                  {genre.name}
                 </Link>
 
                 <button className='my-4 px-4 py-2 bg-white/20 rounded hover:bg-white hover:text-black transition-color ease-in-out duration-300'>Follow</button>
@@ -43,12 +43,12 @@ export default async function Stores() {
               <div className="flex justify-between items-center py-2 border-b border-neutral-600/50">
                 <div className="font-semibold">Popular items</div>
                 <div className="text-right text-neutral-500 text-sm">
-                  {store.games_count}
+                  {genre.games_count}
                 </div>
               </div>
 
               <ul className="text-sm">
-                {store.games.slice(0, 3).map((game) => {
+                {genre.games.slice(0, 3).map((game) => {
                   return (
                     <li
                       key={game.id}
