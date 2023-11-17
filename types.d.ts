@@ -1,5 +1,19 @@
 import { type } from "os"
 
+type AllDeveloper = {
+  id: number
+  name: string
+  slug: string
+  year_start: number
+  image_background: string
+  games_count: number
+  games: {
+    id: number
+    name: string
+    slug: string
+    added: number
+  }[]
+}
 type AllPlatform = {
   id: number
   name: string
