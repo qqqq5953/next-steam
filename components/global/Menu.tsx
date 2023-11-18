@@ -11,10 +11,6 @@ import Link from 'next/link'
 export default function Menu() {
   const menuItems = [
     {
-      path: '/reviews',
-      name: 'Reviews'
-    },
-    {
       path: '/collections',
       name: 'Collections'
     },
@@ -41,7 +37,11 @@ export default function Menu() {
     {
       path: '/developers',
       name: 'Developers'
-    }
+    },
+    {
+      path: '/publishers',
+      name: 'Publishers'
+    },
   ]
 
   return <Sheet>

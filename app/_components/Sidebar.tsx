@@ -7,13 +7,12 @@ import {
   faGamepad,
   faDownload,
   faFolderOpen,
-  faComment,
+  faBook,
   faGhost,
   faUser,
   faHashtag,
   faCode
 } from '@fortawesome/free-solid-svg-icons'
-import path from 'path'
 
 export default function Sidebar() {
   const pathname = usePathname()
@@ -50,11 +49,6 @@ export default function Sidebar() {
           icon: faFolderOpen
         },
         {
-          path: '/reviews',
-          name: 'Reviews',
-          icon: faComment
-        },
-        {
           path: '/genres',
           name: 'Genres',
           icon: faGhost
@@ -73,7 +67,12 @@ export default function Sidebar() {
           path: '/developers',
           name: 'Developers',
           icon: faCode
-        }
+        },
+        {
+          path: '/publishers',
+          name: 'Publishers',
+          icon: faBook
+        },
       ]
     }
   ]
@@ -86,7 +85,7 @@ export default function Sidebar() {
             <li key={item.path}>
               <Link
                 href={item.path}
-                className="block py-2.5 text-2xl font-medium pr-11 hover:text-neutral-500 transition-colors duration-300 ease-in-out xl:text-[26px]"
+                className={`block py-2.5 text-2xl font-medium pr-11 hover:text-neutral-500 transition-colors duration-300 ease-in-out xl:text-[26px] ${pathname === item.path ? 'font-bold' : ''}`}
               >
                 {item.name}
               </Link>
@@ -97,10 +96,10 @@ export default function Sidebar() {
                       <li key={child.path}>
                         <Link
                           href={child.path}
-                          className="flex items-center gap-3 py-1.5 group pr-11"
+                          className={`flex items-center gap-3 py-1.5 pr-11 group ${pathname === child.path ? 'font-bold' : ''}`}
                         >
                           {child.icon && (
-                            <span className="bg-white/20 rounded w-8 h-8 grid place-items-center group-hover:bg-white group-hover:text-black">
+                            <span className={`rounded w-8 h-8 grid place-items-center transition-colors duration-300 ease-in-out ${pathname === child.path ? 'bg-white text-black' : 'bg-white/20 group-hover:bg-white group-hover:text-black'}`}>
                               <FontAwesomeIcon
                                 icon={child.icon}
                                 className="fa-sm"
