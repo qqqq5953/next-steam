@@ -1,5 +1,40 @@
 import { type } from "os"
 
+type ItemCard = {
+  id: number
+  name: string
+  slug: string
+  year_start: number
+  image_background: string
+  games_count: number
+  games: {
+    id: number
+    name: string
+    slug: string
+    added: number
+  }[]
+}
+
+type CreatorCardType = {
+  id: number
+  name: string
+  slug: string
+  image_background: string
+  image: string | null
+  games_count: number
+  positions: {
+    id: number
+    name: string
+    slug: string
+  }[]
+  games: {
+    id: number
+    name: string
+    slug: string
+    added: number
+  }[]
+}
+
 type AllDeveloper = {
   id: number
   name: string
