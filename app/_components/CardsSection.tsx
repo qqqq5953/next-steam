@@ -4,7 +4,6 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import GameCard from '@/app/_components/GameCard'
 import { Game } from '@/types'
 import { platformMap, orderMap } from '@/lib/dropdownOptions'
-import VideoLoader from './VideoLoader'
 import Icon from '@/components/global/Icon'
 
 type Props = {
@@ -27,12 +26,11 @@ export default function CardsSection({ order, platform, mode }: Props) {
   const fetchGames = useCallback(async () => {
     setIsLoading(true)
     try {
-      const res = await fetch(
-        `https://api.rawg.io/api/games?ordering=${orderValue}&parent_platforms=${platformValue}&page_size=12&page=${page}&key=${process.env.NEXT_PUBLIC_RAWG_API_KEY}`
-      )
+      const res = await fetch(`/api/games?ordering=${orderValue}&parent_platforms=${platformValue}&page=${page}`);
 
       if (!res.ok) throw new Error(`Failed to fetch data`)
       const data = await res.json()
+      console.log('data', data);
       setGames((prevGames) => [...prevGames, ...data.results])
       setHasMore(data.results.length > 0)
     } catch (error) {
