@@ -21,7 +21,7 @@ export default function Display() {
     newSearchParams.set("mode", type)
 
     router.push(`?${newSearchParams}`)
-  }, [searchParams])
+  }, [searchParams, router])
 
   const isWeb = useMediaQuery('(min-width: 1024px)')
 

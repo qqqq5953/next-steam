@@ -2,19 +2,35 @@ import { AllStore } from '@/types'
 import ItemCard from '../_components/ItemCard'
 
 export default async function Stores() {
-  const res = await fetch(
-    `https://api.rawg.io/api/stores?key=${process.env.RAWG_API_KEY}`
-  )
-  const stores = await res.json()
+  try {
+    const res = await fetch(
+      `https://api.rawg.io/api/stores?key=${process.env.RAWG_API_KEY}`
+    )
 
-  return (
-    <div className='space-y-4'>
-      <h2 className='text-4xl text-center font-semibold lg:text-left lg:text-7xl'>Stores</h2>
-      <section className='grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 md:grid-cols-3 3xl:grid-cols-4'>
-        {stores.results.map((store: AllStore) => {
-          return <ItemCard key={store.id} data={store} />
-        })}
+    if (!res.ok) {
+      throw new Error(`Failed to fetch developers: ${res.status}`);
+    }
+
+    const stores = await res.json()
+    const results = Array.isArray(stores.results) ? stores.results : [];
+
+    return (
+      <div className='space-y-4'>
+        <h2 className='text-4xl text-center font-semibold lg:text-left lg:text-7xl'>Stores</h2>
+        <section className='grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 md:grid-cols-3 3xl:grid-cols-4'>
+          {results.map((store: AllStore) => {
+            return <ItemCard key={store.id} data={store} />
+          })}
+        </section>
+      </div>
+    )
+  } catch (error) {
+    console.error('Error fetching stores:', error);
+    return (
+      <section className="space-y-4">
+        <h2 className='text-4xl text-center font-semibold lg:text-left lg:text-7xl'>Stores</h2>
+        <p className="text-red-500">Failed to load stores data. Please try again later.</p>
       </section>
-    </div>
-  )
+    );
+  }
 }
