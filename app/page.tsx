@@ -1,9 +1,9 @@
-import useFetch from '@/hooks/useFetch'
+// import useFetch from '@/hooks/useFetch'
 
 import Dropdown from '@/components/global/Dropdown'
 import DisplayOptions from '@/app/_components/DisplayOptions'
 import CardsSection from '@/app/_components/CardsSection'
-import Sidebar from '@/app/_components/Sidebar'
+// import Sidebar from '@/app/_components/Sidebar'
 import { Suspense } from 'react'
 import Icon from '@/components/global/Icon'
 
@@ -13,6 +13,7 @@ type Props = {
 
 export default async function Home({ searchParams }: Props) {
   const { order, platform, mode } = searchParams
+
   // const { data, error } = await useFetch(
   //   'https://jsonplaceholder.typicode.com/posts/1'
   // )

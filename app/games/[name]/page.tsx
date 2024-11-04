@@ -207,7 +207,7 @@ export default async function Games({ params: { name } }: Props) {
             </GridColumnContainer>
 
             <GridColumnContainer title="Other games in the series" spanNum="2">
-              {same_series.results.map((series) => {
+              {same_series?.results.map((series) => {
                 return (
                   <Link
                     key={series.id}
@@ -221,7 +221,7 @@ export default async function Games({ params: { name } }: Props) {
             </GridColumnContainer>
 
             <GridColumnContainer title="DLC's and editions" spanNum="2">
-              {dlc.results.map((item) => {
+              {dlc?.results.map((item) => {
                 return (
                   <Link
                     key={item.id}

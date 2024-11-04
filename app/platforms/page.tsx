@@ -12,7 +12,7 @@ export default async function Platforms() {
       <h2 className='text-4xl text-center font-semibold lg:text-left lg:text-7xl'>Platforms</h2>
       <section className='columns-1 gap-4 sm:gap-6 sm:columns-2 md:columns-3  3xl:columns-4 space-y-4 sm:space-y-6'>
         {platforms.results.map((platform: AllPlatform) => {
-          return <ItemCard data={platform} />
+          return <ItemCard key={platform.id} data={platform} />
         })}
       </section>
     </div>

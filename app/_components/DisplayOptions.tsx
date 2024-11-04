@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import { LayoutGrid, Film } from 'lucide-react'
@@ -13,7 +13,7 @@ export default function Display() {
     searchParams.get('mode') || 'grid'
   )
 
-  function handleClick(type: string) {
+  const handleClick = useCallback((type: string) => {
     setSelectedValue(type)
 
     const queryStrings = searchParams.toString()
@@ -21,14 +21,14 @@ export default function Display() {
     newSearchParams.set("mode", type)
 
     router.push(`?${newSearchParams}`)
-  }
+  }, [searchParams])
 
   const isWeb = useMediaQuery('(min-width: 1024px)')
 
   useEffect(() => {
     if (isWeb == null) return
     if (!isWeb) handleClick('grid')
-  }, [isWeb])
+  }, [isWeb, handleClick])
 
   return (
     <>

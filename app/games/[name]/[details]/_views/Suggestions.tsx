@@ -2,7 +2,7 @@
 
 // import suggestions from '@/source/game_suggestions.json'
 import GameCard from '@/app/_components/GameCard'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 import { Suggestion } from '@/types'
@@ -30,7 +30,7 @@ export default function Suggestions({ name }: Props) {
     return data
   }
 
-  async function loadData(url: string) {
+  const loadData = useCallback(async (url: string) => {
     setIsLoading(true)
 
     const res = await getSuggestions(url)
@@ -44,16 +44,16 @@ export default function Suggestions({ name }: Props) {
         results: prevSuggestions?.results ? [...prevSuggestions?.results, ...res.results] : res.results,
       };
     })
-  }
+  }, [])
 
   useEffect(() => {
     loadData("https://rawg.io/api/games/grand-theft-auto-v/suggested?page=1&page_size=6")
-  }, [])
+  }, [loadData])
 
   return (
     <section>
       <p className='pb-4'>
-        Are you searching for games like {name}? Look no further! Here's a list of games similar to {name} either in the gameplay or in the visual style. If you like {name}, be sure to check some of these games as well.
+        Are you searching for games like {name}? Look no further! Here&apos;s a list of games similar to {name} either in the gameplay or in the visual style. If you like {name}, be sure to check some of these games as well.
       </p>
 
       {suggestions ?

@@ -16,7 +16,7 @@ export default async function Tags() {
       <h2 className='text-4xl text-center font-semibold lg:text-left lg:text-7xl'>Tags</h2>
       <section className='grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 md:grid-cols-3 3xl:grid-cols-4'>
         {tags.results.map((tag: AllTags) => {
-          return <ItemCard data={tag} />
+          return <ItemCard key={tag.id} data={tag} />
         })}
       </section>
     </div>

@@ -32,7 +32,7 @@ export default function Video({
     >
       <source src={hasLoadMap.get(id)} type="video/mp4" />
       <p>
-        Your browser doesn't support HTML5 video. Here is a
+        Your browser doesn&apos;t support HTML5 video. Here is a
         <a href={hasLoadMap.get(id)}>link to the video</a> instead.
       </p>
     </video>

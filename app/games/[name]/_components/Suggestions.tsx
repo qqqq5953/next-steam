@@ -1,10 +1,10 @@
 "use client"
 
-import suggestions from '@/source/game_suggestions.json'
+// import suggestions from '@/source/game_suggestions.json'
 import GameCard from '@/app/_components/GameCard'
 import { GameSingle, Suggestion } from '@/types'
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 
@@ -20,7 +20,7 @@ type Suggestions = {
 }
 
 export default function Suggestions({ game }: Props) {
-  //   const [suggestions, setSuggestions] = useState<Suggestions | null>(null)
+  const [suggestions, setSuggestions] = useState<Suggestions | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   async function getSuggestions(url: string) {
@@ -29,10 +29,11 @@ export default function Suggestions({ game }: Props) {
     return data
   }
 
-  async function loadData(url: string) {
+  const loadData = useCallback(async (url: string) => {
     setIsLoading(true)
 
     const res = await getSuggestions(url)
+
     setSuggestions((prevSuggestions: Suggestions | null) => {
       setIsLoading(false)
 
@@ -43,11 +44,11 @@ export default function Suggestions({ game }: Props) {
         results: prevSuggestions?.results ? [...prevSuggestions?.results, ...res.results] : res.results,
       };
     })
-  }
+  }, [])
 
   useEffect(() => {
-    // loadData("https://rawg.io/api/games/grand-theft-auto-v/suggested?page=1&page_size=6")
-  }, [])
+    loadData("https://rawg.io/api/games/grand-theft-auto-v/suggested?page=1&page_size=6")
+  }, [loadData])
 
   return <section className='space-y-6'>
     <h3 className='text-center text-xl lg:text-4xl underline underline-offset-4 decoration-neutral-500 decoration-1'>

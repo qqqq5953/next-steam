@@ -1,3 +1,4 @@
+import { Game } from '@/types'
 import { getPlaiceholder } from 'plaiceholder'
 
 export async function getBase64(url: string) {
@@ -17,7 +18,13 @@ export async function getBase64(url: string) {
 }
 
 export async function addBlurredDataURL(games: Game[]): Promise<Game[]> {
-  const base64Promise = games.map((game) => getBase64(game.background_image))
+  const base64Promise = games.map((game) => {
+    if (game.background_image) {
+      return getBase64(game.background_image)
+    } else {
+      return ""
+    }
+  })
   const base64Results = await Promise.all(base64Promise)
 
   const blurDataURL = games.map((game, i) => {

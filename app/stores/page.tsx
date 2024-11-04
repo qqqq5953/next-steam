@@ -12,7 +12,7 @@ export default async function Stores() {
       <h2 className='text-4xl text-center font-semibold lg:text-left lg:text-7xl'>Stores</h2>
       <section className='grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 md:grid-cols-3 3xl:grid-cols-4'>
         {stores.results.map((store: AllStore) => {
-          return <ItemCard data={store} />
+          return <ItemCard key={store.id} data={store} />
         })}
       </section>
     </div>
