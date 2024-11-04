@@ -1,10 +1,27 @@
 import { AllGenres } from '@/types'
 import ItemCard from '../_components/ItemCard'
 
+export const revalidate = 60
+
+export async function generateStaticParams() {
+  const genres = await fetch(
+    `https://api.rawg.io/api/genres?key=${process.env.RAWG_API_KEY}`
+  ).then((res) =>
+    res.json()
+  )
+
+  const results: AllGenres[] = Array.isArray(genres.results) ? genres.results : [];
+
+  return results.map((genre) => ({
+    id: String(genre.id),
+  }))
+}
+
 export default async function Genres() {
   try {
     const res = await fetch(
-      `https://api.rawg.io/api/genres?key=${process.env.RAWG_API_KEY}`
+      `https://api.rawg.io/api/genres?key=${process.env.RAWG_API_KEY}`,
+      { next: { revalidate: 3600 } }
     )
 
     if (!res.ok) {
@@ -12,13 +29,13 @@ export default async function Genres() {
     }
 
     const genres = await res.json()
-    const results = Array.isArray(genres.results) ? genres.results : [];
+    const results: AllGenres[] = Array.isArray(genres.results) ? genres.results : [];
 
     return (
       <div className='space-y-4'>
         <h2 className='text-4xl text-center font-semibold lg:text-left lg:text-7xl'>Genres</h2>
         <section className='grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 md:grid-cols-3 3xl:grid-cols-4'>
-          {results.map((genre: AllGenres) => {
+          {results.map((genre) => {
             return <ItemCard key={genre.id} data={genre} />
           })}
         </section>

@@ -63,54 +63,7 @@ export default function GameCard({ game, displayMode, showDescription = false }:
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const isWeb = useMediaQuery('(min-width: 1024px)')
 
-  function handleHoverResult(trailer: Trailer[]) {
-    if (trailer.length === 0) {
-      setShowItem('screenshot')
-    } else {
-      setShowItem('video')
-      setIsFull(true)
-    }
-
-    hasLoadMap.set(game.id, trailer[0]?.data?.['480'])
-  }
-
-  const handleMouseEnter = useCallback(async () => {
-    console.log('handleMouseEnter')
-
-    if (hasLoadMap.has(game.id)) {
-      if (hasLoadMap.get(game.id)) {
-        setShowItem('video')
-      } else {
-        setShowItem('screenshot')
-      }
-    } else {
-      const trailer = await loadTrailer()
-      if (!trailer) return
-      handleHoverResult(trailer)
-    }
-  }, [])
-
-  const handleMouseLeave = useCallback(async () => {
-    console.log('handleMouseLeve')
-
-    if (hasLoadMap.get(game.id)) {
-      stopTrailer()
-    } else if (hasLoadMap.has(game.id) && !hasLoadMap.get(game.id)) {
-      setShowItem('')
-    } else {
-      abortFetching()
-    }
-  }, [])
-
-  useEffect(() => {
-    if (isActivate === true) {
-      handleMouseEnter()
-    } else if (isActivate === false) {
-      handleMouseLeave()
-    }
-  }, [isActivate, handleMouseEnter, handleMouseLeave])
-
-  async function loadTrailer() {
+  const loadTrailer = useCallback(async () => {
     console.log('loadTrailer')
 
     try {
@@ -132,7 +85,54 @@ export default function GameCard({ game, displayMode, showDescription = false }:
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [game.id])
+
+  const handleHoverResult = useCallback((trailer: Trailer[]) => {
+    if (trailer.length === 0) {
+      setShowItem('screenshot')
+    } else {
+      setShowItem('video')
+      setIsFull(true)
+    }
+
+    hasLoadMap.set(game.id, trailer[0]?.data?.['480'])
+  }, [game.id])
+
+  const handleMouseEnter = useCallback(async () => {
+    console.log('handleMouseEnter')
+
+    if (hasLoadMap.has(game.id)) {
+      if (hasLoadMap.get(game.id)) {
+        setShowItem('video')
+      } else {
+        setShowItem('screenshot')
+      }
+    } else {
+      const trailer = await loadTrailer()
+      if (!trailer) return
+      handleHoverResult(trailer)
+    }
+  }, [game.id, loadTrailer, handleHoverResult])
+
+  const handleMouseLeave = useCallback(async () => {
+    console.log('handleMouseLeve')
+
+    if (hasLoadMap.get(game.id)) {
+      stopTrailer()
+    } else if (hasLoadMap.has(game.id) && !hasLoadMap.get(game.id)) {
+      setShowItem('')
+    } else {
+      abortFetching()
+    }
+  }, [game.id])
+
+  useEffect(() => {
+    if (isActivate === true) {
+      handleMouseEnter()
+    } else if (isActivate === false) {
+      handleMouseLeave()
+    }
+  }, [isActivate, game.id, handleHoverResult, handleMouseEnter, handleMouseLeave, loadTrailer])
 
   function stopTrailer() {
     if (!videoRef.current) return
