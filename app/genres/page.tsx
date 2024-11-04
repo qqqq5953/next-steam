@@ -4,6 +4,11 @@ import ItemCard from '../_components/ItemCard'
 export const revalidate = 60
 
 export async function generateStaticParams() {
+  if (!process.env.RAWG_API_KEY) {
+    console.error("RAWG_API_KEY is missing.");
+    return [];
+  }
+
   const genres = await fetch(
     `https://api.rawg.io/api/genres?key=${process.env.RAWG_API_KEY}`
   ).then((res) =>
