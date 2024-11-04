@@ -78,7 +78,7 @@ export default function Sidebar() {
   ]
 
   return (
-    <aside className={`hidden xl:block shrink-0 w-1/6 ${pathname.startsWith('/games') ? "pt-28" : "pt-16"}`}>
+    <aside className={`hidden xl:block shrink-0 w-1/6 pt-16`}>
       <ul>
         {menu.map((item) => {
           return (
