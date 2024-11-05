@@ -248,11 +248,11 @@ export default async function Games({ params: { name } }: Props) {
               })}
             </GridColumnContainer>
 
-            <GridColumnContainer title="Website" spanNum="2">
+            {game.website && <GridColumnContainer title="Website" spanNum="2">
               <Link className={itemClass} href={game.website}>
                 {game.website}
               </Link>
-            </GridColumnContainer>
+            </GridColumnContainer>}
 
             <Requirements game={game} />
 
@@ -263,16 +263,18 @@ export default async function Games({ params: { name } }: Props) {
             >
               <div className="flex flex-nowrap gap-2 overflow-auto pb-4 lg:hidden">
                 {game.stores.map((item) => {
-                  return (
-                    <Link
-                      key={item.store.name}
-                      className="text-base shrink-0 rounded p-2 bg-neutral-800/90 text-neutral-400/70 text-center hover:bg-slate-50 hover-text-black transition-colors duration-300"
-                      href={storeLinkObj[item.store.id]}
-                      target="blank"
-                    >
-                      {item.store.name}
-                    </Link>
-                  )
+                  if (storeLinkObj[item.store.id]) {
+                    return (
+                      <Link
+                        key={item.store.name}
+                        className="text-base shrink-0 rounded p-2 bg-neutral-800/90 text-neutral-400/70 text-center hover:bg-slate-50 hover-text-black transition-colors duration-300"
+                        href={storeLinkObj[item.store.id]}
+                        target="blank"
+                      >
+                        {item.store.name}
+                      </Link>
+                    )
+                  }
                 })}
               </div>
             </GridColumnContainer>
@@ -307,16 +309,18 @@ export default async function Games({ params: { name } }: Props) {
           <GridColumnContainer title="Where to buy" spanNum="1">
             <div className="hidden lg:grid lg:grid-cols-2 lg:gap-4">
               {game.stores.map((item) => {
-                return (
-                  <Link
-                    key={item.store.name}
-                    className="col-span-1 rounded p-2 bg-neutral-800/90 text-neutral-400/70 text-center hover:bg-slate-50 hover:text-black transition-colors duration-300"
-                    href={storeLinkObj[item.store.id]}
-                    target="blank"
-                  >
-                    {item.store.name}
-                  </Link>
-                )
+                if (storeLinkObj[item.store.id]) {
+                  return (
+                    <Link
+                      key={item.store.name}
+                      className="col-span-1 rounded p-2 bg-neutral-800/90 text-neutral-400/70 text-center hover:bg-slate-50 hover:text-black transition-colors duration-300"
+                      href={storeLinkObj[item.store.id]}
+                      target="blank"
+                    >
+                      {item.store.name}
+                    </Link>
+                  )
+                }
               })}
             </div>
           </GridColumnContainer>
