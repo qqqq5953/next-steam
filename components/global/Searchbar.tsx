@@ -5,30 +5,108 @@ import { useEffect, useState } from 'react'
 import { Input } from '@/components/base-ui/Input'
 import { useDebounce } from '@/hooks/useDebounce'
 
-import { SearchResult } from '@/types'
-import GameList from './GameList'
+import { Collection, CollectionsAPI, Developer, SearchResult } from '@/types'
+import GameItem from './GameItem'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faCircleNotch, faTimes } from '@fortawesome/free-solid-svg-icons'
+import CreatorItem from './CreatorItem'
+import CollectionItem from './CollectionItem'
 
 export default function Searchbar() {
-  const [searchResult, setSearchResult] = useState<[] | null>([])
+  const [gamesValue, setGamesValue] = useState<{
+    count: number,
+    results: SearchResult[]
+  } | null>(null)
+
+  const [collectionsValue, setCollectionsValue] = useState<CollectionsAPI | null>(null)
+
+  const [creatorsValue, setCreatorsValue] = useState<{
+    count: number,
+    results: any
+  } | null>(null)
+
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [keyword, setKeyword] = useState<string>('')
+
   const debouncedValue = useDebounce<string>(keyword, 500)
 
   useEffect(() => {
-    if (!debouncedValue) return setSearchResult(null)
-    searchForGames(debouncedValue)
+    if (!debouncedValue) {
+      setGamesValue(null)
+      setCollectionsValue(null)
+      setCreatorsValue(null)
+      return
+    }
+
+    setIsLoading(true)
+
+    Promise
+      .allSettled([
+        searchForGames(debouncedValue),
+        searchForCollections(debouncedValue),
+        searchForCreators(debouncedValue),
+      ])
+      .then(res => {
+        const [gamesRes, collectionsRes, creatorsRes] = res
+
+        if (
+          gamesRes.status === "fulfilled" &&
+          !gamesRes.value.errorMsg
+        ) {
+          setGamesValue(gamesRes.value)
+        } else {
+          setGamesValue(null)
+        }
+
+        if (
+          collectionsRes.status === "fulfilled" &&
+          !collectionsRes.value.errorMsg
+        ) {
+          setCollectionsValue(collectionsRes.value)
+        } else {
+          setCollectionsValue(null)
+        }
+
+        if (
+          creatorsRes.status === "fulfilled" &&
+          !creatorsRes.value.errorMsg
+        ) {
+          setCreatorsValue(creatorsRes.value)
+        } else {
+          setCreatorsValue(null)
+        }
+      })
+      .catch(err => {
+        console.error('search err', err);
+        setGamesValue(null)
+        setCollectionsValue(null)
+        setCreatorsValue(null)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
 
     async function searchForGames(keyword: string) {
-      setIsLoading(true)
+      const res = await fetch(`/api/games/search?query=${keyword.trim()}`)
 
-      const res = await fetch(`https://rawg.io/api/games?search=${keyword.trim()}&page_size=20&key=c542e67aec3a4340908f9de9e86038af`)
-      const data = await res.json()
-      console.log('data', data);
+      if (!res.ok) return setGamesValue(null)
+      return await res.json()
+    }
 
-      setSearchResult(data.results)
-      setIsLoading(false)
+    async function searchForCollections(keyword: string) {
+      const res = await fetch(`/api/collections/search?query=${keyword.trim()}`)
+      console.log('res2', res);
+
+      if (!res.ok) return setCollectionsValue(null)
+      return await res.json()
+    }
+
+    async function searchForCreators(keyword: string) {
+      const res = await fetch(`/api/creators/search?query=${keyword.trim()}`)
+      console.log('res3', res);
+
+      if (!res.ok) return setCreatorsValue(null)
+      return await res.json()
     }
   }, [debouncedValue])
 
@@ -49,19 +127,43 @@ export default function Searchbar() {
       {debouncedValue && <div className='fixed top-12 inset-x-0 bg-[#181818] overflow-auto overscroll-contain mt-4 p-4 md:rounded-xl group-focus-within:block hidden md:absolute md:top-full md:w-full md:bg-black
       max-h-[500px]
         '>
-        {isLoading &&
+        {isLoading ?
           <div className='text-center py-4'>
             <FontAwesomeIcon icon={faCircleNotch} className='text-neutral-500 animate-spin fa-2xl' />
+          </div> :
+          <div className='space-y-4'>
+            {gamesValue && gamesValue?.results?.length !== 0 && <div className='space-y-4'>
+              <p className='text-xl'>Games</p>
+              <ul className='space-y-4'>
+                {gamesValue.results?.map((result: SearchResult) => {
+                  return <GameItem
+                    game={result}
+                    key={result.slug} imageClassName='w-[36px] h-[47px]'
+                    titleClassName="text-sm"
+                  />
+                })}
+              </ul>
+            </div>}
+
+            {collectionsValue && collectionsValue?.results?.length !== 0 && <div className='space-y-4'>
+              <p className='text-xl'>Collections</p>
+              <ul className='space-y-4'>
+                {collectionsValue.results?.map((result: Collection) => {
+                  return <CollectionItem {...result} key={result.slug} />
+                })}
+              </ul>
+            </div>}
+
+            {creatorsValue && creatorsValue?.results?.length !== 0 && <div className='space-y-4'>
+              <p className='text-xl'>Creators</p>
+              <ul className='space-y-4'>
+                {creatorsValue.results?.map((result: Developer) => {
+                  return <CreatorItem {...result} key={result.slug} />
+                })}
+              </ul>
+            </div>}
           </div>
         }
-
-        {!isLoading && searchResult?.length !== 0 && <ul className='space-y-4'>
-          {searchResult?.map((result: SearchResult) => {
-            return <GameList game={result} key={result.slug} />
-          })}
-        </ul>}
-
-        {!isLoading && searchResult?.length === 0 && <div>No result</div>}
       </div>}
     </div>
   )

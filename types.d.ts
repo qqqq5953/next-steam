@@ -185,8 +185,6 @@ type Trailer = {
   }
 }
 
-
-
 type StoreLink = {
   count: number,
   next: string | null,
@@ -206,6 +204,37 @@ type DLC = {
   next: string | null,
   previous: string | null,
   results: { id: number, slug: string, name: string }[]
+}
+
+type Collection = {
+  backgrounds: {
+    dominant_color: string
+    saturated_color: string
+    url: string
+  }[],
+  game_background: {
+    dominant_color: string
+    saturated_color: string
+    url: string
+  },
+  game_covers: {
+    dominant_color: string
+    saturated_color: string
+    url: string
+  }[],
+  games_count: number,
+  id: number,
+  name: string,
+  noindex: boolean,
+  score: string,
+  slug: string,
+}
+
+type CollectionsAPI = {
+  count: number,
+  next: string | null,
+  previous: string | null,
+  results: Collection[]
 }
 
 type GameDetails = {

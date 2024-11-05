@@ -51,7 +51,7 @@ export default function Suggestions({ name }: Props) {
   }, [loadData])
 
   return (
-    <section>
+    <section className='space-y-6'>
       <p className='pb-4'>
         Are you searching for games like {name}? Look no further! Here&apos;s a list of games similar to {name} either in the gameplay or in the visual style. If you like {name}, be sure to check some of these games as well.
       </p>

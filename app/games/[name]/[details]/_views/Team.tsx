@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import React from 'react'
 import { Developer } from '@/types'
-import GameList from '@/components/global/GameList'
+import GameItem from '@/components/global/GameItem'
 
 type Props = {
   name: string
@@ -32,7 +32,7 @@ export default async function Team({ name }: Props) {
               </div>
               <ul className='space-y-4 py-4 divide divide-y-[0.5px] divide-neutral-700'>
                 {developer.games.map(game => {
-                  return <GameList game={game} key={game.id} />
+                  return <GameItem game={game} key={game.id} />
                 })}
               </ul>
             </div>

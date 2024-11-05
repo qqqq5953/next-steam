@@ -4,18 +4,18 @@ import Link from 'next/link'
 
 type Props = {
   data: {
-    id: number
-    name: string
-    slug: string
-    year_start?: number
-    image_background: string
-    games_count: number
+    id: number;
+    name: string;
+    slug: string;
+    year_start?: number;
+    image_background: string;
+    games_count: number;
     games: {
-      id: number
-      name: string
-      slug: string
-      added: number
-    }[]
+      id: number;
+      name: string;
+      slug: string;
+      added: number;
+    }[];
   },
 }
 
