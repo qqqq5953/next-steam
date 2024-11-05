@@ -57,10 +57,22 @@ export default function CardsSection({ order, platform, mode }: Props) {
       { threshold: 1.0 }
     )
 
-    if (lastGameRef.current) observer.observe(lastGameRef.current);
+    /* 
+      The ref value 'lastGameRef.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'lastGameRef.current' to a variable inside the effect, and use that variable in the cleanup function. 
+
+      if (lastGameRef.current) observer.observe(lastGameRef.current);
+
+      return () => {
+        if (lastGameRef.current) observer.unobserve(lastGameRef.current);
+      };
+    */
+
+    // Capture the current `lastGameRef.current` value to avoid potential issues in cleanup
+    const currentRef = lastGameRef.current;
+    if (currentRef) observer.observe(currentRef);
 
     return () => {
-      if (lastGameRef.current) observer.unobserve(lastGameRef.current);
+      if (currentRef) observer.unobserve(currentRef);
     };
   }, [isLoading, hasMore])
 
