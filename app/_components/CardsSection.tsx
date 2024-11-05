@@ -30,7 +30,7 @@ export default function CardsSection({ order, platform, mode }: Props) {
 
       if (!res.ok) throw new Error(`Failed to fetch data`)
       const data = await res.json()
-      console.log('data', data);
+      // console.log('data', data);
       setGames((prevGames) => [...prevGames, ...data.results])
       setHasMore(data.results.length > 0)
     } catch (error) {
