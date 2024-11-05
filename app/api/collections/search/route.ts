@@ -1,14 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export const dynamic = 'force-dynamic'
+// export const dynamic = 'force-dynamic'
 
 export async function GET(
   request: NextRequest,
 ) {
+  const query = request.nextUrl.searchParams.get("query");
 
   try {
-    const query = request.nextUrl.searchParams.get("query");
-
     const response = await fetch(
       `https://rawg.io/api/collections?search=${query}&page_size=2&page=1&key=${process.env.RAWG_OFFICIAL_API_KEY}`
     );
