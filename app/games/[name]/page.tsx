@@ -1,16 +1,16 @@
-import game from '@/source/game_example.json'
-import same_series from '@/source/game_same_series.json'
-import dlc from '@/source/games_dlc&edition.json'
-import stores_link from '@/source/game_store.json'
+// import game from '@/source/game_example.json'
+// import same_series from '@/source/game_same_series.json'
+// import dlc from '@/source/games_dlc&edition.json'
+// import stores_link from '@/source/game_store.json'
 
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
+// import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { getBrandIcon, getUniqueIcons, platformMap } from '@/lib/getBrandIcon'
 
-import { AgeRatingPrefix, GameDetails } from '@/types'
+import { AgeRatingPrefix, Game, GameDetails } from '@/types'
 import getGameDetails from '@/lib/getGameDetails'
 
 import AboutSection from './_components/AboutSection'
@@ -22,14 +22,28 @@ import Creators from './_components/Creators'
 import Achievements from './_components/Achievements'
 import Requirements from './_components/Requirements'
 import Reddit from './_components/Reddit'
-const RefreshButton = dynamic(() => import("./_components/RefreshButton"))
+// const RefreshButton = dynamic(() => import("./_components/RefreshButton"))
 
 type Props = {
   params: { name: string }
 }
 
-export default async function Games({ params: { name } }: Props) {
+export const revalidate = 120
 
+export async function generateStaticParams() {
+  // only get the first 20 data
+  const games: Game[] = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}`)
+    .then((res) => res.json())
+    .then((data) => data.results);
+
+  // Generate a list of params with the 'name' for each game
+  return games.map((game) => ({
+    name: game.slug
+  }));
+}
+
+
+export default async function Games({ params: { name } }: Props) {
   const { game, same_series, dlc, stores_link, errors }: GameDetails = await getGameDetails(name)
 
   if (!game) return null
