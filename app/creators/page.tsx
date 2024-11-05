@@ -2,9 +2,7 @@ import { CreatorCardType } from '@/types'
 import CreatorCard from '../_components/CreatorCard'
 
 export default async function Creators() {
-  const res = await fetch(
-    `https://api.rawg.io/api/creators?key=${process.env.RAWG_API_KEY}`
-  )
+  const res = await fetch(`${process.env.BASE_URL}/api/creators`)
   const creators = await res.json()
 
   return (

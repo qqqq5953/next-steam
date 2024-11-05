@@ -87,14 +87,14 @@ export default function Searchbar() {
       })
 
     async function searchForGames(keyword: string) {
-      const res = await fetch(`/api/games/search?query=${keyword.trim()}`)
+      const res = await fetch(`${process.env.BASE_URL}/api/games/search?query=${keyword.trim()}`)
 
       if (!res.ok) return setGamesValue(null)
       return await res.json()
     }
 
     async function searchForCollections(keyword: string) {
-      const res = await fetch(`/api/collections/search?query=${keyword.trim()}`)
+      const res = await fetch(`${process.env.BASE_URL}/api/collections/search?query=${keyword.trim()}`)
       console.log('res2', res);
 
       if (!res.ok) return setCollectionsValue(null)
@@ -102,7 +102,7 @@ export default function Searchbar() {
     }
 
     async function searchForCreators(keyword: string) {
-      const res = await fetch(`/api/creators/search?query=${keyword.trim()}`)
+      const res = await fetch(`${process.env.BASE_URL}/api/creators/search?query=${keyword.trim()}`)
       console.log('res3', res);
 
       if (!res.ok) return setCreatorsValue(null)

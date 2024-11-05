@@ -3,15 +3,9 @@ import ItemCard from '../_components/ItemCard'
 
 export default async function Developers() {
   try {
-    const res = await fetch(
-      `https://api.rawg.io/api/developers?key=${process.env.RAWG_API_KEY}`
-    )
+    const res = await fetch(`${process.env.BASE_URL}/api/developers`)
+    const developers = await res.json()
 
-    if (!res.ok) {
-      throw new Error(`Failed to fetch developers: ${res.status}`);
-    }
-
-    const developers = await res.json();
     const results = Array.isArray(developers.results) ? developers.results : [];
 
     return (
