@@ -7,7 +7,7 @@ type Props = {
 export default function RatingSection({ game }: Props) {
   const ratingTitle = game.ratings.sort(
     (a: { count: number }, b: { count: number }) => b.count - a.count
-  )[0].title
+  )?.[0]?.title ?? "Not rated yet"
 
   const ratingTotalScore = game.ratings.reduce(
     (acc: any, cur: { count: any }) => acc + cur.count,
@@ -33,19 +33,24 @@ export default function RatingSection({ game }: Props) {
       </div>
 
       <div className="flex w-full rounded overflow-hidden">
-        {game.ratings.map((rating: Rating) => {
-          return (
-            <div
-              key={rating.id}
-              className={`h-10 ${
-                ratingColorMap[rating.title as keyof RatingColor]
-              }`}
-              style={{
-                width: `${rating.percent}%`
-              }}
-            ></div>
-          )
-        })}
+        {game.ratings.length === 0 ?
+          <div className='grid place-items-center w-full h-11 bg-neutral-500 text-xl font-semibold tracking-widest lg:text-2xl'>No reviews
+          </div> :
+          <>
+            {game.ratings.map((rating: Rating) => {
+              return (
+                <div
+                  key={rating.id}
+                  className={`h-11 ${ratingColorMap[rating.title as keyof RatingColor]
+                    }`}
+                  style={{
+                    width: `${rating.percent}%`
+                  }}
+                ></div>
+              )
+            })}
+          </>
+        }
       </div>
 
       <div className="flex flex-wrap gap-4 text-sm ">
@@ -53,9 +58,8 @@ export default function RatingSection({ game }: Props) {
           return (
             <div key={rating.id} className="flex items-center gap-2">
               <div
-                className={`w-2 h-2 rounded-full ${
-                  ratingColorMap[rating.title as keyof RatingColor]
-                }`}
+                className={`w-2 h-2 rounded-full ${ratingColorMap[rating.title as keyof RatingColor]
+                  }`}
               ></div>
               <div className="capitalize font-medium">{rating.title}</div>
               <div className="  text-neutral-400/80 font-thin tracking-widest">
