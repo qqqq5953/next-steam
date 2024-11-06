@@ -19,8 +19,7 @@ export default async function Gallery({
   const data = await getGallery({ id: game.id })
   if (!data) return null
   const { movies, screenshots } = data
-  console.log('movies', movies);
-
+  // console.log('movies', movies);
 
   return (
     <div className={className}>

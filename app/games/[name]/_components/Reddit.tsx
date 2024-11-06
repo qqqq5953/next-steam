@@ -31,7 +31,7 @@ export default function Reddit({ game }: Props) {
         })}
         <Link href={`/games/${game.slug}/reddit`} className="block rounded px-2 py-3.5 bg-neutral-800/90 text-white text-sm text-center font-light hover:bg-slate-50 hover:text-black transition-colors duration-300 w-full lg:hidden">View All</Link>
 
-        <Link href={`/games/${game.slug}/posts`} className="hidden absolute -bottom-2 right-20 px-2 rounded bg-[#181818] text-white text-center text-xs font-light tracking-wider hover:text-neutral-500 transition-colors duration-300 lg:flex lg:items-center">
+        <Link href={`/games/${game.slug}/reddit`} className="hidden absolute -bottom-2 right-20 px-2 rounded bg-[#181818] text-white text-center text-xs font-light tracking-wider hover:text-neutral-500 transition-colors duration-300 lg:flex lg:items-center">
           <span>VIEW ALL</span>
           <Icon name="chevron-right" size={16} className='inline-block' />
         </Link>

@@ -17,7 +17,7 @@ export default async function GameLayout({
   params: { name }
 }: Props) {
   const res = await fetch(
-    `https://api.rawg.io/api/games/${name}?key=${process.env.RAWG_API_KEY}`
+    `${process.env.BASE_URL}/api/games?name=${name}`
   )
   const game = await res.json()
 

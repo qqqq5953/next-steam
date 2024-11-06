@@ -9,7 +9,7 @@ type Props = {
 }
 
 export default async function Youtube({ name }: Props) {
-  const res = await fetch(`https://api.rawg.io/api/games/${name}/youtube?page_size=12&key=${process.env.RAWG_OFFICIAL_API_KEY}`)
+  const res = await fetch(`${process.env.BASE_URL}/api/games/youtube?name=${name}`)
   const youtube = await res.json()
 
   return (

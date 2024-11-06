@@ -23,7 +23,7 @@ export default async function GameLayout({
   params: { name, details }
 }: Props) {
   const res = await fetch(
-    `${process.env.BASE_URL}/api/games/${name}`
+    `${process.env.BASE_URL}/api/games/details?name=${name}`
   )
   const game: GameSingle = await res.json()
 

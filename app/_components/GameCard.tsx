@@ -73,7 +73,7 @@ export default function GameCard({ game, displayMode, showDescription = false }:
       setIsLoading(true)
 
       const response = await fetch(
-        `https://api.rawg.io/api/games/${game.id}/movies?key=04fd56d2bfc34a73964433ff1117f1d1`,
+        `/api/games/movies?gameId=${game.id}`,
         { signal: abortController.signal }
       )
       const data = await response.json()

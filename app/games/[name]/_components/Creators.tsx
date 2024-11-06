@@ -12,7 +12,7 @@ type Props = {
 export default async function Creators({ game }: Props) {
   try {
     const res = await fetch(
-      `https://api.rawg.io/api/games/${game.id}/development-team?page_size=5&key=${process.env.RAWG_API_KEY}`
+      `${process.env.BASE_URL}/api/games/development-team?gameId=${game.id}`
     );
 
     if (!res.ok) {
