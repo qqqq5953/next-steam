@@ -1,14 +1,10 @@
 import { AllTags } from '@/types'
-import { Card } from '@/components/base-ui/Card'
-import ImageContainer from '@/components/global/ImageContainer'
-import Link from 'next/link'
 import ItemCard from '../_components/ItemCard'
-
 
 export default async function Tags() {
   try {
     const res = await fetch(
-      `https://api.rawg.io/api/tags?key=${process.env.RAWG_API_KEY}`
+      `${process.env.BASE_URL}/api/tags`
     )
 
     if (!res.ok) {

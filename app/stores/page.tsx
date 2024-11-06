@@ -4,7 +4,7 @@ import ItemCard from '../_components/ItemCard'
 export default async function Stores() {
   try {
     const res = await fetch(
-      `https://api.rawg.io/api/stores?key=${process.env.RAWG_API_KEY}`
+      `${process.env.BASE_URL}/api/stores`
     )
 
     if (!res.ok) {

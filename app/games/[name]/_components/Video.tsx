@@ -2,7 +2,7 @@
 import useMediaQuery from '@/hooks/useMediaQuery'
 
 type Props = {
-  url: string
+  url?: string
   mediaQuery: string
 }
 
