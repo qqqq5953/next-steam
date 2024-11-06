@@ -4,7 +4,7 @@ import ItemCard from '../_components/ItemCard'
 export default async function Publishers() {
   try {
     const res = await fetch(
-      `/api/publishers`
+      `https://api.rawg.io/api/publishers?key=${process.env.RAWG_API_KEY}`
     )
 
     if (!res.ok) {

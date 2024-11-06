@@ -4,7 +4,7 @@ import ItemCard from '../_components/ItemCard'
 export default async function Genres() {
   try {
     const res = await fetch(
-      `${process.env.BASE_URL}/api/genres`,
+      `https://api.rawg.io/api/genres?key=${process.env.RAWG_API_KEY}`,
       { next: { revalidate: 3600 } }
     )
 

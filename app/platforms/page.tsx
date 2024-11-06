@@ -4,7 +4,7 @@ import ItemCard from '../_components/ItemCard'
 export default async function Platforms() {
   try {
     const res = await fetch(
-      `${process.env.BASE_URL}/api/platforms`
+      `https://api.rawg.io/api/platforms?key=${process.env.RAWG_API_KEY}`
     )
 
     if (!res.ok) {
