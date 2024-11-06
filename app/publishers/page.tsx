@@ -4,7 +4,7 @@ import ItemCard from '../_components/ItemCard'
 export default async function Publishers() {
   try {
     const res = await fetch(
-      `${process.env.BASE_URL}/api/publishers`
+      `/api/publishers`
     )
 
     if (!res.ok) {
