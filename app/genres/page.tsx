@@ -9,7 +9,7 @@ export default async function Genres() {
     )
 
     if (!res.ok) {
-      throw new Error(`Failed to fetch developers: ${res.status}`);
+      throw new Error(`Failed to fetch genre: ${res.status}`);
     }
 
     const genres = await res.json()

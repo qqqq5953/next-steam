@@ -8,7 +8,7 @@ export default async function Tags() {
     )
 
     if (!res.ok) {
-      throw new Error(`Failed to fetch developers: ${res.status}`);
+      throw new Error(`Failed to fetch tags: ${res.status}`);
     }
 
     const tags = await res.json()

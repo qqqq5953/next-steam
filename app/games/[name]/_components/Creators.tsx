@@ -16,7 +16,7 @@ export default async function Creators({ game }: Props) {
     );
 
     if (!res.ok) {
-      throw new Error(`Failed to fetch developers: ${res.status}`);
+      throw new Error(`Failed to fetch creators: ${res.status}`);
     }
 
     const developers = await res.json();

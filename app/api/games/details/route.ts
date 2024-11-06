@@ -13,7 +13,7 @@ export async function GET(
     );
 
     if (!response.ok) {
-      return NextResponse.json({ error: 'Failed to fetch game detail' });
+      return NextResponse.json({ errorMsg: 'Failed to fetch game detail' });
     }
 
     const data = await response.json();

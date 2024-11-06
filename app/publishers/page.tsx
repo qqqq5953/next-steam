@@ -8,7 +8,7 @@ export default async function Publishers() {
     )
 
     if (!res.ok) {
-      throw new Error(`Failed to fetch developers: ${res.status}`);
+      throw new Error(`Failed to fetch publishers: ${res.status}`);
     }
 
     const publishers = await res.json()

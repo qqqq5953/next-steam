@@ -12,7 +12,7 @@ export async function GET(
     );
 
     if (!response.ok) {
-      return NextResponse.json({ error: 'Failed to fetch game movie' });
+      return NextResponse.json({ errorMsg: 'Failed to fetch game movie' });
     }
 
     const data = await response.json();

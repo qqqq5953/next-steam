@@ -9,7 +9,7 @@ export async function GET(
     );
 
     if (!response.ok) {
-      return NextResponse.json({ error: 'Failed to fetch platforms data' });
+      return NextResponse.json({ errorMsg: 'Failed to fetch platforms data' });
     }
 
     const data = await response.json();

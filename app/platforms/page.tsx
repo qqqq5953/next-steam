@@ -8,7 +8,7 @@ export default async function Platforms() {
     )
 
     if (!res.ok) {
-      throw new Error(`Failed to fetch developers: ${res.status}`);
+      throw new Error(`Failed to fetch platforms: ${res.status}`);
     }
 
     const platforms = await res.json()

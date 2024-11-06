@@ -9,7 +9,7 @@ export async function GET(
     );
 
     if (!response.ok) {
-      return NextResponse.json({ error: 'Failed to fetch tags data' });
+      return NextResponse.json({ errorMsg: 'Failed to fetch tags data' });
     }
 
     const data = await response.json();
