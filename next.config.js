@@ -21,4 +21,4 @@ const nextConfig = {
   }
 }
 
-module.exports = nextConfig
+https: module.exports = nextConfig
