@@ -31,15 +31,32 @@ type Props = {
 export const revalidate = 120
 
 export async function generateStaticParams() {
-  // only get the first 20 data
-  const games: Game[] = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}`)
-    .then((res) => res.json())
-    .then((data) => data.results);
+  try {
+    // Check if API key is available
+    if (!process.env.RAWG_API_KEY) {
+      console.error('RAWG_API_KEY is not set');
+      return [];
+    }
 
-  // Generate a list of params with the 'name' for each game
-  return games.map((game) => ({
-    name: game.slug
-  }));
+    // only get the first 20 data
+    const response = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}`);
+    
+    if (!response.ok) {
+      console.error(`API request failed: ${response.status} ${response.statusText}`);
+      return [];
+    }
+
+    const data = await response.json();
+    const games: Game[] = data.results || [];
+
+    // Generate a list of params with the 'name' for each game
+    return games.map((game) => ({
+      name: game.slug
+    }));
+  } catch (error) {
+    console.error('Error in generateStaticParams:', error);
+    return [];
+  }
 }
 
 
