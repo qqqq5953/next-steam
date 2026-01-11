@@ -6,6 +6,7 @@ export async function GET(
   request: NextRequest
 ) {
   const name = request.nextUrl.searchParams.get("name")
+  console.log('name', name);
 
   try {
     const response = await fetch(

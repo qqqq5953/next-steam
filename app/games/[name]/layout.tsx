@@ -17,9 +17,19 @@ export default async function GameLayout({
   params: { name }
 }: Props) {
   const res = await fetch(
-    `${process.env.BASE_URL}/api/games?name=${name}`
+    `${process.env.BASE_URL}/api/games/details?name=${name}`
   )
+  if (!res.ok) {
+    console.error('Failed to fetch game')
+    return <div>{children}</div>
+  }
+  
   const game = await res.json()
+  
+  if (!game || game.errorMsg) {
+    console.error('Invalid game data')
+    return <div>{children}</div>
+  }
 
   return (
     <div className="max-w-lg mx-auto lg:max-w-none xl:max-w-[944px]">
