@@ -6,13 +6,8 @@ export const dynamic = 'force-dynamic'
 export default async function Tags() {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/tags`
+      `https://api.rawg.io/api/tags?key=${process.env.RAWG_API_KEY}`
     )
-
-    if (!res.ok) {
-      throw new Error(`Failed to fetch tags: ${res.status}`);
-    }
-
     const tags = await res.json()
     const results = Array.isArray(tags.results) ? tags.results : [];
 

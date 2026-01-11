@@ -1,17 +1,12 @@
 import { AllStore } from '@/types'
 import ItemCard from '../_components/ItemCard'
+import { getStores } from '@/lib/rawg/getStores';
 
 export const dynamic = 'force-dynamic'
 
 export default async function Stores() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/stores`)
-
-    if (!res.ok) {
-      throw new Error(`Failed to fetch stores: ${res.status}`);
-    }
-
-    const stores = await res.json()
+    const stores = await getStores()
     const results = Array.isArray(stores.results) ? stores.results : [];
 
     return (

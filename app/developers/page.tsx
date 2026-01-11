@@ -1,11 +1,10 @@
 import { AllDeveloper } from '@/types'
 import ItemCard from '../_components/ItemCard'
+import { getDevelopers } from '@/lib/rawg/getDevelopers';
 
 export default async function Developers() {
   try {
-    const res = await fetch(`https://api.rawg.io/api/developers?key=${process.env.RAWG_API_KEY}`)
-    const developers = await res.json()
-
+    const developers = await getDevelopers()
     const results = Array.isArray(developers.results) ? developers.results : [];
 
     return (

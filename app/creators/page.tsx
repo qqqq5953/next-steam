@@ -1,6 +1,6 @@
 import { CreatorCardType } from '@/types'
 import CreatorCard from '../_components/CreatorCard'
-import { getCreators } from '@/lib/getCreators'
+import { getCreators } from '@/lib/rawg/getCreators'
 
 export default async function Creators() {
   const creators = await getCreators()
