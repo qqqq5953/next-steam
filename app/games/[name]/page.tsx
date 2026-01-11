@@ -28,7 +28,8 @@ type Props = {
   params: { name: string }
 }
 
-export const revalidate = 120
+// export const revalidate = 120
+export const dynamic = 'force-dynamic'
 
 export async function generateStaticParams() {
   try {
