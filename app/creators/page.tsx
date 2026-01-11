@@ -1,9 +1,9 @@
 import { CreatorCardType } from '@/types'
 import CreatorCard from '../_components/CreatorCard'
+import { getCreators } from '@/lib/getCreators'
 
 export default async function Creators() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/creators`)
-  const creators = await res.json()
+  const creators = await getCreators()
 
   return (
     <div className='space-y-4'>
