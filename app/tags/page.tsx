@@ -1,6 +1,8 @@
 import { AllTags } from '@/types'
 import ItemCard from '../_components/ItemCard'
 
+export const dynamic = 'force-dynamic'
+
 export default async function Tags() {
   try {
     const res = await fetch(

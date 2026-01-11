@@ -1,6 +1,8 @@
 import { AllStore } from '@/types'
 import ItemCard from '../_components/ItemCard'
 
+export const dynamic = 'force-dynamic'
+
 export default async function Stores() {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/stores`)
