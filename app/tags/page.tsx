@@ -4,7 +4,7 @@ import ItemCard from '../_components/ItemCard'
 export default async function Tags() {
   try {
     const res = await fetch(
-      `${process.env.BASE_URL}/api/tags`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/tags`
     )
 
     if (!res.ok) {

@@ -9,7 +9,7 @@ type Props = {
 }
 
 export default async function Youtube({ name }: Props) {
-  const res = await fetch(`${process.env.BASE_URL}/api/games/youtube?name=${name}`)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/games/youtube?name=${name}`)
   const youtube = await res.json()
 
   return (

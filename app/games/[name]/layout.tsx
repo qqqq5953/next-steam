@@ -17,7 +17,7 @@ export default async function GameLayout({
   params: { name }
 }: Props) {
   const res = await fetch(
-    `${process.env.BASE_URL}/api/games/details?name=${name}`
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/games/details?name=${name}`
   )
   if (!res.ok) {
     console.error('Failed to fetch game')

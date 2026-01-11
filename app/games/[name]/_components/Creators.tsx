@@ -12,7 +12,7 @@ type Props = {
 export default async function Creators({ game }: Props) {
   try {
     const res = await fetch(
-      `${process.env.BASE_URL}/api/games/development-team?gameId=${game.id}`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/games/development-team?gameId=${game.id}`
     );
 
     if (!res.ok) {

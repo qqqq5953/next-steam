@@ -3,7 +3,7 @@ import ItemCard from '../_components/ItemCard'
 
 export default async function Stores() {
   try {
-    const res = await fetch(`${process.env.BASE_URL}/api/stores`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/stores`)
 
     if (!res.ok) {
       throw new Error(`Failed to fetch stores: ${res.status}`);

@@ -9,7 +9,7 @@ type Props = {
 }
 
 export default async function Team({ name }: Props) {
-  const res = await fetch(`${process.env.BASE_URL}/api/games/development-team?name=${name}`)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/games/development-team?name=${name}`)
 
   const developers = await res.json()
 
